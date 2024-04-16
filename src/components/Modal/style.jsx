@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Overlay = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -9,11 +12,11 @@ export const Overlay = styled.div`
     right: 0;
     background-color: rgba(0,0,0,0.6);
 `;
-export const Div = styled.div`
+export const Modal = styled.div`
   margin-top: 100px;
   margin-bottom: 100px;
   background-color: #EBEBEB;
-  width: 60%;
+  width: 45%;
   //height: 100px;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -27,18 +30,19 @@ export const Div = styled.div`
   margin-left: auto;
   margin-right: auto;
 `;
-export const HeaderM = styled.h2`
-  display: flex;
-  justify-content: space-between;
-`
-export const Button = styled.button`
-  background-color: red;
+export const Close = styled.button`
+  background-color: rgba(0,0,0,0.0);
   border-radius: 100px;
   width: 20px;
   border: none;
-  color: #fff;
+  color: #000;
   cursor: pointer;
 `;
+export const HeaderM = styled.h2`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`
 export const TitleM = styled.h2`
   font-family: 'Exo 2', sans-serif;
   font-weight: 700;
@@ -47,6 +51,29 @@ export const TitleM = styled.h2`
 
   color: #000000;
 `;
+export const Switch = styled.div`
+  display: flex;
+  justify-content: right;
+`
+export const SwitchText = styled.text`
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 400;
+
+  color: #6F6F6F;
+`
+
+export const Div = styled.div`
+    display: flex;
+    //width: 100%;
+    justify-content: space-between;
+    align-items: end;
+`
+export const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  gap: 1rem;
+`
 export const Text = styled.h3`
   font-family: 'Exo 2', sans-serif;
   font-weight: 700;
@@ -54,7 +81,6 @@ export const Text = styled.h3`
 
   color: #000000;
 `;
-
 export const Input = styled.input`
   font-family: 'Exo 2', sans-serif;
   font-weight: 400;
@@ -69,10 +95,9 @@ export const Input = styled.input`
   background-color: #D9D9D9;
   outline: none;
   text-transform: capitalize;
+  margin-bottom: 1rem;
 
-  width: 40%;
-`
-export const FooterM = styled.div`
+  width: 60%;
 `
 export const Textarea = styled.textarea`
   font-family: 'Exo 2', sans-serif;
@@ -82,21 +107,24 @@ export const Textarea = styled.textarea`
   color: #000000;
   text-transform: capitalize;
 
-  width: 40%;
+  width: 90%;
 
   /* top | right | bottom | left */
   padding: 1rem;
   background-color: #D9D9D9;
   resize: none;
 `
-export const Switch = styled.div`
-  display: flex;
-  justify-content: right;
-`
-export const SwitchText = styled.text`
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 400;
+export const AddButton = styled.button`
+  background-color: #D9D9D9;
+  color: #000;
+  cursor: pointer;
+  padding: 0.8rem;
+  font-weight: 700;
+  font-size: 20px;
+  margin-left: 1rem;
 
-  color: #6F6F6F;
+  :hover {
+  background-color: #000;
+  color: #fff;
+  }
 `
-
