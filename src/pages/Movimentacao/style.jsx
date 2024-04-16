@@ -181,10 +181,9 @@ flex-direction: row;
 align-items: center;
 justify-content: right;
 gap: 50px;
-/* margin-right: 50px; */
 `
 export const ButtonContainer = styled.div`
-width: 85px;
+width: 185px;
 padding: 4px;
 border-radius: 5px;
 background-color: #38AD68;
@@ -192,7 +191,7 @@ color: #ffff;
  &:active {
     transform: scale(98%);
     transition: transform 0.2s ease;
-    /* background-color: #000000; */
+    background-color: #2e8d56;
     
   }
 `

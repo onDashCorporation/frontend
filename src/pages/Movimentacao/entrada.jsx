@@ -6,6 +6,7 @@ import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import CountItem from "../../components/countItem/countItem";
+import Dropdown from "../../components/dropdown/dropdown";
 
 
   const limit = 7;
@@ -13,11 +14,12 @@ import CountItem from "../../components/countItem/countItem";
 const Entrada = () => {
 
   
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
-  const [offset, setOffSet] = useState(0);
-    const [opset, setOpset] = useState(true);
-     const [selectedItems, setSelectedItems] = useState([]);
+      const [searchTerm, setSearchTerm] = useState("");
+      const [filteredData, setFilteredData] = useState(data);
+      const [offset, setOffSet] = useState(0);
+      const [opset, setOpset] = useState(true);
+      const [selectedItems, setSelectedItems] = useState([]);
+      const [itemValor, setItemValor] = useState()
 
 
 
@@ -53,6 +55,11 @@ const Entrada = () => {
   updatedItems.splice(index, 1); // Remove o item com o índice fornecido
   setSelectedItems(updatedItems); // Atualiza o estado com o novo array sem o item removido
 };
+
+const handleNovoValor = (novoValor) => {
+  setItemValor(novoValor); // Atualiza o estado com o novo valor
+  console.log(itemValor)
+};
  
 
   return (
@@ -68,7 +75,9 @@ const Entrada = () => {
                 <S.Op  select={opset === true ? 'true' : undefined} onClick={() => setOpset(true) }>Entrada</S.Op>
                 <S.Op select={opset === false ? 'false' : undefined} onClick={() => setOpset(false)}>Adicionar</S.Op>
               </S.Option>
-               {opset ? ("") 
+               {opset ? (<S.ButtonContainer >
+               <Dropdown Title="Adicionar Entrada"/>
+               </S.ButtonContainer>)
                :
                (<S.SearchContainer>
                     <Search 
@@ -100,7 +109,7 @@ const Entrada = () => {
                         </S.StyledTableCell>
                       ))}
                       <S.StyledTableCell >
-                     <CountItem/>  
+                     <CountItem onValorChange={handleNovoValor}  />  
                  </S.StyledTableCell>
                 <S.StyledTableCell >
                      <S.ItemButton onClick={() => handleRemoveFromEntrada(index)}/>  
@@ -142,7 +151,7 @@ const Entrada = () => {
                     </S.StyledTableCell>
                 ))}
               
-                <S.StyledTableCell  onClick={() => {handleAddToEntrada(item); console.log("oi")}} >
+                <S.StyledTableCell  onClick={() => {handleAddToEntrada(item)}} >
                      <S.ButtonContainer>
                         Adicionar
                     </S.ButtonContainer>
