@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import * as I from "iconoir-react";
 
-export const Container = styled.div`
-  width: 100%;
-`;
+
 export const SearchContainer = styled.div`
   user-select: none;
   /* width: 100%; */
@@ -17,6 +15,7 @@ export const Search = styled(I.Search)`
 `;
 
 export const SearchInput = styled.input`
+  width: 100%;
   height: 30px;
   padding: 1px 10px;
   border-radius: 5px;
