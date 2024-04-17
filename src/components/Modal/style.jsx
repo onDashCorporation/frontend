@@ -112,7 +112,6 @@ export const Textarea = styled.textarea`
   font-size: 15px;
 
   color: #000000;
-  text-transform: capitalize;
 
   width: 90%;
 
