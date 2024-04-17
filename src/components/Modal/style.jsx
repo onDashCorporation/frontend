@@ -129,8 +129,12 @@ export const AddButton = styled.button`
   font-size: 20px;
   margin-left: 1rem;
 
-  :hover {
-  background-color: #000;
+  transition: 
+    background-color 300ms ease 0s,
+    color 300ms ease 0s;
+
+  &:hover {
+  background-color: #121212;
   color: #fff;
   }
 `
