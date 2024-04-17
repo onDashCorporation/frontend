@@ -1,6 +1,7 @@
 import * as S from "./style"
 import React from 'react'
 import { IconoirProvider, Xmark } from 'iconoir-react';
+import "./switch.css";
 
 export default function Modal({isOpen, setOpenModal, title}) {
   if (isOpen) {
@@ -33,6 +34,11 @@ export default function Modal({isOpen, setOpenModal, title}) {
                 
               <S.Switch>
                 <S.SwitchText>Adiconar em sequência</S.SwitchText>
+
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
               </S.Switch>
 
             </S.HeaderM>

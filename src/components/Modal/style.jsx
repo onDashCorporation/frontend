@@ -66,6 +66,7 @@ export const SwitchText = styled.text`
   font-weight: 400;
 
   color: #6F6F6F;
+  margin-right: 0.5rem;
 `
 
 export const Div = styled.div`
