@@ -7,6 +7,7 @@ export const Container = styled.div`
     position: relative;
     user-select: none;
     align-items: center;
+    justify-content: center;
     border-radius: 10px;
 
 
@@ -51,10 +52,14 @@ export const Op = styled.text`
 }
 `;
 export const IconConatiner = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
 align-items: center;
 
 `;
 export const Trash = styled(I.XmarkCircle)`
+
     width: 20px;
   color: rgb(163, 161, 161);
 
