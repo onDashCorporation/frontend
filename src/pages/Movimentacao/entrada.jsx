@@ -98,6 +98,7 @@ const handleNovoValor = (novoValor) => {
                 <S.ThHeader>Nome</S.ThHeader>
                 <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader >Categoria</S.ThHeader>       
+                {/* <S.ThHeader >Estoque Min</S.ThHeader>        */}
                 <S.ThHeader >Adicionar</S.ThHeader>       
                 <S.ThHeader isLast>⠀⠀⠀⠀⠀⠀⠀</S.ThHeader>       
                 </S.TrHeader>
@@ -110,6 +111,9 @@ const handleNovoValor = (novoValor) => {
                           <S.Test>{value}</S.Test>
                         </S.StyledTableCell>
                       ))}
+                      {/* <S.StyledTableCell >
+                        oioi
+                 </S.StyledTableCell> */}
                       <S.StyledTableCell >
                      <CountItem onValorChange={handleNovoValor}  />  
                  </S.StyledTableCell>

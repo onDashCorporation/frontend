@@ -156,6 +156,11 @@ export const RadiusButto = styled.div`
     transition: all 0.3s ease;
     transition: all 0.3s ;
     background-color: #ff0000;
+    & + ${ItemButton} {
+      transition: all 0.1s ease;
+      transition: all 0.1s ;
+      color: #ffffff;
+    }
   }
 `;
 
@@ -163,11 +168,11 @@ export const ItemButton = styled(I.Xmark)`
   width: 40px;
   color: #7a7a7a;
 
-  &:hover {
+  /* &:hover {
     transition: all 0.3s ease;
     transition: all 0.3s ;
     color: #ffffff;
-  }
+  } */
 `;
 export const Edit = styled(I.EditPencil)`
   width: 20px;
