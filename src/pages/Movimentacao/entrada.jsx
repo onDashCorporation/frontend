@@ -6,7 +6,7 @@ import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import CountItem from "../../components/countItem/countItem";
-import Dropdown from "../../components/dropdown/dropdown";
+import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 
 
   const limit = 7;
@@ -75,9 +75,11 @@ const handleNovoValor = (novoValor) => {
                 <S.Op  select={opset === true ? 'true' : undefined} onClick={() => setOpset(true) }>Entrada</S.Op>
                 <S.Op select={opset === false ? 'false' : undefined} onClick={() => setOpset(false)}>Adicionar</S.Op>
               </S.Option>
-               {opset ? (<S.ButtonContainer >
-               <Dropdown Title="Adicionar Entrada"/>
-               </S.ButtonContainer>)
+               {opset ? (
+                <S.ButtonOp>
+               <ButtonConfirm Title="Adicionar Entrada"  width="150px" backgroundColor="#38AD68" fontSize="15px"/>
+               </S.ButtonOp>
+               )
                :
                (<S.SearchContainer>
                     <Search 
@@ -97,7 +99,7 @@ const handleNovoValor = (novoValor) => {
                 <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader >Categoria</S.ThHeader>       
                 <S.ThHeader >Adicionar</S.ThHeader>       
-                <S.ThHeader isLast></S.ThHeader>       
+                <S.ThHeader isLast>⠀⠀⠀⠀⠀⠀⠀</S.ThHeader>       
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
@@ -112,7 +114,11 @@ const handleNovoValor = (novoValor) => {
                      <CountItem onValorChange={handleNovoValor}  />  
                  </S.StyledTableCell>
                 <S.StyledTableCell >
-                     <S.ItemButton onClick={() => handleRemoveFromEntrada(index)}/>  
+                      <S.ItemContainer >
+                        <S.RadiusButto onClick={() => handleRemoveFromEntrada(index)}>
+                        <S.ItemButton /> 
+                        </S.RadiusButto>
+                     </S.ItemContainer> 
                  </S.StyledTableCell>
                     </S.TrBody>
                   ))}
@@ -151,10 +157,12 @@ const handleNovoValor = (novoValor) => {
                     </S.StyledTableCell>
                 ))}
               
-                <S.StyledTableCell  onClick={() => {handleAddToEntrada(item)}} >
+                <S.StyledTableCell >
+                    <S.ItemContainer onClick={() => {handleAddToEntrada(item)}}>
                      <S.ButtonContainer>
                         Adicionar
                     </S.ButtonContainer>
+                    </S.ItemContainer>
                  </S.StyledTableCell>
               </S.TrBody>
             ))}
