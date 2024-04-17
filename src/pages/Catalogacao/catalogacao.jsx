@@ -26,9 +26,8 @@ const Catalogacao = () => {
             <S.Button onClick={() => setOpen(true)}>Abrir modal</S.Button>
             </div>
             <S.Modal>
-              
-              {/* <Modal isOpen={setOpen} title={'Informações do Departamento'}/> */}
-              <Modal isOpen={open} setOpenModal={() => setOpen(!open)}/>
+
+              <Modal title={'Informações de Departamento'} isOpen={open} setOpenModal={() => setOpen(!open)}/>
 
             </S.Modal>
           </S.ContainerModal>

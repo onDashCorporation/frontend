@@ -13,30 +13,36 @@ export const Overlay = styled.div`
     background-color: rgba(0,0,0,0.6);
 `;
 export const Modal = styled.div`
+  display: flex;
+  flex-direction: column;
+  //width: 100%;
   margin-top: 100px;
   margin-bottom: 100px;
   background-color: #EBEBEB;
-  width: 45%;
+  width: 60vw;
   //height: 100px;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
-  /* top | right | bottom | left */
-  padding: 1.5% 5% 1.5% 5%;
-
   /* top: 50%; right: 50%;
   transform: translate(50%,-50%); */
   margin-left: auto;
   margin-right: auto;
 `;
+export const ContainerM = styled.div`
+  width: 90%;
+
+  /* top | right | bottom | left */
+  margin: 1.5% 5% 5% 5%;
+`
 export const Close = styled.button`
+  //display: flex
   background-color: rgba(0,0,0,0.0);
-  border-radius: 100px;
   width: 20px;
-  border: none;
-  color: #000;
   cursor: pointer;
+
+  margin-left: 10px;
+  margin-top: 10px;
 `;
 export const HeaderM = styled.h2`
   display: flex;
@@ -47,7 +53,7 @@ export const TitleM = styled.h2`
   font-family: 'Exo 2', sans-serif;
   font-weight: 700;
   font-size: 20px;
-  text-transform: capitalize;
+  //text-transform: capitalize;
 
   color: #000000;
 `;

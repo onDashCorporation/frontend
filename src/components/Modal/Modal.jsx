@@ -2,7 +2,7 @@ import * as S from "./style"
 import React from 'react'
 import { IconoirProvider, Xmark } from 'iconoir-react';
 
-export default function Modal({isOpen, setOpenModal}) {
+export default function Modal({isOpen, setOpenModal, title}) {
   if (isOpen) {
     return(
 
@@ -10,7 +10,7 @@ export default function Modal({isOpen, setOpenModal}) {
 
         <S.Modal>
 
-          {/* Close */}
+          {/* Close Modal*/}
           <IconoirProvider
             iconProps={{
               color: '#000',
@@ -23,37 +23,43 @@ export default function Modal({isOpen, setOpenModal}) {
             <S.Close onClick={(setOpenModal)}><Xmark /></S.Close>
           </IconoirProvider>
 
-          {/* Header Modal */}
-          <S.HeaderM>
+          {/* Modal container*/}
+          <S.ContainerM>
+        
+            {/* Header Modal */}
+            <S.HeaderM>
 
-            <S.TitleM>Informações de Departamento</S.TitleM>
-              
-            <S.Switch>
-              <S.SwitchText>Adiconar em sequência</S.SwitchText>
-            </S.Switch>
+              <S.TitleM>{title}</S.TitleM>
+                
+              <S.Switch>
+                <S.SwitchText>Adiconar em sequência</S.SwitchText>
+              </S.Switch>
 
-          </S.HeaderM>
+            </S.HeaderM>
 
+            {/* Modal content */}
             <S.Div>
 
-              <S.Form>
-                {/* Campo nome */}
-                <S.Text>Nome</S.Text>
-                
-                <S.Input required/>
+                <S.Form>
+                  {/* Campo nome */}
+                  <S.Text>Nome</S.Text>
+                  
+                  <S.Input required/>
 
-                {/* Campo Descrição */}
-                <S.Text>Descrição</S.Text>
-                
-                <S.Textarea rows="5" maxlength="130"/>
-              </S.Form>
+                  {/* Campo Descrição */}
+                  <S.Text>Descrição</S.Text>
+                  
+                  <S.Textarea rows="5" maxlength="130"/>
+                </S.Form>
 
 
-              <S.AddButton onClick={console.log('clicou')}>
-                Adicionar
-              </S.AddButton>
+                <S.AddButton onClick={console.log('clicou')}>
+                  Adicionar
+                </S.AddButton>
 
             </S.Div>
+
+          </S.ContainerM>
 
         </S.Modal>
 
