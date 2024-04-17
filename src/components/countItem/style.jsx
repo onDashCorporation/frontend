@@ -7,16 +7,18 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+
 `;
 export const InputInser = styled.input`
   font-size: 100%;
-  padding: 0.6em;
+  padding: 5px;
   outline: none;
   color: black;
   border: 2px solid rgb(182, 181, 181);
   background-color: transparent;
   border-radius: 10px;
-  width: 50%;
+  width: 35%;
+
   &:focus{
     transition: all 0.3s ease;
     transition: all 0.3s ;

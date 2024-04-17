@@ -2,7 +2,7 @@ import * as S from "./style"
 import React, { useState } from 'react';
 
 
-const CountItem = ({ onValorChange }) => {
+const CountItem = ({ onValorChange,placeholder }) => {
   const [valor, setValor] = useState('');
 
   const handleChange = (event) => {
@@ -19,7 +19,7 @@ const CountItem = ({ onValorChange }) => {
       type="number"
       value={valor}
       onChange={handleChange}
-      placeholder={"Adicionar" || ""}
+      placeholder={ placeholder || ""}
     />
     </S.Container>
     )
