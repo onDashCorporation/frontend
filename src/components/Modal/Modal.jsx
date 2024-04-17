@@ -4,6 +4,22 @@ import { IconoirProvider, Xmark } from 'iconoir-react';
 import "./switch.css";
 
 export default function Modal({isOpen, setOpenModal, title}) {
+
+  function ToggleSwitch() {
+    // Get the checkbox
+    var checkBox = document.getElementById("switch");
+    // Get the output text
+    var input = document.getElementById("name").value;
+    var textarea = document.getElementById("desc").value;
+  
+    // If the checkbox is checked, display the output text
+    if (checkBox.checked == true){
+      input = "";
+    } else {
+      textarea = "";
+    }
+  }
+
   if (isOpen) {
     return(
 
@@ -35,8 +51,9 @@ export default function Modal({isOpen, setOpenModal, title}) {
               <S.Switch>
                 <S.SwitchText>Adiconar em sequência</S.SwitchText>
 
+                {/* Toggle Switch */}
                 <label class="switch">
-                  <input type="checkbox" />
+                  <input type="checkbox" id="switch"/>
                   <span class="slider round"></span>
                 </label>
               </S.Switch>
@@ -50,12 +67,12 @@ export default function Modal({isOpen, setOpenModal, title}) {
                   {/* Campo nome */}
                   <S.Text>Nome</S.Text>
                   
-                  <S.Input required/>
+                  <S.Input required name='name' id="name" type="text"/>
 
                   {/* Campo Descrição */}
                   <S.Text>Descrição</S.Text>
                   
-                  <S.Textarea rows="5" maxlength="130"/>
+                  <S.Textarea name='desc' id="desc" rows="5" maxlength="130" type="text"/>
                 </S.Form>
 
 
@@ -75,3 +92,34 @@ export default function Modal({isOpen, setOpenModal, title}) {
   }
   return null
 }
+
+
+//   const [infos, setInfos] = useState([]);
+ 
+//     const [nameInfo, setNameInfo] = useState('');
+//     const [descInfo, setDescInfo] = useState('');
+ 
+ 
+//     // ADICIONAR
+//     const addInfos= async () => {
+//       if (nameInfo.trim() === '') {
+//         console.log('Insira o nome.');
+//         return;
+//       }
+//       if (descInfo.trim() === '') {
+//         console.log('Insira a descrição.');
+//         return;
+//       }
+//       try {
+// const response = await axios.post(API_URL, {
+//           name: nameInfo,
+//           desc: descInfo,
+//         });
+//         setInfos([...infos, response.data]);
+//         setNameInfo('');
+//         setDescInfo('');
+//         Console.log('Adicionado',);
+//       } catch (error) {
+//         console.error('Erro ao adicionar', error);
+//       }
+//     };
