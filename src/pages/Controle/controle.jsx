@@ -24,6 +24,8 @@ const Controle = () => {
   const [offset, setOffSet] = useState(0);
   const [opset, setOpset] = useState(true);
   const [openModal, setOpenModal] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
 
   const normalizeString = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -84,7 +86,9 @@ const Controle = () => {
                   <Filter filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
-               <Dropdown Title="Adicionar"/>
+               <Dropdown Title="Adicionar" 
+               OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
+               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
