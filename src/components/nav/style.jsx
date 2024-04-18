@@ -33,10 +33,10 @@ export const Op = styled.text`
   transition: 0.2s;
 
   &:hover {
-    color: #0c4b66;
+    color: #ffffff;
     font-weight: 500;
     
     border-radius: 5px;
-    background-color: #93dbf7;
+    background-color: #277DFF;
   }
 `;
