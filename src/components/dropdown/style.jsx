@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import * as I from 'iconoir-react';
 
 export const Container = styled.div`
     display: flex;
@@ -12,7 +11,7 @@ export const Container = styled.div`
 `;
 export const Button = styled.button`
 background-color: #38AD68;
-  width: 100%;
+  width: 110px;
   height: 100%;
   font-size: 20px;
   color: #fafafa;
@@ -32,8 +31,9 @@ export const ContainerOp = styled.div`
     position: absolute;
     top: 43px;
     color: #333;
-    width: 80px;
-    text-align: center;
+    width: 100px;
+    padding: 5px;
+    text-align: left;
     border-radius: 5px;
     -webkit-box-shadow: 1px 5px 17px -7px rgba(173,170,173,0.98);
 -moz-box-shadow: 1px 5px 17px -7px rgba(173,170,173,0.98);

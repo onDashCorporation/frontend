@@ -24,7 +24,7 @@ const Reset = () => {
       console.log(values.newPassword)
 
       if(values.newPassword  !== values.confPassword){
-        setError("senhas invalidas ou  diferentes")
+        setError("senhas invalidas ou diferentes")
         console.log("erro senha")
       }
       else{

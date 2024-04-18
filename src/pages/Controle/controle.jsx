@@ -2,6 +2,7 @@
 import Nav from "../../components/nav/nav";
 import Header from "../../components/header/header";
 import Filter from "../../components/filter/filter";
+import Folder from "../../assets/images/folder.svg"
 import { useState } from "react";
 import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
@@ -23,6 +24,8 @@ const Controle = () => {
   const [offset, setOffSet] = useState(0);
   const [opset, setOpset] = useState(true);
   const [openModal, setOpenModal] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
 
   const normalizeString = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -83,7 +86,9 @@ const Controle = () => {
                   <Filter filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
-               <Dropdown Title="Adicionar"/>
+               <Dropdown Title="Adicionar" 
+               OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
+               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -111,8 +116,14 @@ const Controle = () => {
                     </S.StyledTableCell>
                 ))}
                 <S.StyledTableCell >
-                  <S.Edit onClick={() => setOpenModal(true)}/>
-                 <S.Trash onClick={() => setOpenModal(true)}/>                
+                  <S.ButtonContainer>
+                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
+                  <S.Edit/>
+                  </S.ButtonEdit>
+                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
+                 <S.Trash/>   
+                 </S.ButtonDelete>  
+                 </S.ButtonContainer>           
                  </S.StyledTableCell>
               </S.TrBody>
             ))}
@@ -132,7 +143,7 @@ const Controle = () => {
           <S.StyledTable>
             <S.TableHeader>
               <S.TrHeader>
-              <S.ThHeader isFirst className={filterop === 'status' ? "Houver" : ""}>Foto</S.ThHeader>
+              <S.ThHeader isFirst className={filterop === 'status' ? "Houver" : ""}>Tipo</S.ThHeader>
                 <S.ThHeader>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
                 <S.ThHeader> Quantidade</S.ThHeader>
@@ -151,8 +162,7 @@ const Controle = () => {
                   </S.StyledTableCell>
               ))}
               <S.StyledTableCell >
-                 <S.Edit/>
-                 <S.Trash/>
+                <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
               </S.StyledTableCell>
             </S.TrBody>
           ))}
