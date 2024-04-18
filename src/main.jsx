@@ -14,7 +14,8 @@ import Relatorios from "./pages/Relatorios/relatorios.jsx";
 import Catalogacao from "./pages/Catalogacao/catalogacao.jsx";
 import Reset from "./pages/Login/reset.jsx"
 import Pedidos from "./pages/Solicitacoes/pedidos.jsx"
-import Entrada from "./pages/Movimentacao/entrada.jsx";
+import Entrada from "./pages/Movimentacao/entrada.jsx"; 
+import Saida from "./pages/Movimentacao/saida.jsx"; 
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/entrada",
         element: <Entrada />,
+      },
+      {
+        path: "/saida",
+        element: <Saida />,
       },
       {
         path: "/relatorios",
