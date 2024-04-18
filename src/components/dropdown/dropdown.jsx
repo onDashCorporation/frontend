@@ -18,7 +18,7 @@ return(
         {isActive && (
             <S.ContainerOp>
                 <S.Op onClick={e => {nav("/entrada"), setIsActive(false)}}>Entrada</S.Op>
-                <S.Op onClick={e => {nav("/pedidos"), setIsActive(false)}}>Saida</S.Op>
+                <S.Op onClick={e => {nav("/saida"), setIsActive(false)}}>Saida</S.Op>
             </S.ContainerOp>
         )}  
     </S.Container>

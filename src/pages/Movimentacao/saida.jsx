@@ -12,7 +12,7 @@ import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
   const limit = 7;
   const total =  data.length;
 
-const Entrada = () => {
+const Saida = () => {
 
   
       const [searchTerm, setSearchTerm] = useState("");
@@ -73,15 +73,15 @@ const handleNovoValor = (novoValor) => {
         <Nav />
         <S.Container>
           <S.Section>
-            <S.Title>Entrada</S.Title>
+            <S.Title>Saida</S.Title>
             <S.Header>
                 <S.Option>
-                <S.Op  select={opset === true ? 'true' : undefined} onClick={() => setOpset(true) }>Entrada</S.Op>
+                <S.Op  select={opset === true ? 'true' : undefined} onClick={() => setOpset(true) }>Saida</S.Op>
                 <S.Op select={opset === false ? 'false' : undefined} onClick={() => setOpset(false)}>Adicionar</S.Op>
               </S.Option>
                {opset ? (
                 <S.ButtonOp>
-               <ButtonConfirm Title="Adicionar Entrada"  width="150px" backgroundColor="#38AD68" fontSize="15px"/>
+               <ButtonConfirm Title="Adicionar Saida"  width="150px" backgroundColor="#38AD68" fontSize="15px"/>
                </S.ButtonOp>
                )
                :
@@ -102,8 +102,7 @@ const handleNovoValor = (novoValor) => {
                 <S.ThHeader>Nome</S.ThHeader>
                 <S.ThHeader>Categoria</S.ThHeader>
                 <S.ThHeader >Quantidade</S.ThHeader>       
-                <S.ThHeader >Estoque Min</S.ThHeader>       
-                <S.ThHeader >Adicionar</S.ThHeader>       
+                <S.ThHeader >Saida</S.ThHeader>       
                 <S.ThHeader isLast>⠀⠀⠀⠀⠀⠀⠀</S.ThHeader>       
                 </S.TrHeader>
               </S.TableHeader>
@@ -115,9 +114,6 @@ const handleNovoValor = (novoValor) => {
                           <S.Test>{value}</S.Test>
                         </S.StyledTableCell>
                       ))}
-                      <S.StyledTableCell >
-                        10%
-                 </S.StyledTableCell>
                       <S.StyledTableCell >
                      <CountItem onValorChange={handleNovoValor}  />  
                  </S.StyledTableCell>
@@ -192,4 +188,4 @@ const handleNovoValor = (novoValor) => {
   );
 };
 
-export default Entrada;
+export default Saida;

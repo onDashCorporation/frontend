@@ -30,8 +30,8 @@ const Pedidos = () => {
           <S.SectionConatiner>
             <S.Title>Pedidos</S.Title>
             <S.ButtonContainer>
-               <ButtonConfirm Title="Finalinzar" backgroundColor="#f22b2b" />
-               <ButtonConfirm Title="Confirmar" backgroundColor="#38AD68"/>
+               <ButtonConfirm Title="Finalinzar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
+               <ButtonConfirm Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>
                </S.ButtonContainer>
           </S.SectionConatiner>
           
