@@ -136,14 +136,27 @@ export const StyledTableCell = styled(TableCell)`
   text-align: center;
 `;
 export const Test = styled.div`
+  max-width: 207px;
   text-align: center;
 `;
 export const ItemContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 5px;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+`;
+
+export const ItemButton = styled(I.Xmark)`
+  width: 40px;
+  color: #ff0000;
+`;
+export const TextErro = styled.text`
+text-align: center;
+font-size: 12px;
+color: #d81212;
 `;
 export const RadiusButto = styled.div`
   display: flex;
@@ -156,24 +169,12 @@ export const RadiusButto = styled.div`
     transition: all 0.3s ease;
     transition: all 0.3s ;
     background-color: #ff0000;
-    & + ${ItemButton} {
-      transition: all 0.1s ease;
-      transition: all 0.1s ;
+    ${ItemButton} {
       color: #ffffff;
     }
   }
 `;
 
-export const ItemButton = styled(I.Xmark)`
-  width: 40px;
-  color: #7a7a7a;
-
-  /* &:hover {
-    transition: all 0.3s ease;
-    transition: all 0.3s ;
-    color: #ffffff;
-  } */
-`;
 export const Edit = styled(I.EditPencil)`
   width: 20px;
   color: green;
@@ -198,7 +199,7 @@ export const PaginationConatiner = styled.div`
   justify-content: right;
   gap: 50px;
 `;
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.button`
   width: 85px;
   padding: 4px;
   border-radius: 5px;
