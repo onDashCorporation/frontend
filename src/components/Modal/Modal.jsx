@@ -1,39 +1,90 @@
 import * as S from "./style"
 import React from 'react'
+import { IconoirProvider, Xmark } from 'iconoir-react';
+import "./switch.css";
 
-export default function Modal({isOpen, setOpenModal}) {
+export default function Modal({isOpen, setOpenModal, title}) {
+
+  function ToggleSwitch() {
+    // Get the checkbox
+    var checkBox = document.getElementById("switch");
+    // Get the output text
+    var input = document.getElementById("name").value;
+    var textarea = document.getElementById("desc").value;
+  
+    // If the checkbox is checked, display the output text
+    if (checkBox.checked == true){
+      input = "";
+    } else {
+      textarea = "";
+    }
+  }
+
   if (isOpen) {
     return(
 
       <S.Overlay>
 
-        <S.Div>
-          
-          <S.HeaderM>
+        <S.Modal>
 
-            {/* <S.Button onClick={() => setOpen(true)}>Abrir modal</S.Button> */}
-            <S.Button onClick={(setOpenModal)}>X</S.Button>
-            {/* Testando */}
-            {/* <S.Button onClick={() => console.log('feche')}>X</S.Button> */}
-            <S.TitleM>Informações de Deparatamento</S.TitleM>
-              
-            <S.Switch>
-              <S.SwitchText>Adiconar em sequência</S.SwitchText>
-            </S.Switch>
+          {/* Close Modal*/}
+          <IconoirProvider
+            iconProps={{
+              color: '#000',
+              strokeWidth: 1.5,
+              width: '2rem',
+              height: '2rem',
+            }}
+          >
+            {/* icon xmark */}
+            <S.Close onClick={(setOpenModal)}><Xmark /></S.Close>
+          </IconoirProvider>
 
-          </S.HeaderM>
+          {/* Modal container*/}
+          <S.ContainerM>
+        
+            {/* Header Modal */}
+            <S.HeaderM>
 
-          <S.Text>Nome</S.Text>
-          <br/>
-          <S.Input required/>
+              <S.TitleM>{title}</S.TitleM>
+                
+              <S.Switch>
+                <S.SwitchText>Adiconar em sequência</S.SwitchText>
+
+                {/* Toggle Switch */}
+                <label class="switch">
+                  <input type="checkbox" id="switch"/>
+                  <span class="slider round"></span>
+                </label>
+              </S.Switch>
+
+            </S.HeaderM>
+
+            {/* Modal content */}
+            <S.Div>
+
+                <S.Form>
+                  {/* Campo nome */}
+                  <S.Text>Nome</S.Text>
+                  
+                  <S.Input required name='name' id="name" type="text"/>
+
+                  {/* Campo Descrição */}
+                  <S.Text>Descrição</S.Text>
+                  
+                  <S.Textarea name='desc' id="desc" rows="5" maxlength="130" type="text"/>
+                </S.Form>
 
 
-          <S.Text>Descrição</S.Text>
-          <br/>
-          {/* <S.Input/> */}
-          <S.Textarea rows="5" maxlength="130"/>
+                <S.AddButton onClick={console.log('clicou')}>
+                  Adicionar
+                </S.AddButton>
 
-        </S.Div>
+            </S.Div>
+
+          </S.ContainerM>
+
+        </S.Modal>
 
       </S.Overlay>
   
@@ -42,81 +93,33 @@ export default function Modal({isOpen, setOpenModal}) {
   return null
 }
 
-// export function Modal2(isOpen, title) {
-//   if (isOpen) {
-//       return(
 
-//           <S.Div>
-
-//               <S.HeaderM>
-//                 <S.TitleM>{title}</S.TitleM>
-                
-//                 <S.Switch>
-//                   <S.SwitchText>Adiconar em sequência</S.SwitchText>
-//                 </S.Switch>
-
-//                 <button onClick={() => setOpen(!isOpen)}>Fechar</button>
-
-//               </S.HeaderM>
-
-//               <S.Text>Nome</S.Text>
-//               <br/>
-//               <S.Input required/>
-
-
-//               <S.Text>Descrição</S.Text>
-//               <br/>
-//               {/* <S.Input/> */}
-//               <S.Textarea rows="5" maxlength="130"/>
-
-//             </S.Div>
-
-//       )
-//   }
-//   else{
-//       return <></>
-//   }
-// }
-
-// class Modal extends React.Component {
-//   render() {
-//     return <div>Hello {this.props.title}</div>;
-//   }
-// }
-
-     
-// export function Modal2({ isOpen, setOpen, title} : IModal) {
-//     if (isOpen) {
-//         return(
-
-//             <S.Div>
-
-//                 <S.HeaderM>
-//                   <S.TitleM>Informações do departamento:</S.TitleM>
-                  
-//                   <S.Switch>
-//                     <S.SwitchText>Adiconar em sequência</S.SwitchText>
-//                   </S.Switch>
-
-//                 </S.HeaderM>
-
-//                 <S.Text>Nome</S.Text>
-//                 <br/>
-//                 <S.Input required/>
-
-//  <S.FooterM> {/* PAREI AQUIIIIIIIIIIIIIIIIIII ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/}
-
-// </S.FooterM>
-//                 <S.Text>Descrição</S.Text>
-//                 <br/>
-//                 {/* <S.Input/> */}
-//                 <S.Textarea rows="5" maxlength="130"/>
-
-//               </S.Div>
-
-//         )
-//     }
-//     else{
-//         return <></>
-//     }
-// }
+//   const [infos, setInfos] = useState([]);
+ 
+//     const [nameInfo, setNameInfo] = useState('');
+//     const [descInfo, setDescInfo] = useState('');
+ 
+ 
+//     // ADICIONAR
+//     const addInfos= async () => {
+//       if (nameInfo.trim() === '') {
+//         console.log('Insira o nome.');
+//         return;
+//       }
+//       if (descInfo.trim() === '') {
+//         console.log('Insira a descrição.');
+//         return;
+//       }
+//       try {
+// const response = await axios.post(API_URL, {
+//           name: nameInfo,
+//           desc: descInfo,
+//         });
+//         setInfos([...infos, response.data]);
+//         setNameInfo('');
+//         setDescInfo('');
+//         Console.log('Adicionado',);
+//       } catch (error) {
+//         console.error('Erro ao adicionar', error);
+//       }
+//     };

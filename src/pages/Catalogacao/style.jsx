@@ -25,7 +25,6 @@ export const ContainerModal = styled.div`
   margin-right: 8%;
 
   width: 84%;
-  background-color: #dce8f5;
   align-items: left;
   flex-direction: column;
 `;
@@ -51,9 +50,10 @@ export const Title = styled.h1`
 `;
 
 export const Button = styled.button`
-  background-color: #fff;
+  background-color: #dce8f5;
   border-radius: 5px;
   border: none;
   cursor: pointer;
+    //background-color: ;
 `;
 
