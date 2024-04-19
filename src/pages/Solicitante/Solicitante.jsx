@@ -122,7 +122,7 @@ const solicitante = () => {
                  </S.ButtonDelete>  
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
-                <S.StyledTableCell onClick={()=> {nav("")}}>
+                <S.StyledTableCell onClick={()=> {nav("/pedido")}}>
                    <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
                 </S.StyledTableCell>
               </S.TrBody>
@@ -177,7 +177,7 @@ const solicitante = () => {
              />
           </S.PaginationConatiner>
         </S.TableContainer>)}
-        <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} />
+        <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
         </S.Container>
       </S.Main>
     </S.Body>
