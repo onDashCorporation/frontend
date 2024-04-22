@@ -20,6 +20,7 @@ const solicitacoes = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(data);
   const [offset, setOffSet] = useState(0)
+  const [offset1, setOffSet1] = useState(0)
   const [opset, setOpset] = useState(true);
 
   const normalizeString = (str) => {
@@ -96,7 +97,7 @@ const solicitacoes = () => {
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
-              {filteredData.slice(offset,offset + limit).map((item, index) => (
+              {filteredData.slice(offset1,offset1 + limit).map((item, index) => (
               <S.TrBody key={index}>
                 {Object.entries(item).map(([key, value], index) => (
                   <S.StyledTableCell key={index} >
@@ -116,8 +117,8 @@ const solicitacoes = () => {
                <Pagination 
                limit={limit}
                total={total} 
-               offset={offset}
-               setOffset={setOffSet}
+               offset={offset1}
+               setOffset={setOffSet1}
                />
             </S.PaginationConatiner>
           </S.TableContainer>) 
