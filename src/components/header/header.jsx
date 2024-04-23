@@ -5,7 +5,7 @@ const Header = () => {
     <S.HeaderContainer>
       <S.Logo>Stock Box</S.Logo>
       <S.IconContainer>
-          oi
+          
       </S.IconContainer>
     </S.HeaderContainer>
   );
