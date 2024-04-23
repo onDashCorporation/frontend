@@ -33,15 +33,7 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
           <S.Close onClick={handleCloseModal}><S.IconClose/></S.Close>
           </S.header>
          </S.ContainerHeader>
-         { func == true ?
-         (
-          <div>oi</div>
-         ) : (<div>
-          hello
-         </div>
-        )
-
-         }
+         
 
           <S.ContainerM>
             <S.Div>
@@ -57,6 +49,14 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
                   </S.Switch>
                   </S.HeaderM>
                   <S.Input autoComplete="off" required name='name' id="name" type="text"  placeholder={placeholder || "Nome"}/>
+                  { func == true ?(
+                      <div></div>
+                      ) : 
+                      (<S.Text>
+                        Cargo
+                      </S.Text>
+                    
+                    )}
                   <S.Text>Descrição</S.Text>
                   <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text" placeholder="Adicione uma descrição"/>
                 </S.Form>
