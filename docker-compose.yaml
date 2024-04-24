@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  frontend:
+    container_name: container-acai-frontend
+    image: carlosvenancio/acai-frontend
+    ports:
+      - "4000:3000"
+    networks:
+      - acai-network
+      - frontend-network
+    restart: "always"
+    depends_on:
+      - backend
+  backend:
+    container_name: container-acai-backend
+    image: carlosvenancio/acai-backend
+    ports:
+      - "5000:5000"
+    networks:
+      - acai-network
+      - backend-network
+    restart: "always"
+    depends_on:
+      - database
+  database:
+    container_name: container-acai-database
+    image: carlosvenancio/acai-database 
+    networks:
+      - backend-network
+    restart: "always"
+networks:
+  acai-network:
+  backend-network:
+  frontend-network:
+volumes:
+  data:
