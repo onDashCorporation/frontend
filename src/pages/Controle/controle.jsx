@@ -10,7 +10,8 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
+
+import ProductModal from "../../components/ProductModal/ProductModal";
 
 
   const limit = 7;
@@ -27,6 +28,8 @@ const Controle = () => {
   const [opset, setOpset] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
+  const [openProductM, setOpenProductM] = useState(false);
 
 
   const normalizeString = (str) => {
@@ -88,18 +91,13 @@ const Controle = () => {
                   <Filter filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
-               {opset ?(<ButtonConfirm 
-               Title="Adicionar"  
-               width="100px" 
-               height="40px"
-               backgroundColor="#38AD68" 
-               fontSize="15px"
-              //  onClick={}
-               />)
-               :
-               (<Dropdown Title="Movimento" 
+
+                {/* PARA TESTAR ABRINDO A MODAL */}
+                <button onClick={() => setOpenProductM(true)}>Adicionar</button>
+
+               <Dropdown Title="Adicionar" 
                OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
-               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>)}
+               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -189,6 +187,9 @@ const Controle = () => {
           </S.PaginationConatiner>
         </S.TableContainer>)}
         <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
+
+        <ProductModal title='Adicionar Produto' placeholder='Digite o nome' isOpen={openProductM} setOpenModal={setOpenProductM}/>
+
         </S.Container>
       </S.Main>
     </S.Body>
