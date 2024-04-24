@@ -97,7 +97,7 @@ const Controle = () => {
 
                <Dropdown Title="Adicionar" 
                OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
-               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>)}
+               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
