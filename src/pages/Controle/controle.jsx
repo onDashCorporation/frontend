@@ -10,7 +10,7 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-
+import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import ProductModal from "../../components/ProductModal/ProductModal";
 
 
@@ -93,11 +93,17 @@ const Controle = () => {
                 <S.ButtonContainer >
 
                 {/* PARA TESTAR ABRINDO A MODAL */}
-                <button onClick={() => setOpenProductM(true)}>Adicionar</button>
-
-               <Dropdown Title="Adicionar" 
-               OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
-               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
+                {opset?( <ButtonConfirm onClick={() => setOpenProductM(true)} 
+                Title="Adicionar"  
+                width="100px" 
+                height="40px"
+                backgroundColor="#38AD68" 
+                fontSize="15px"/>
+                  ):
+                  (<Dropdown Title="Movimento" 
+                  OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
+                  OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>)}
+               
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -170,7 +176,7 @@ const Controle = () => {
                   </S.Test>
                   </S.StyledTableCell>
               ))}
-              <S.StyledTableCell >
+              <S.StyledTableCell  onClick={()=> nav("/movipedido")}>
                 <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
               </S.StyledTableCell>
             </S.TrBody>
