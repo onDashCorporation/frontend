@@ -7,9 +7,7 @@ import {
   getPaddingStatus,
   getRadiusStatus,
   getBackgroudSelect,
-} from "../Solicitacoes/utils";
-import * as I from "iconoir-react";
-
+} from "./utils";
 
 export const Body = styled.div`
   display: flex;
@@ -165,69 +163,10 @@ export const PaginationConatiner = styled.div`
   gap: 50px;
 `;
 export const ButtonContainer = styled.div`
+  /* width: 160px; */
+  height: 40px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 35px;
-  gap: 15px;
-
-`;
-export const Edit = styled(I.EditPencil)`
-  width: 20px;
-  color: #38ad68;
-`;
-export const Trash = styled(I.TrashSolid)`
-  color: #af3939;
-  width: 20px;
-`;
-
-export const ButtonEdit = styled.button`
-display: flex;
-align-items: center;
-justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 4px;
-  border-radius: 5px;
-  background-color: #ffffff;
-  color: #ffff;
-  transition: all 0.2s ease;
-  border-radius: 20px;
-
-
-  &:active {
-    background-color: #2e8d56;
-  }
-  &:hover {
-    ${Edit}{
-      color: #ffff;
-    }
-    border-radius: 20px;
-    background-color: #2e8d56;
-  }
-`;
-export const ButtonDelete = styled.button`
-display: flex;
-align-items: center;
-justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 4px;
-  border-radius: 5px;
-  background-color: #ffffff;
-  color: #ffff;
-  border-radius: 20px;
-  transition: all 0.2s ease;
-
-  &:active {
-    background-color: #af3939;
-  }
-  &:hover {
-    ${Trash}{
-      color: #ffff;
-    }
-    border-radius: 20px;
-    background-color: #af3939;
-  }
+  justify-content: right;
+  gap: 30px;
 `;

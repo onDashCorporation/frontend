@@ -48,17 +48,26 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
                     </label>
                   </S.Switch>
                   </S.HeaderM>
+                  <S.Des>
                   <S.Input autoComplete="off" required name='name' id="name" type="text"  placeholder={placeholder || "Nome"}/>
+
+                  </S.Des>
                   { func == true ?(
-                      <div></div>
+                    <S.Des>
+                      <S.Text>
+                      Nif
+                    </S.Text>
+                    <S.Input autoComplete="off" required name='nif' id="nif" type="text"  placeholder={ "Digite seu Nif"}/>
+                    </S.Des>
                       ) : 
-                      (<S.Text>
-                        Cargo
-                      </S.Text>
+                      (
+                        <S.Des>
+                          <S.Text>Descrição</S.Text>
+                  <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text" placeholder="Adicione uma descrição"/>
+                        </S.Des>
                     
                     )}
-                  <S.Text>Descrição</S.Text>
-                  <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text" placeholder="Adicione uma descrição"/>
+                  
                 </S.Form>
             </S.Div>
             <S.ConatinerButton>
