@@ -10,8 +10,9 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-
+import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import ProductModal from "../../components/ProductModal/ProductModal";
+import DropDelete from "../../components/dropdelete/dropdelete.jsx";
 
 
   const limit = 7;
@@ -93,11 +94,17 @@ const Controle = () => {
                 <S.ButtonContainer >
 
                 {/* PARA TESTAR ABRINDO A MODAL */}
-                <button onClick={() => setOpenProductM(true)}>Adicionar</button>
-
-               <Dropdown Title="Adicionar" 
-               OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
-               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
+                {opset?( <ButtonConfirm onClick={() => setOpenProductM(true)} 
+                Title="Adicionar"  
+                width="100px" 
+                height="40px"
+                backgroundColor="#38AD68" 
+                fontSize="15px"/>
+                  ):
+                  (<Dropdown Title="Movimento" 
+                  OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
+                  OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>)}
+               
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -118,7 +125,7 @@ const Controle = () => {
               {filteredData.slice(offset1,offset1 + limit).map((item, index) => (
               <S.TrBody key={index}>
                 {Object.entries(item).map(([key, value], index) => (
-                  <S.StyledTableCell key={index} >
+                  <S.StyledTableCell key={index}   >
                     <S.Test  >
                     {value}
                     </S.Test>
@@ -126,12 +133,10 @@ const Controle = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
-                  <S.Edit/>
-                  </S.ButtonEdit>
-                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
-                 <S.Trash/>   
-                 </S.ButtonDelete>  
+                  <DropDelete PlusOP={true}
+                 onClickOP1={() => setOpenModal1(true)} 
+                onClickOP2={() => setOpenModal2(true)}
+             />
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
               </S.TrBody>
@@ -170,7 +175,7 @@ const Controle = () => {
                   </S.Test>
                   </S.StyledTableCell>
               ))}
-              <S.StyledTableCell >
+              <S.StyledTableCell  onClick={()=> nav("/movipedido")}>
                 <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
               </S.StyledTableCell>
             </S.TrBody>
