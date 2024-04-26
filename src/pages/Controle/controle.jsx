@@ -188,7 +188,9 @@ const Controle = () => {
         </S.TableContainer>)}
         <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
 
-        <ProductModal title='Adicionar Produto' placeholder='Digite o nome' isOpen={openProductM} setOpenModal={setOpenProductM}/>
+        <ProductModal title='Adicionar Produto' 
+        placeholder='Digite o nome' 
+        isOpen={openProductM} setOpenModal={setOpenProductM}/>
 
         </S.Container>
       </S.Main>
