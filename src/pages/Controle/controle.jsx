@@ -12,6 +12,7 @@ import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import ProductModal from "../../components/ProductModal/ProductModal";
+import DropDelete from "../../components/dropdelete/dropdelete.jsx";
 
 
   const limit = 7;
@@ -124,7 +125,7 @@ const Controle = () => {
               {filteredData.slice(offset1,offset1 + limit).map((item, index) => (
               <S.TrBody key={index}>
                 {Object.entries(item).map(([key, value], index) => (
-                  <S.StyledTableCell key={index} >
+                  <S.StyledTableCell key={index}   >
                     <S.Test  >
                     {value}
                     </S.Test>
@@ -132,12 +133,10 @@ const Controle = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
-                  <S.Edit/>
-                  </S.ButtonEdit>
-                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
-                 <S.Trash/>   
-                 </S.ButtonDelete>  
+                  <DropDelete PlusOP={true}
+                 onClickOP1={() => setOpenModal1(true)} 
+                onClickOP2={() => setOpenModal2(true)}
+             />
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
               </S.TrBody>

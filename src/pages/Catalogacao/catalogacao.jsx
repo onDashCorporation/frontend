@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 import Modal from '../../components/Modal/Modal.jsx'
+import DropDelete from "../../components/dropdelete/dropdelete.jsx";
 
 
   const limit = 7;
@@ -118,14 +119,12 @@ const Catalogacao = () => {
                     </S.StyledTableCell>
                 ))}
                 <S.StyledTableCell >
-                  <S.ButtonContainer>
-                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
-                  <S.Edit/>
-                  </S.ButtonEdit>
-                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
-                 <S.Trash/>   
-                 </S.ButtonDelete>  
-                 </S.ButtonContainer>           
+                <S.ButtonContainer >
+                <DropDelete PlusOP={true}
+                 onClickOP1={() => setOpenModal1(true)} 
+                onClickOP2={() => setOpenModal2(true)}
+             />
+               </S.ButtonContainer>          
                  </S.StyledTableCell>
               </S.TrBody>
             ))}
@@ -140,9 +139,9 @@ const Catalogacao = () => {
                />
             </S.PaginationConatiner>
           </S.TableContainer>
-        <Modal title={'Informações do Departamento'} placeholder="Digite o nome" func={true} isOpen={openModal1} setOpenModal={setOpenModal1}/>
-        <Modal title={'Informações da Categoria'} placeholder="Digite o nome" func={true} isOpen={openModal2} setOpenModal={setOpenModal2}/>
-        <Modal title={'Informações do Funcionario'} placeholder="Digite o nome" func={false} isOpen={openModal3} setOpenModal={setOpenModal3}/>
+        <Modal title={'Informações do Departamento'} placeholder="Digite o nome" func={false} isOpen={openModal1} setOpenModal={setOpenModal1}/>
+        <Modal title={'Informações da Categoria'} placeholder="Digite o nome" func={false} isOpen={openModal2} setOpenModal={setOpenModal2}/>
+        <Modal title={'Informações do Funcionario'} placeholder="Digite o nome" func={true} isOpen={openModal3} setOpenModal={setOpenModal3}/>
         <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente" />
 
         </S.Container>

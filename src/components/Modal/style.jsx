@@ -63,6 +63,7 @@ export const HeaderM = styled.h2`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 96%;
   /* margin-bottom: 2rem; */
 `
 export const TitleM = styled.h2`
@@ -102,6 +103,12 @@ export const Text = styled.h3`
 
   color: #000000;
 `;
+export const Des = styled.div`
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: 93%;
+`;
 export const Input = styled.input`
   font-weight: 400;
   font-size: 18px;
@@ -111,6 +118,7 @@ export const Input = styled.input`
   outline: none;
   margin-bottom: 1rem;
   border-radius: 5px;
+  width: 100%;
 
 `
 export const Textarea = styled.textarea`
@@ -121,6 +129,7 @@ export const Textarea = styled.textarea`
   padding: 1rem;
   background-color: #D9D9D9;
   resize: none;
+  width:100%;
 `
 export const ConatinerButton = styled.div`
 display: flex;

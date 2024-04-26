@@ -138,14 +138,6 @@ export const Test = styled.div`
 export const ItemButton = styled.button`
   width: 20px;
 `;
-export const Edit = styled(I.EditPencil)`
-  width: 20px;
-  color: #ffffff;
-`;
-export const Trash = styled(I.TrashSolid)`
-  color: #ffffff;
-  width: 20px;
-`;
 export const Active = styled.div`
   width: 10px;
   height: 10px;
@@ -168,35 +160,61 @@ export const ButtonContainer = styled.div`
   align-items: center;
   gap: 15px;
 `;
+export const Edit = styled(I.EditPencil)`
+  width: 20px;
+  color: #38ad68;
+`;
+export const Trash = styled(I.TrashSolid)`
+  color: #af3939;
+  width: 20px;
+`;
+
 export const ButtonEdit = styled.button`
-  width: 30px;
-  height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+  width: 40px;
+  height: 40px;
   padding: 4px;
   border-radius: 5px;
-  background-color: #38ad68;
+  background-color: #ffffff;
   color: #ffff;
+  transition: all 0.2s ease;
+  border-radius: 20px;
+
+
   &:active {
-    transition: transform 0.2s ease;
     background-color: #2e8d56;
   }
   &:hover {
-    transition: transform 0.2s ease;
+    ${Edit}{
+      color: #ffff;
+    }
+    border-radius: 20px;
     background-color: #2e8d56;
   }
 `;
 export const ButtonDelete = styled.button`
-  width: 30px;
-  height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+  width: 40px;
+  height: 40px;
   padding: 4px;
   border-radius: 5px;
-  background-color: #cf4848;
+  background-color: #ffffff;
   color: #ffff;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+
   &:active {
-    transition: transform 0.2s ease;
     background-color: #af3939;
   }
   &:hover {
-    transition: transform 0.2s ease;
+    ${Trash}{
+      color: #ffff;
+    }
+    border-radius: 20px;
     background-color: #af3939;
   }
 `;
