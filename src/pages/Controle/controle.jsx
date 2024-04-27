@@ -133,9 +133,9 @@ const Controle = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <DropDelete PlusOP={true}
+                  <DropDelete Mix={true} 
                  onClickOP1={() => setOpenModal1(true)} 
-                onClickOP2={() => setOpenModal2(true)}
+                onClickOP2={() => setOpenModal(true)}
              />
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
@@ -175,8 +175,13 @@ const Controle = () => {
                   </S.Test>
                   </S.StyledTableCell>
               ))}
-              <S.StyledTableCell  onClick={()=> nav("/movipedido")}>
-                <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
+              <S.StyledTableCell  >
+              <S.ButtonContainer>
+                  <DropDelete Vizu={true}
+                  onClickOP3={()=> nav("/movipedido")} 
+                
+             />
+                 </S.ButtonContainer>
               </S.StyledTableCell>
             </S.TrBody>
           ))}

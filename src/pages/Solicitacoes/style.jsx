@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import * as I from "iconoir-react"
+
 import {
   getBackgroudStatus,
   getWidthStatus,
@@ -153,6 +155,18 @@ export const Active = styled.div`
   border-radius: 100px;
   background-color: aqua;
 `;
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+`;
+export const More = styled(I.MoreHoriz)`
+width: 30px;
+stroke-Width: 2.0;
+color: #277DFF;
+`;
 
 export const PaginationConatiner = styled.div`
   width: 100%;
@@ -161,12 +175,4 @@ export const PaginationConatiner = styled.div`
   align-items: center;
   justify-content: right;
   gap: 50px;
-`;
-export const ButtonContainer = styled.div`
-  /* width: 160px; */
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
-  gap: 30px;
 `;

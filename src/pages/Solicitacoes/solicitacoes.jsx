@@ -8,6 +8,7 @@ import Folder from "../../assets/images/folder.svg"
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
+import DropDelete from "../../components/dropdelete/dropdelete";
 
 
   const limit = 7;
@@ -106,9 +107,11 @@ const solicitacoes = () => {
                     </S.Test>
                     </S.StyledTableCell>
                 ))}
-                <S.StyledTableCell onClick={()=> {nav("/pedidos")}}>
-                   <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
-                </S.StyledTableCell>
+                <S.StyledTableCell >
+                <S.ButtonContainer onClick={() => nav("/pedidos")}>
+              <S.More/>       
+                  </S.ButtonContainer>  
+              </S.StyledTableCell>
               </S.TrBody>
             ))}
               </S.TableBody>
@@ -146,7 +149,9 @@ const solicitacoes = () => {
                   </S.StyledTableCell>
               ))}
               <S.StyledTableCell >
-                 <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
+              <S.ButtonContainer onClick={() => nav("/pedidos")}>
+              <S.More/>       
+                  </S.ButtonContainer>  
               </S.StyledTableCell>
             </S.TrBody>
           ))}
