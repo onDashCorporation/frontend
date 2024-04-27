@@ -30,6 +30,7 @@ export const ContainerOp = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
+    z-index: 1;
     top: 110%;
     background-color: #ffffff;
     font-weight: 500;
