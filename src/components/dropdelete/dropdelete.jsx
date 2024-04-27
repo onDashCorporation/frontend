@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as S from "./style"
 
-const DropDelete = ({  onClickOP1, onClickOP2}) => {
+const DropDelete = ({  onClickOP1, onClickOP2, onClickOP3, Vizu, Mix}) => {
 
     const [isActive, setIsActive] = useState(false);
     const nav = useNavigate();
@@ -17,9 +17,12 @@ return(
         </S.Button>
         {isActive && (
             <S.ContainerOp>
-                <S.Op onClick={onClickOP1}>Visualisar</S.Op>
-                <S.Op onClick={onClickOP1}>Editar</S.Op>
-                <S.Op onClick={onClickOP2}>Delete</S.Op>
+                {Vizu == true ? (<S.Op onClick={onClickOP3}>Visualisar</S.Op>): (<div></div>)}
+                {Mix == true ? (<S.Op onClick={onClickOP1}>Editar</S.Op>
+                ): (<div></div>)}
+                {Mix == true ? (
+                <S.Op onClick={onClickOP2}>Delete</S.Op>): (<div></div>)}
+                
             </S.ContainerOp>
         )}  
     </S.Container>
