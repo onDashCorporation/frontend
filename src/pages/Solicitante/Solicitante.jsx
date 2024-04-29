@@ -116,15 +116,14 @@ const solicitante = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <DropDelete PlusOP={true}
-                 onClickOP1={() => setOpenModal1(true)} 
-                onClickOP2={() => setOpenModal2(true)}
+                  <DropDelete Vizu={true} Mix1={true}
+                onClickOP2={() => setOpenModal(true)}
+                onClickOP3={() => nav("/pedido")}
+                op="Excluir"
+
              />  
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
-                {/* <S.StyledTableCell onClick={()=> {nav("/pedido")}}>
-                   <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
-                </S.StyledTableCell> */}
               </S.TrBody>
             ))}
               </S.TableBody>
@@ -162,8 +161,10 @@ const solicitante = () => {
                   </S.StyledTableCell>
               ))}
               <S.StyledTableCell >
-                 <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
-              </S.StyledTableCell>
+              <S.ButtonContainer onClick={() => nav("/pedido")}>
+              <S.More/>       
+                  </S.ButtonContainer>              
+                   </S.StyledTableCell>
             </S.TrBody>
           ))}
             </S.TableBody>

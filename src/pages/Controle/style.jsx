@@ -168,6 +168,11 @@ export const ButtonContainer = styled.div`
   align-items: center;
   gap: 15px;
 `;
+export const More = styled(I.MoreHoriz)`
+width: 30px;
+stroke-Width: 2.0;
+color: #277DFF;
+`;
 export const Edit = styled(I.EditPencil)`
   width: 20px;
   color: #38ad68;
