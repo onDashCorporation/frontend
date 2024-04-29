@@ -84,7 +84,7 @@ const handleNovoValor = (novoValor) => {
               </S.Option>
                {opset ? (
                 <S.ButtonOp>
-               <ButtonConfirm Title="Adicionar Item"  width="150px" backgroundColor="#38AD68" fontSize="15px"  onClick={() => setOpenModal(true)}/>
+               <ButtonConfirm Title="Finalizar pedido"  width="150px" backgroundColor="#38AD68" fontSize="15px"  onClick={() => setOpenModal(true)}/>
                </S.ButtonOp>
                )
                :
