@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import * as I from 'iconoir-react';
-
 export const Container = styled.div`
     display: flex;
     flex-direction: row;
@@ -17,13 +16,18 @@ export const Title = styled.text`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 5px 5px 5px;
-    border: 1px solid rgb(182, 181, 181);
-    border-radius: 10px;
+    padding: 5px 15px;
+    /* border: 1px solid rgb(221, 221, 221); */
+    background-color: #ffff;
+
+    border-radius: 5px;
     font-size: 15px;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #333;
     cursor: pointer;
+    transition: border-color 0.3s ease;
+    transition: all 0.3 ease;
+    border: 1px solid ${props => props.isActive ? '#4e8fd9' : 'rgb(221, 221, 221)'};
 
 `;
 export const ContainerOp = styled.div`
@@ -37,6 +41,7 @@ export const ContainerOp = styled.div`
     color: #333;
     width: 100%;
     border-radius: 5px;
+    padding: 10px 0px;
     -webkit-box-shadow: 1px 5px 17px -7px rgba(173,170,173,0.98);
     -moz-box-shadow: 1px 5px 17px -7px rgba(173,170,173,0.98);
     box-shadow: 1px 5px 17px -7px rgba(173,170,173,0.98);
@@ -44,7 +49,7 @@ export const ContainerOp = styled.div`
 `;
 export const Op = styled.text`
     font-size: 14px;
-    padding: 5px 5px 4px 10px;
+    padding: 5px 15px;
     cursor: pointer;
     transition: all 0.2s;
 
@@ -60,9 +65,9 @@ align-items: center;
 
 `;
 export const Trash = styled(I.XmarkCircle)`
-
+    transition: color 0.4s ease;
+    color:  ${props => props.isActive ? '#4e8fd9' : 'rgb(221, 221, 221)'};
     width: 20px;
-  color: rgb(163, 161, 161);
 
 
 
