@@ -175,59 +175,42 @@ export const ButtonContainer = styled.div`
 `;
 export const Edit = styled(I.EditPencil)`
   width: 20px;
-  color: #38ad68;
+  color: #ffffff;
 `;
 export const Trash = styled(I.TrashSolid)`
-  color: #af3939;
+  color: #ffffff;
   width: 20px;
 `;
 
 export const ButtonEdit = styled.button`
-display: flex;
-align-items: center;
-justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   padding: 4px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: #38ad68;
   color: #ffff;
-  transition: all 0.2s ease;
-  border-radius: 20px;
-
-
   &:active {
+    transition: transform 0.2s ease;
     background-color: #2e8d56;
   }
   &:hover {
-    ${Edit}{
-      color: #ffff;
-    }
-    border-radius: 20px;
+    transition: transform 0.2s ease;
     background-color: #2e8d56;
   }
 `;
 export const ButtonDelete = styled.button`
-display: flex;
-align-items: center;
-justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   padding: 4px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: #cf4848;
   color: #ffff;
-  border-radius: 20px;
-  transition: all 0.2s ease;
-
   &:active {
+    transition: transform 0.2s ease;
     background-color: #af3939;
   }
   &:hover {
-    ${Trash}{
-      color: #ffff;
-    }
-    border-radius: 20px;
+    transition: transform 0.2s ease;
     background-color: #af3939;
   }
 `;
