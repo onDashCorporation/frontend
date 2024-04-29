@@ -28,10 +28,6 @@ const Pedido = () => {
         <S.Container>
           <S.SectionConatiner>
             <S.Title>Pedido</S.Title>
-            {/* <S.ButtonContainer>
-               <ButtonConfirm Title="Finalinzar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
-               <ButtonConfirm Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>
-               </S.ButtonContainer> */}
           </S.SectionConatiner>
           
          <S.TableContainer>
