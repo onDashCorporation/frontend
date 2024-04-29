@@ -10,7 +10,7 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-
+import DropDelete from "../../components/dropdelete/dropdelete.jsx";
 import ProductModal from "../../components/ProductModal/ProductModal";
 
 
