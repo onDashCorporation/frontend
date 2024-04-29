@@ -177,15 +177,9 @@ export const More = styled(I.MoreHoriz)`
 width: 30px;
 stroke-Width: 2.0;
 color: #277DFF;
+margin-right: 60px;
 `;
-export const Edit = styled(I.EditPencil)`
-  width: 20px;
-  color: #ffffff;
-`;
-export const Trash = styled(I.TrashSolid)`
-  color: #ffffff;
-  width: 20px;
-`;
+
 
 export const ButtonEdit = styled.button`
   width: 30px;

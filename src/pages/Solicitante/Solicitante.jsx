@@ -1,16 +1,14 @@
 import * as S from "./style";
-import Nav from "../../components/nav/nav";
 import Header from "../../components/header/header";
 import Filter from "../../components/filter/filter";
 import { useState } from "react";
 import Search from "../../components/search/search";
-import Folder from "../../assets/images/folder.svg"
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-
+import DropDelete from "../../components/dropdelete/dropdelete";
 
   const limit = 7;
   const total =  data.length;
@@ -98,7 +96,6 @@ const solicitante = () => {
                 <S.ThHeader>Nome</S.ThHeader>
                 <S.ThHeader>Departamento</S.ThHeader>
                 <S.ThHeader >Data</S.ThHeader>       
-                <S.ThHeader ></S.ThHeader>       
                 <S.ThHeader isLast></S.ThHeader>       
                 </S.TrHeader>
               </S.TableHeader>

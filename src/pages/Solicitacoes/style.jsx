@@ -27,6 +27,8 @@ export const Container = styled.div`
   width: 100%;
   height: 90vh;
   gap: 30px;
+  background-color: #fafafa;
+
 `;
 export const Section = styled.div`
   display: flex;
@@ -105,6 +107,8 @@ export const TableContainer = styled.div`
 export const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
+    background-color: #ffff;
+
 `;
 
 export const TableHeader = styled.thead`
@@ -175,4 +179,6 @@ export const PaginationConatiner = styled.div`
   align-items: center;
   justify-content: right;
   gap: 50px;
+    background-color: #ffff;
+
 `;

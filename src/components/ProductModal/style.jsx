@@ -23,12 +23,12 @@ export const Modal = styled.div`
   border-radius: 5px;
   
 `;
-export const ContainerM = styled.div`
-  width: 90%;
-  margin: 1.5% 5% 0% 5%;
-`;
+// export const ContainerM = styled.div`
+//   width: 90%;
+//   margin: 1.5% 5% 0% 5%;
+// `;
 
-export const IconClose = styled(I.Xmark)`
+export const IconClose = styled(Xmark)`
  color: #ff0000;
  width: 2rem;
  height: 2rem;

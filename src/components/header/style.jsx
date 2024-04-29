@@ -6,7 +6,8 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  background-color: #f4f7ff;
+  /* background-color: #f4f7ff; */
+  background-color: #ffff;
   border-bottom: 0.5px solid rgba(179, 178, 178, 0.2);
 `;
 

@@ -81,3 +81,11 @@ export function getBackgroudSelect(props) {
           return '#';
       }
 }
+export function modificBorderColor(props) {
+    switch (props) {
+        case 'true':
+          return '#4e8fd9'
+        default:
+          return 'rgb(221, 221, 221)';
+      }
+}
