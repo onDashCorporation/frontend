@@ -126,7 +126,7 @@ const Controle = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <DropDelete Mix={true} 
+                  <DropDelete Mix={true} Mix1={true}
                  onClickOP1={() => setOpenModal1(true)} 
                 onClickOP2={() => setOpenModal(true)}
              />
@@ -169,12 +169,9 @@ const Controle = () => {
                   </S.StyledTableCell>
               ))}
               <S.StyledTableCell  >
-              <S.ButtonContainer>
-                  <DropDelete Vizu={true}
-                  onClickOP3={()=> nav("/movipedido")} 
-                
-             />
-                 </S.ButtonContainer>
+              <S.ButtonContainer onClick={() => nav("/pedidos")}>
+              <S.More/>       
+                  </S.ButtonContainer> 
               </S.StyledTableCell>
             </S.TrBody>
           ))}
