@@ -28,10 +28,15 @@ const MoviPedido = () => {
         <Nav />
         <S.Container>
           <S.SectionConatiner>
-            <S.Title>Entrada n°6297327232873</S.Title>
+            <S.TextContainer>
+            <S.Title>Entrada </S.Title>
+           <S.Sub>
+            n°6297327232873
+            </S.Sub>
+            </S.TextContainer>
             <S.ButtonContainer>
-               <ButtonConfirm Title="Finalinzar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
-               <ButtonConfirm Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>
+               <ButtonConfirm Title="Finalinzar" backgroundColor="#f22b2b" fontSize="15px"  width="120px" height="40px"/>
+               <ButtonConfirm Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px" height="40px"/>
                </S.ButtonContainer>
           </S.SectionConatiner>
           
