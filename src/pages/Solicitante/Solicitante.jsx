@@ -10,8 +10,6 @@ import Pagination from "../../components/pagination/pagination"
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-import DropDelete from "../../components/dropdelete/dropdelete.jsx";
-
 
 
   const limit = 7;
@@ -100,7 +98,7 @@ const solicitante = () => {
                 <S.ThHeader>Nome</S.ThHeader>
                 <S.ThHeader>Departamento</S.ThHeader>
                 <S.ThHeader >Data</S.ThHeader>       
-                {/* <S.ThHeader ></S.ThHeader>        */}
+                <S.ThHeader ></S.ThHeader>       
                 <S.ThHeader isLast></S.ThHeader>       
                 </S.TrHeader>
               </S.TableHeader>
@@ -116,15 +114,17 @@ const solicitante = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <DropDelete PlusOP={true}
-                 onClickOP1={() => setOpenModal1(true)} 
-                onClickOP2={() => setOpenModal2(true)}
-             />  
+                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
+                  <S.Edit/>
+                  </S.ButtonEdit>
+                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
+                 <S.Trash/>   
+                 </S.ButtonDelete>  
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
-                {/* <S.StyledTableCell onClick={()=> {nav("/pedido")}}>
+                <S.StyledTableCell onClick={()=> {nav("/pedido")}}>
                    <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
-                </S.StyledTableCell> */}
+                </S.StyledTableCell>
               </S.TrBody>
             ))}
               </S.TableBody>
