@@ -10,9 +10,8 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
-import ProductModal from "../../components/ProductModal/ProductModal";
 import DropDelete from "../../components/dropdelete/dropdelete.jsx";
+import ProductModal from "../../components/ProductModal/ProductModal";
 
 
   const limit = 7;
@@ -94,17 +93,11 @@ const Controle = () => {
                 <S.ButtonContainer >
 
                 {/* PARA TESTAR ABRINDO A MODAL */}
-                {opset?( <ButtonConfirm onClick={() => setOpenProductM(true)} 
-                Title="Adicionar"  
-                width="100px" 
-                height="40px"
-                backgroundColor="#38AD68" 
-                fontSize="15px"/>
-                  ):
-                  (<Dropdown Title="Movimento" 
-                  OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
-                  OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>)}
-               
+                <button onClick={() => setOpenProductM(true)}>Adicionar</button>
+
+               <Dropdown Title="Adicionar" 
+               OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
+               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -125,7 +118,7 @@ const Controle = () => {
               {filteredData.slice(offset1,offset1 + limit).map((item, index) => (
               <S.TrBody key={index}>
                 {Object.entries(item).map(([key, value], index) => (
-                  <S.StyledTableCell key={index}   >
+                  <S.StyledTableCell key={index} >
                     <S.Test  >
                     {value}
                     </S.Test>
@@ -198,9 +191,7 @@ const Controle = () => {
         </S.TableContainer>)}
         <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
 
-        <ProductModal title='Adicionar Produto' 
-        placeholder='Digite o nome' 
-        isOpen={openProductM} setOpenModal={setOpenProductM}/>
+        <ProductModal title='Adicionar Produto' placeholder='Digite o nome' isOpen={openProductM} setOpenModal={setOpenProductM}/>
 
         </S.Container>
       </S.Main>
