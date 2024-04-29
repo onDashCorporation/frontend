@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as I from "iconoir-react";
+import { Xmark, Upload } from "iconoir-react";
 
 export const Overlay = styled.div`
     display: flex;
@@ -47,7 +47,7 @@ export const Close = styled.button`
   background-color: rgba(0,0,0,0.0);
   cursor: pointer;
 `;
-export const IconClose = styled(I.Xmark)`
+export const IconClose = styled(Xmark)`
  color: #ff0000;
  width: 2rem;
  height: 2rem;
@@ -87,6 +87,59 @@ export const HeaderContent = styled.div`
     //margin-top: 20px;
     width: 100%;
 `;
+
+export const Image = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-right: 3rem;
+    align-items: center;
+    align-content: center;
+    padding: 4rem;
+    width: 5rem;
+    //width: 60%;
+    flex-wrap: wrap;
+
+    height: 5rem;
+    background-color: #D9D9D9;
+`;
+
+export const AddImage = styled.input`
+  display: flex;
+  position: absolute;
+  width: 4rem;
+  //height: 10rem;
+  font-size: 50px;
+
+  //display: block;
+  opacity: 0;
+  //opacity: 0.5;
+  //z-index: 1000000;
+  z-index: 1;
+`;
+
+export const UploadDiv = styled.div`
+  display: flex;
+  //width: 4rem;
+  //height: 4rem;
+  //background-color: #98fff6ec;
+  //padding: 1rem;
+  align-items: center;
+
+`
+// export const UploadButton = styled.button`
+//   //display: flex;
+//   //width: 5rem
+//   //height: 4rem;
+//   //background-color: #8b8b8bed;
+//   //padding: 1rem;
+// `
+export const IconUpload = styled(Upload)`
+  display: flex;
+  color: #000;
+  width: 4rem;
+`;
+
 export const NameInput = styled.input`
   font-weight: 400;
   font-size: 18px;
@@ -109,7 +162,7 @@ export const CategoryInput = styled.input`
   margin-bottom: 1rem;
   border-radius: 5px;
 
-  width: 60%;
+  width: 70%;
 `;
 
 
@@ -117,14 +170,15 @@ export const Switch = styled.div`
   display: flex;
   align-items: center;
   justify-content: right;
+  gap: 0.5rem;
 
-  width: 50%;
+  width: 100%;
 `;
 export const SwitchText = styled.text`
   font-weight: 400;
 
   color: #6F6F6F;
-  margin-right: 0.5rem;
+  //margin-right: 0.5rem;
 `;
 
 
@@ -132,6 +186,7 @@ export const Div2 = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
     //align-items: center;
     //margin-top: 20px;
 `;

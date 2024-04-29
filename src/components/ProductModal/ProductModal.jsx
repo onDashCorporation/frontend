@@ -39,6 +39,14 @@ export default function ProductModal({isOpen, setOpenModal, title, placeholder})
                 <S.Div>
                   <S.Form>
                     <S.HeaderM>
+
+                      <S.Image>
+                        <S.UploadDiv>
+                          <S.IconUpload />
+                          {/* <S.UploadButton></S.UploadButton> */}
+                          <S.AddImage type="file" name="arquivo" accept="image/png, image/jpeg"/>
+                        </S.UploadDiv>
+                      </S.Image>
                       
                       <S.HeaderContent>
                         <S.Text>Nome</S.Text>
