@@ -10,7 +10,7 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-import DropDelete from "../../components/dropdelete/dropdelete.jsx";
+
 import ProductModal from "../../components/ProductModal/ProductModal";
 
 
@@ -126,10 +126,12 @@ const Controle = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <DropDelete Mix={true} 
-                 onClickOP1={() => setOpenModal1(true)} 
-                onClickOP2={() => setOpenModal(true)}
-             />
+                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
+                  <S.Edit/>
+                  </S.ButtonEdit>
+                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
+                 <S.Trash/>   
+                 </S.ButtonDelete>  
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
               </S.TrBody>
@@ -168,13 +170,8 @@ const Controle = () => {
                   </S.Test>
                   </S.StyledTableCell>
               ))}
-              <S.StyledTableCell  >
-              <S.ButtonContainer>
-                  <DropDelete Vizu={true}
-                  onClickOP3={()=> nav("/movipedido")} 
-                
-             />
-                 </S.ButtonContainer>
+              <S.StyledTableCell >
+                <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
               </S.StyledTableCell>
             </S.TrBody>
           ))}

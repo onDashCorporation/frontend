@@ -33,18 +33,10 @@ export const SectionConatiner = styled.div`
   width: 90%;
   gap: 20px;
 `;
-export const TextContainer =  styled.div`
-display: flex;
-flex-direction: column;
-/* height: 100%; */
-`;
 
 export const Title = styled.div`
   font-size: 35px;
   font-weight: bold;
-`;
-export const Sub = styled.div`
-  font-size: 20px;
 `;
 export const Header = styled.div`
   display: flex;

@@ -1,8 +1,10 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import * as S from "./style";
 import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
+ 
+const MAX_IMAGE_WIDTH= 300; // Define o limite máximo de tamanho do arquivo em px
+const MAX_IMAGE_HEIGHT = 300;
 
 const Header = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -12,7 +14,7 @@ const Header = () => {
   const [email, setEmail] = useState('');
   const dropdownRef = useRef(null); // Referência para o elemento dropdown
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     // Adiciona event listener para detectar cliques fora do dropdown
     function handleClickOutside(event) {
@@ -20,46 +22,54 @@ const Header = () => {
         setDropdownVisible(false);
       }
     }
-
+ 
     // Adiciona o event listener quando o componente monta
     document.addEventListener('mousedown', handleClickOutside);
-    
+ 
     // Remove o event listener quando o componente desmonta
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [dropdownRef]);
-
+ 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
-
+ 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setProfileImage(reader.result);
-    };
-
+   
     if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const image = new Image();
+        image.src = reader.result;
+        image.onload = () => {
+          // Verifica se as dimensões da imagem não excedem os limites máximos em pixels
+          if (image.width <= MAX_IMAGE_WIDTH && image.height <= MAX_IMAGE_HEIGHT) {
+            setProfileImage(reader.result);
+          } else {
+            console.log("A imagem selecionada excede as dimensões máximas permitidas.");
+          }
+        };
+      };
       reader.readAsDataURL(file);
     }
   };
-
+ 
   const openModal = () => {
     setShowModal(true);
     setDropdownVisible(false); // Fechar o dropdown ao abrir o modal
   };
-
+ 
   const closeModal = () => {
     setShowModal(false);
   };
-
+ 
   const handleSaveProfile = () => {
     // Lógica para salvar os dados do perfil
   };
-
+ 
   return (
     <S.HeaderContainer>
       <S.ContainerLogo>
@@ -95,23 +105,27 @@ const Header = () => {
                   <S.Fotoperfil src={profileImage} alt="Foto de Perfil" />
                 ) : (
                   <S.UploadIconModal />
-                )} 
+                )}
                 <S.InputImg id="upload-input" type="file" accept="image/*" onChange={handleImageChange} />
               </label>
             </S.UploadInputContainer>
+           
             <S.Nome>
               <Input label="Nome" value={name} onChange={(e) => setName(e.target.value)} />
             </S.Nome>
             <S.Email>
               <Input label="Endereço de Email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </S.Email>
+            </S.Email> 
+            
             <S.SaveButton onClick={handleSaveProfile}>Salvar</S.SaveButton>
+            
           </S.ModalContent>
         </S.ModalBackground>
       )}
     </S.HeaderContainer>
   );
 };
-
+ 
 export default Header;
-;
+
+

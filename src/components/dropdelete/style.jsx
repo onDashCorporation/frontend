@@ -13,10 +13,11 @@ export const Container = styled.div`
 `;
 export const More = styled(I.MoreHoriz)`
 width: 30px;
-stroke-Width: 2.0;
-color: #277DFF;
+/* margin-right: 50px; */
 `;
 export const Button = styled.div` 
+/* width: 70px; */
+  padding: 10px;
   border: none;
   cursor: pointer;
 
@@ -39,7 +40,7 @@ export const ContainerOp = styled.div`
 box-shadow: 1px 5px 17px -7px rgba(173,170,173,0.98);
 `;
 export const Op = styled.text`
-    font-size: 13px;
+    font-size: 14px;
     padding: 5px;
     cursor: pointer;
     transition: all 0.2s;
@@ -48,3 +49,4 @@ export const Op = styled.text`
     background-color: #e0e8f0;
 }
 `;
+

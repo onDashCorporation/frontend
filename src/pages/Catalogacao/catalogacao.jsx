@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 import Modal from '../../components/Modal/Modal.jsx'
-import DropDelete from "../../components/dropdelete/dropdelete.jsx";
 
 
   const limit = 7;
@@ -119,13 +118,14 @@ const Catalogacao = () => {
                     </S.StyledTableCell>
                 ))}
                 <S.StyledTableCell >
-                <S.ButtonContainer >
-                <DropDelete Vizu={true} Mix={true}
-                 onClickOP1={() => setOpenModal1(true)} 
-                onClickOP2={() => setOpenModal(true)}
-                onClickOP3={() => {nav("/pedidos")}}
-             />
-               </S.ButtonContainer>          
+                  <S.ButtonContainer>
+                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
+                  <S.Edit/>
+                  </S.ButtonEdit>
+                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
+                 <S.Trash/>   
+                 </S.ButtonDelete>  
+                 </S.ButtonContainer>           
                  </S.StyledTableCell>
               </S.TrBody>
             ))}
