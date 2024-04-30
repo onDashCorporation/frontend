@@ -47,26 +47,6 @@ export default function ProductModal({isOpen, setOpenModal, title, placeholder})
       };
     }
   }, [isOpen]); // Dependendo do estado isOpen para adicionar ou remover o event listener
- 
-  useEffect(() => {
-    if (isOpen) {
-      function handleImageChange(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-          setImgSrc(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
-
-      const input = document.getElementById('img-input');
-      input.addEventListener('change', handleImageChange);
-
-      return () => {
-        input.removeEventListener('change', handleImageChange);
-      };
-    }
-  }, [isOpen]); // Dependendo do estado isOpen para adicionar ou remover o event listener
 
     return(
     <div>
