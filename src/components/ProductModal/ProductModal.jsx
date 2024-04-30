@@ -3,6 +3,8 @@ import ButtonConfirm from "../ButtonConfirm/ButtonConfirm";
 import "./switch.css";
 import { Upload } from "iconoir-react";
 
+import { useState, useEffect } from 'react';
+
 
 export default function ProductModal({isOpen, setOpenModal, title, placeholder}) {
 
@@ -23,7 +25,49 @@ export default function ProductModal({isOpen, setOpenModal, title, placeholder})
   let handleCloseModal = () => {
     setOpenModal(false);
   };
+
+  const [imgSrc, setImgSrc] = useState("");
+
+  useEffect(() => {
+    if (isOpen) {
+      function handleImageChange(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImgSrc(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      const input = document.getElementById('img-input');
+      input.addEventListener('change', handleImageChange);
+
+      return () => {
+        input.removeEventListener('change', handleImageChange);
+      };
+    }
+  }, [isOpen]); // Dependendo do estado isOpen para adicionar ou remover o event listener
  
+  useEffect(() => {
+    if (isOpen) {
+      function handleImageChange(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImgSrc(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      const input = document.getElementById('img-input');
+      input.addEventListener('change', handleImageChange);
+
+      return () => {
+        input.removeEventListener('change', handleImageChange);
+      };
+    }
+  }, [isOpen]); // Dependendo do estado isOpen para adicionar ou remover o event listener
+
     return(
     <div>
         {isOpen && (
@@ -43,9 +87,11 @@ export default function ProductModal({isOpen, setOpenModal, title, placeholder})
 
                       <S.Row1Div>
                         <S.Image>
+                          <S.DivPreview><S.PreviewImage id="preview" src={imgSrc}/></S.DivPreview>
+                          
                           <S.UploadDiv>
                             <Upload  color="#000" strokeWidth={1} style={{ display: "flex", width: "5rem", height: "5rem",}}/>
-                            <S.AddImage type="file" name="arquivo" accept="image/png, image/jpeg"/>
+                            <S.AddImage type="file" name="arquivo" id="img-input" accept="image/png, image/jpeg"/>
                           </S.UploadDiv>
                         </S.Image>
 
@@ -64,10 +110,12 @@ export default function ProductModal({isOpen, setOpenModal, title, placeholder})
 
                       <S.Switch>
                         <S.SwitchText>Adiconar em sequência</S.SwitchText>
+                        {/* <S.SwitchCheckbox> */}
                         <label class="switch">
-                        <input type="checkbox" id="switch"/>
-                        <span class="slider round"></span>
+                          <input type="checkbox" id="switch"/>
+                          <span class="slider round" />
                         </label>
+                        {/* </S.SwitchCheckbox> */}
                       </S.Switch>
                     </S.Row1>      
                         

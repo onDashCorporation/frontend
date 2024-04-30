@@ -92,14 +92,30 @@ export const Image = styled.div`
     gap: 1rem;
     margin-right: 2rem;
     align-items: center;
-    align-content: center;
+    //align-content: center;
     //padding: 4rem;
-    width: 250px;
+    min-width: 250px;
     //width: 60%;
     //flex-wrap: wrap;
 
     height: 200px;
     background-color: #D9D9D9;
+    border-radius: 5px;
+`;
+export const DivPreview = styled.div`
+    //display: flex;
+    position: absolute;
+
+    width: 250px;
+    height: 200px;
+
+    border-radius: 5px;
+`;
+export const PreviewImage = styled.img`
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+
     border-radius: 5px;
 `;
 export const UploadDiv = styled.div`
@@ -168,10 +184,10 @@ export const CategoryInput = styled.input`
 export const Switch = styled.div`
   margin-left: 1rem;
   //display: flex;
-  align-items: center;
+  //align-items: center;
+  //align-content: center;
   justify-content: right;
   //gap: 0.5rem;
-  //flex-wrap: nowrap;
 
   width: 211px;
 `;
@@ -180,8 +196,13 @@ export const SwitchText = styled.text`
 
   color: #6F6F6F;
   margin-right: 0.5rem;
+  text-align: right;
+  //min-width: 100px;
+  //text-wrap: nowrap;
 `;
+export const SwitchCheckbox = styled.div`
 
+`;
 
 
 export const Row2 = styled.div`
