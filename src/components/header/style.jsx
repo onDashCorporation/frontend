@@ -10,13 +10,13 @@ export const HeaderContainer = styled.div`
   border-bottom: 0.5px solid rgba(179, 178, 178, 0.2);
 `;
 
-export const ContainerLogo = styled.text`
+export const ContainerLogo = styled.div`
   margin-left: 20px;
   font-size: 25px;
   font-weight: bold;
 `;
 
-export const Logo = styled.text`
+export const Logo = styled.div`
   margin-left: 20px;
   font-size: 25px;
   font-weight: bold;
@@ -25,15 +25,14 @@ export const Logo = styled.text`
 export const IconContainer = styled.div``;
 
 export const Areaconta = styled.div`
-position: relative;
-margin-right: 10%;
-margin-bottom: 10px;
-margin-top:12px;
+  position: relative;
+  margin-right: 10%;
+  margin-bottom: 10px;
+  margin-top: 12px;
 `;
 
 export const FotoperfilContainer = styled.div`
   position: relative;
-  
 `;
 
 export const UploadInputContainer = styled.div`
@@ -46,7 +45,7 @@ export const UploadInputContainer = styled.div`
 
 export const UploadIconModal = styled.div`
   margin-bottom: 20px;
-  margin-left:-273px;
+  margin-left: -273px;
   margin-top: 20px;
   width: 200px;
   height: 200px;
@@ -56,7 +55,19 @@ export const UploadIconModal = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  overflow: hidden;
+  overflow: hidden; /* Adiciona overflow hidden para esconder conteúdo que exceda as dimensões */
+`;
+
+
+export const UploadIconConta = styled.div`   
+  margin-top: 0px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #bab9b9;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+  overflow: hidden; /* Esconde conteúdo que ultrapassa a moldura */
 `;
 
 
@@ -71,17 +82,17 @@ export const Drop = styled.ul`
   border-radius: 4px;
   padding: 15px;
   padding-left: 6px;
-  z-index:0;
+  z-index: 0;
 `;
 
 export const Titleconta = styled.a`
-text-decoration: none;
+  text-decoration: none;
   padding-left: 20px;
-   margin-left: 10px;
-   margin-right:-90px;
-   &:hover {
-   color: #277dff;
-   cursor: pointer; 
+  margin-left: 10px;
+  margin-right: -90px;
+  &:hover {
+    color: #277dff;
+    cursor: pointer; 
   }
 `;
 
@@ -102,7 +113,7 @@ export const Perfiltext = styled.a`
   padding: 5px;
   margin-left: 5px;
   padding-left: 7px;
-  padding-right: 4px;
+  padding-right: 7px;
   border-radius: 5px;
   &:hover {
     color: #277dff;
@@ -115,7 +126,7 @@ export const Cargotext = styled.a`
   text-decoration: none;
   padding: 5px;
   margin-left: 5px;
-  padding-left: 7px;
+  padding-left: 6px;
   padding-right: 6px;
   border-radius: 5px;
   &:hover {
@@ -129,8 +140,8 @@ export const Sairtext = styled.a`
   text-decoration: none;
   padding: 5px;
   margin-left: 5px;
-  padding-left: 7px;
-  padding-right: 5px;
+  padding-left: 6px;
+  padding-right: 21px;
   border-radius: 5px;
   &:hover {
     color: #277dff;
@@ -159,8 +170,8 @@ export const ModalContent = styled.div`
 `;
 
 export const CloseButton = styled.button`
-  margin-top:-45px;
-  margin-right:-35px;
+  margin-top: -45px;
+  margin-right: -35px;
   float: right;
   background: transparent;
   border: none;
@@ -195,32 +206,33 @@ export const SaveButton = styled.button`
 export const Nome = styled.div`
   margin-top: -220px;
   padding-bottom: 40px;
-  margin-left:348px;
+  margin-left: 348px;
 `;
 
 export const Email = styled.div`
   padding-bottom: 35px;
-  margin-left:348px;
+  margin-left: 348px;
 `;
 
-export const UploadIconConta = styled.div`   
-margin-top:0px;
-width: 40px;
-height: 40px;
-border: 1px solid #bab9b9;
-border-radius: 50%;
-display: flex;
-cursor: pointer;
+export const UploadIconModalImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
+
+export const UploadIconContaImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 export const TitlecontaWrapper = styled.div`
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 `;
- export const InputImg = styled.input`
- display:none;
- `;
-export const Fotoperfil = styled.img`
-width: ${props => (props.small ? '40px' : 'auto')};
-height: ${props => (props.small ? '40px' : 'auto')};
-border-radius: ${props => (props.small ? '50%' : '0')}
+
+export const InputImg = styled.input`
+  display: none;
 `;
+
+

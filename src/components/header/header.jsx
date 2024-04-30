@@ -50,6 +50,7 @@ const Header = () => {
             setProfileImage(reader.result);
           } else {
             console.log("A imagem selecionada excede as dimensões máximas permitidas.");
+            alert("A imagem selecionada excede as dimensões máximas permitidas.");
           }
         };
       };
@@ -79,7 +80,13 @@ const Header = () => {
       <S.Areaconta>
         <S.TitlecontaWrapper onClick={toggleDropdown}>
           <S.FotoperfilContainer onClick={openModal}>
-            <S.UploadIconConta className={profileImage ? "upload-icon-conta-small" : ""} style={profileImage ? { backgroundImage: `url(${profileImage})` } : null} />
+            {profileImage ? (
+              <S.UploadIconConta>
+                <S.UploadIconModalImg src={profileImage} alt="Foto de Perfil" />
+              </S.UploadIconConta>
+            ) : (
+              <S.UploadIconConta />
+            )}
           </S.FotoperfilContainer>
           <S.Titleconta>Conta</S.Titleconta>
         </S.TitlecontaWrapper>
@@ -102,7 +109,9 @@ const Header = () => {
             <S.UploadInputContainer>
               <label htmlFor="upload-input">
                 {profileImage ? (
-                  <S.Fotoperfil src={profileImage} alt="Foto de Perfil" />
+                  <S.UploadIconModal>
+                    <S.UploadIconModalImg src={profileImage} alt="Foto de Perfil" />
+                  </S.UploadIconModal>
                 ) : (
                   <S.UploadIconModal />
                 )}
@@ -127,5 +136,7 @@ const Header = () => {
 };
  
 export default Header;
+
+
 
 
