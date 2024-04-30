@@ -5,8 +5,8 @@ export const Main = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  max-width: 100%;
-  height: auto;
+  max-width: 100vw;
+  height: 100vh;
   overflow: hidden;
   user-select: none;
  
@@ -23,7 +23,7 @@ export const Login = styled.div`
   justify-content: space-around;
   background-color: white;
   gap: 40px;
-  max-width: 30%;
+  max-width: 42%;
   height: 93vh;
  
   @media screen and (max-width: 768px) {
@@ -35,6 +35,7 @@ export const Login = styled.div`
 export const ImgContainer = styled.div`
   display: flex;
   align-items: center;
+  height:100%;
   width: 70%;
   border: none;
   outline: none;
@@ -64,13 +65,15 @@ export const ImgTextContainer = styled.div`
 `;
  
 export const Img = styled.img`
-  max-width: 98%;
-  max-height: auto;
-  min-width: 100px;
-  min-height: 50px;
-  border: none;
-  outline: none;
+   /* max-width: 100%;  */
+     
+   max-height: auto; 
+  /* min-width: 100px; */
+  min-height: 50px; 
+  border: none; 
+  outline: none; 
   border-radius: 10px;
+
 `;
  
 export const TitleContainer = styled.div`
@@ -96,6 +99,7 @@ export const Title = styled.div`
 export const SubTitle = styled.div`
   font-size: 18px;
   color: #737373;
+  
  
   @media screen and (max-width: 768px) {
     width: 85%;
@@ -130,10 +134,10 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 30px;
-  /* @media screen and (max-width: 1024px) {
-    margin-top:-18%;
-  } */
+  gap: 30px; 
+   @media screen and (max-width: 1024px) {
+  
+  }
   @media screen and (max-width: 425px) {
     width: 60%;
    }

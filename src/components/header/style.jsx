@@ -89,7 +89,7 @@ export const Titleconta = styled.a`
   text-decoration: none;
   padding-left: 20px;
   margin-left: 10px;
-  margin-right: -90px;
+  margin-right: -90%;
   &:hover {
     color: #277dff;
     cursor: pointer; 
