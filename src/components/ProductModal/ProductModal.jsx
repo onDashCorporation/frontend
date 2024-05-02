@@ -6,7 +6,7 @@ import { Upload } from "iconoir-react";
 import { useState, useEffect } from 'react';
 
 
-export default function ProductModal({isOpen, setOpenModal, title, placeholder}) {
+export default function ProductModal({isOpen, setOpenModal, title}) {
 
 
   // function ToggleSwitch() {
