@@ -5,30 +5,32 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  background-color: #f4f7ff;
+ 
+  background-color: transparent;
   border-bottom: 0.5px solid rgba(179, 178, 178, 0.2);
 `;
 
 export const ContainerLogo = styled.div`
-  margin-left: 20px;
+ background-color:#f4f7ff;
+ padding: 25px 35px;
+ padding-right:62.2px;
   font-size: 25px;
   font-weight: bold;
+  border-right: 0.5px solid rgba(179, 178, 178, 0.2);
 `;
 
 export const Logo = styled.div`
-  margin-left: 20px;
   font-size: 25px;
   font-weight: bold;
 `;
 
-export const IconContainer = styled.div``;
+export const IconContainer = styled.div`
+`;
 
 export const Areaconta = styled.div`
   position: relative;
   margin-right: 10%;
-  margin-bottom: 10px;
-  margin-top: 12px;
+
 `;
 
 export const FotoperfilContainer = styled.div`
@@ -82,7 +84,7 @@ export const Drop = styled.ul`
   border-radius: 4px;
   padding: 15px;
   padding-left: 6px;
-  z-index: 0;
+ 
 `;
 
 export const Titleconta = styled.a`
@@ -160,6 +162,8 @@ export const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+ z-index: 10;
+
 `;
 
 export const ModalContent = styled.div`

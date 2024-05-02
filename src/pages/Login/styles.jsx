@@ -53,6 +53,7 @@ export const ImgTextContainer = styled.div`
   position: absolute;
   bottom: 15%;
   margin-left: 45px;
+
   @media screen and (width: 1024px) {
   margin-bottom:5%;
 }
@@ -66,8 +67,8 @@ export const ImgTextContainer = styled.div`
  
 export const Img = styled.img`
    /* max-width: 100%;  */
-     
-   max-height: auto; 
+   
+  max-height: auto; 
   /* min-width: 100px; */
   min-height: 50px; 
   border: none; 
