@@ -2,24 +2,29 @@ import styled from "styled-components";
 import { Xmark, Upload } from "iconoir-react";
 
 export const Overlay = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.6);
 `;
 export const Modal = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #EBEBEB;
   width: 70vw;
+  max-height: 90vh;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+`;
+export const Overflow = styled.div`
+  width: 69.8vw;
+  overflow-y: scroll;
 `;
 
 
