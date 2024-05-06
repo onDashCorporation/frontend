@@ -8,10 +8,10 @@ import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
+import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 
 import ProductModal from "../../components/ProductModal/ProductModal";
-import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm.jsx";
 
 
   const limit = 7;
@@ -90,9 +90,15 @@ const Controle = () => {
                 <S.FilterContainer>
                   <Filter filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
-                <S.ButtonContainer>
-                  <ButtonConfirm onClick={() => setOpenProductM(true)} Title="Adicionar" backgroundColor={'#38AD68'} fontSize={'15px'} color={'#fafafa'} width={'110px'} height={'100%'} padding={'10px'}/>
-                </S.ButtonContainer>
+                <S.ButtonContainer >
+
+                {/* PARA TESTAR ABRINDO A MODAL */}
+                <button onClick={() => setOpenProductM(true)}>Adicionar</button>
+
+               <Dropdown Title="Adicionar" 
+               OP1="Entrada" onClickOP1={e => {nav("/entrada"), setIsActive(false)}} 
+               OP2="saida" onClickOP2={e => {nav("/saida"), setIsActive(false)}}/>
+               </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
           </S.Section>
@@ -120,10 +126,12 @@ const Controle = () => {
                 ))}
                 <S.StyledTableCell >
                   <S.ButtonContainer>
-                  <DropDelete Mix={true} Mix1={true}
-                 onClickOP1={() => setOpenModal1(true)} 
-                onClickOP2={() => setOpenModal(true)}
-             />
+                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
+                  <S.Edit/>
+                  </S.ButtonEdit>
+                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
+                 <S.Trash/>   
+                 </S.ButtonDelete>  
                  </S.ButtonContainer>           
                  </S.StyledTableCell>
               </S.TrBody>
@@ -162,10 +170,8 @@ const Controle = () => {
                   </S.Test>
                   </S.StyledTableCell>
               ))}
-              <S.StyledTableCell  >
-              <S.ButtonContainer onClick={() => nav("/pedidos")}>
-              <S.More/>       
-                  </S.ButtonContainer> 
+              <S.StyledTableCell >
+                <S.ImageCell src={Folder} alt="Imagem" onClick={() => handleImageClick(item.id)} />
               </S.StyledTableCell>
             </S.TrBody>
           ))}
@@ -182,7 +188,7 @@ const Controle = () => {
         </S.TableContainer>)}
         <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
 
-        <ProductModal title='Adicionar Produto' isOpen={openProductM} setOpenModal={setOpenProductM}/>
+        <ProductModal title='Adicionar Produto' placeholder='Digite o nome' isOpen={openProductM} setOpenModal={setOpenProductM}/>
 
         </S.Container>
       </S.Main>

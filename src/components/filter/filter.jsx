@@ -11,9 +11,9 @@ const Filter = ({filterop, setFilterop}) => {
 
 return(
     <S.Container>
-        <S.Title   isActive={isActive} onClick={(e) => setIsActive(!isActive)}>{filterop}
+        <S.Title onClick={(e) => setIsActive(!isActive)}>{filterop}
         <S.IconConatiner onClick={()=> {setIsActive(false); setFilterop("Filtro")}}>           
-         <S.Trash isActive={isActive}/>     
+         <S.Trash/>     
          </S.IconConatiner>     
          </S.Title>  
         {isActive && (

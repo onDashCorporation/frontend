@@ -5,19 +5,21 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  /* background-color: #f4f7ff; */
-  background-color: #ffff;
+ 
+  background-color: transparent;
   border-bottom: 0.5px solid rgba(179, 178, 178, 0.2);
+
 `;
 
 export const ContainerLogo = styled.div`
  background-color:#f4f7ff;
  padding: 25px 35px;
  padding-right:62.2px;
+ padding-bottom:40px;
   font-size: 25px;
   font-weight: bold;
   border-right: 0.5px solid rgba(179, 178, 178, 0.2);
+
 `;
 
 export const Logo = styled.div`
@@ -240,4 +242,18 @@ export const InputImg = styled.input`
   display: none;
 `;
 
-
+export const VoltarButton = styled.button`
+  background-color: transparent;
+  color:  #bab9b9;
+  border: none;
+  margin-left:300px;
+  margin-bottom:-10px;
+  position:absolute;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color:#277dff;
+  }
+`;
