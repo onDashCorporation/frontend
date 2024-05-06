@@ -271,24 +271,29 @@ import styled from "styled-components";
 import { Xmark, Upload } from "iconoir-react";
 
 export const Overlay = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.6);
 `;
 export const Modal = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #EBEBEB;
   width: 70vw;
+  max-height: 90vh;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+`;
+export const Overflow = styled.div`
+  width: 69.8vw;
+  overflow-y: scroll;
 `;
 
 
@@ -361,14 +366,30 @@ export const Image = styled.div`
     gap: 1rem;
     margin-right: 2rem;
     align-items: center;
-    align-content: center;
+    //align-content: center;
     //padding: 4rem;
-    width: 250px;
+    min-width: 250px;
     //width: 60%;
     //flex-wrap: wrap;
 
     height: 200px;
     background-color: #D9D9D9;
+    border-radius: 5px;
+`;
+export const DivPreview = styled.div`
+    //display: flex;
+    position: absolute;
+
+    width: 250px;
+    height: 200px;
+
+    border-radius: 5px;
+`;
+export const PreviewImage = styled.img`
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+
     border-radius: 5px;
 `;
 export const UploadDiv = styled.div`
@@ -437,10 +458,10 @@ export const CategoryInput = styled.input`
 export const Switch = styled.div`
   margin-left: 1rem;
   //display: flex;
-  align-items: center;
+  //align-items: center;
+  //align-content: center;
   justify-content: right;
   //gap: 0.5rem;
-  //flex-wrap: nowrap;
 
   width: 211px;
 `;
@@ -449,8 +470,13 @@ export const SwitchText = styled.text`
 
   color: #6F6F6F;
   margin-right: 0.5rem;
+  text-align: right;
+  //min-width: 100px;
+  //text-wrap: nowrap;
 `;
+export const SwitchCheckbox = styled.div`
 
+`;
 
 
 export const Row2 = styled.div`
