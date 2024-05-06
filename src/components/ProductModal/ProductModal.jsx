@@ -5,7 +5,6 @@ import { Upload } from "iconoir-react";
 
 import { useState, useEffect } from 'react';
 
-
 export default function ProductModal({isOpen, setOpenModal, title}) {
 
 
@@ -26,6 +25,7 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
     setOpenModal(false);
   };
 
+  // Para exibir o preview da imagem
   const [imgSrc, setImgSrc] = useState("");
 
   useEffect(() => {
@@ -48,6 +48,35 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
     }
   }, [isOpen]); // Dependendo do estado isOpen para adicionar ou remover o event listener
 
+
+
+  // Para o preview, qnd o src estiver vazio
+  function handleImageError() {
+    document.getElementById("DivPreview").style.display = "none";
+  }
+  function handleInputChange(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onloadend = function() {
+      const image = new Image();
+      image.src = reader.result;
+  
+      image.onload = function() {
+        document.getElementById("DivPreview").style.display = "block";
+        document.getElementById("preview").src = reader.result;
+      };
+  
+      image.onerror = function() {
+        document.getElementById("DivPreview").style.display = "none";
+      };
+    };
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
     return(
     <div>
         {isOpen && (
@@ -68,11 +97,13 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
 
                         <S.Row1Div>
                           <S.Image>
-                            <S.DivPreview><S.PreviewImage id="preview" src={imgSrc}/></S.DivPreview>
+                            <S.DivPreview id="DivPreview" className="preview-container">
+                              {imgSrc ? <S.PreviewImage id="preview" src={imgSrc} onError={handleImageError}/> : null}
+                            </S.DivPreview>
                             
                             <S.UploadDiv>
                               <Upload  color="#000" strokeWidth={1} style={{ display: "flex", width: "5rem", height: "5rem",}}/>
-                              <S.AddImage type="file" name="arquivo" id="img-input" accept="image/png, image/jpeg"/>
+                              <S.AddImage type="file" name="arquivo" id="img-input" accept="image/png, image/jpeg" onChange={handleInputChange}/>
                             </S.UploadDiv>
                           </S.Image>
 
