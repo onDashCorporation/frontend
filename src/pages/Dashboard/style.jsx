@@ -9,7 +9,6 @@ export const test = styled.div`
   display: flex;
 `;
 export const Container = styled.div`
-  background-color: #000000;
   overflow-y: auto;
   width: 100%;
   height: 90vh;
@@ -19,10 +18,14 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const IN = styled.div`
-  margin-top: 100px;
-  margin-bottom: 100px;
-  background-color: #d60505;
-  width: 15%;
-  height: 100px;
+export const LibConatiner = styled.div`
+display: flex;
+flex-wrap: wrap;
+  width: 100%;
+  height: 700px;
+`;
+export const Lib = styled.div`
+width: 800px;
+height: 800px;
+
 `;
