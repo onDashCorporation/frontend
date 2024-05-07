@@ -1,7 +1,6 @@
 import * as S from "./style"
 import ButtonConfirm from "../ButtonConfirm/ButtonConfirm";
 import "./switch.css";
-import { Upload } from "iconoir-react";
 
 import { useState, useEffect } from 'react';
 
@@ -101,10 +100,9 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
                               {imgSrc ? <S.PreviewImage id="preview" src={imgSrc} onError={handleImageError}/> : null}
                             </S.DivPreview>
                             
-                            <S.UploadDiv>
-                              <Upload  color="#000" strokeWidth={1} style={{ display: "flex", width: "5rem", height: "5rem",}}/>
+                            
                               <S.AddImage type="file" name="arquivo" id="img-input" accept="image/png, image/jpeg" onChange={handleInputChange}/>
-                            </S.UploadDiv>
+                            
                           </S.Image>
 
                           <S.Row1Wrap>

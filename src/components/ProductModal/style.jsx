@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Xmark, Upload } from "iconoir-react";
+import { Xmark } from "iconoir-react";
 
 export const Overlay = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ export const Modal = styled.div`
 `;
 export const Overflow = styled.div`
   width: 69.8vw;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 
@@ -97,7 +97,8 @@ export const Image = styled.div`
     gap: 1rem;
     margin-right: 2rem;
     align-items: center;
-    //align-content: center;
+    
+    align-content: center;
     //padding: 4rem;
     min-width: 250px;
     //width: 60%;
@@ -109,7 +110,7 @@ export const Image = styled.div`
 `;
 export const DivPreview = styled.div`
     //display: flex;
-    position: absolute;
+    position: relative;
 
     width: 250px;
     height: 200px;
@@ -124,13 +125,10 @@ export const PreviewImage = styled.img`
     border-radius: 5px;
 `;
 export const UploadDiv = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  
-  align-items: center;
-  justify-content: center;
-  //align-content: center;
+  //display: flex;
+  //width: 100%;
+  //height: 100%;
+  border: dashed red;
 `
 // export const IconUpload = styled(Upload)`
 //   display: flex;
@@ -140,13 +138,13 @@ export const UploadDiv = styled.div`
 // `;
 export const AddImage = styled.input`
   display: flex;
-  position: absolute;
+  position: relative;
   width: 10rem;
-  //height: 7rem;
   font-size: 7rem;
-
-  opacity: 0;
+  //top: -200px;
+  //opacity: 0;
   z-index: 2;
+  background-color: aqua;
 `;
 
 export const Row1Wrap = styled.div`
@@ -241,7 +239,8 @@ export const Inputs = styled.input`
   border-radius: 5px;
   gap: 2rem;
 
-  //width: 20%;
+  max-width: 80%;
+  min-width: 40%;
 `;
 
 export const Textarea = styled.textarea`
