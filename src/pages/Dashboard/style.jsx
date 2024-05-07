@@ -16,16 +16,22 @@ export const Container = styled.div`
   gap: 20px;
   justify-content: center;
   align-items: center;
+
 `;
 
 export const LibConatiner = styled.div`
 display: flex;
 flex-wrap: wrap;
+flex-direction: row;
+/* gap: 20px; */
+justify-content: space-around;
   width: 100%;
   height: 700px;
+  
 `;
 export const Lib = styled.div`
-width: 800px;
-height: 800px;
+
+/* width: ; */
+/* height: 800px; */
 
 `;
