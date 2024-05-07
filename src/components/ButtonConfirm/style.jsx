@@ -9,6 +9,8 @@ export const Button = styled.button`
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  z-index: 1;
+  position: relative;
   -webkit-font-smoothing: subpixel-antialiased;
   &:active {
     transform: scale(98%);
