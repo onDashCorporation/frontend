@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 import Modal from '../../components/Modal/Modal.jsx'
-import DropDelete from "../../components/dropdelete/dropdelete.jsx";
 
 
   const limit = 7;
