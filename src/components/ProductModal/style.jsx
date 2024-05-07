@@ -83,12 +83,11 @@ export const Row1 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  width: 100%;
 `;
 export const Row1Div = styled.div`
   display: flex;
   flex-direction: row;
+  width: 80%;
 `;
 
 export const Image = styled.div`
@@ -97,20 +96,16 @@ export const Image = styled.div`
     gap: 1rem;
     margin-right: 2rem;
     align-items: center;
-    
-    align-content: center;
-    //padding: 4rem;
     min-width: 250px;
-    //width: 60%;
-    //flex-wrap: wrap;
+    border: 2px dashed #ccc;
 
     height: 200px;
-    background-color: #D9D9D9;
     border-radius: 5px;
 `;
 export const DivPreview = styled.div`
-    //display: flex;
+    display: flex;
     position: relative;
+    justify-content: center;
 
     width: 250px;
     height: 200px;
@@ -124,35 +119,20 @@ export const PreviewImage = styled.img`
 
     border-radius: 5px;
 `;
-export const UploadDiv = styled.div`
-  //display: flex;
-  //width: 100%;
-  //height: 100%;
-  border: dashed red;
-`
-// export const IconUpload = styled(Upload)`
-//   display: flex;
-//   color: #000;
-//   width: 5rem;
-//   height: 5rem;
-// `;
 export const AddImage = styled.input`
-  display: flex;
-  position: relative;
-  width: 10rem;
-  font-size: 7rem;
-  //top: -200px;
-  //opacity: 0;
-  z-index: 2;
-  background-color: aqua;
+  position: absolute;
+  width: 100%;
+  font-size: 10rem;
+  opacity: 0;
 `;
 
 export const Row1Wrap = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
-  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 1rem;
+  //gap: 1rem;
+  justify-content: space-around;
 `;
 export const Row1Content = styled.div`
     display: flex;
@@ -186,11 +166,7 @@ export const CategoryInput = styled.input`
 
 export const Switch = styled.div`
   margin-left: 1rem;
-  //display: flex;
-  //align-items: center;
-  //align-content: center;
   justify-content: right;
-  //gap: 0.5rem;
 
   width: 211px;
 `;
@@ -200,8 +176,6 @@ export const SwitchText = styled.text`
   color: #6F6F6F;
   margin-right: 0.5rem;
   text-align: right;
-  //min-width: 100px;
-  //text-wrap: nowrap;
 `;
 export const SwitchCheckbox = styled.div`
 
@@ -209,17 +183,15 @@ export const SwitchCheckbox = styled.div`
 
 
 export const Row2 = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    //align-items: center;
-    //margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 `;
 export const Row2Content = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 export const Text = styled.h3`

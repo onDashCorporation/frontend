@@ -97,23 +97,21 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
                         <S.Row1Div>
                           <S.Image>
                             <S.DivPreview id="DivPreview" className="preview-container">
+                              <S.AddImage type="file" name="arquivo" id="img-input" accept="image/png, image/jpeg" onChange={handleInputChange}/>
+
                               {imgSrc ? <S.PreviewImage id="preview" src={imgSrc} onError={handleImageError}/> : null}
                             </S.DivPreview>
-                            
-                            
-                              <S.AddImage type="file" name="arquivo" id="img-input" accept="image/png, image/jpeg" onChange={handleInputChange}/>
-                            
                           </S.Image>
 
                           <S.Row1Wrap>
                             <S.Row1Content>
                               <S.Text>Nome</S.Text>
-                              <S.NameInput autoComplete="off" required name='name' id="name" type="text"  placeholder={"Digite o nome"}/>
+                              <S.NameInput autoComplete="off" required name='name' id="name" type="text"  placeholder={"Nome"}/>
                             </S.Row1Content>
 
                             <S.Row1Content>
                               <S.Text>Categoria</S.Text>
-                              <S.CategoryInput autoComplete="off" required name='category' id="category" type="text"  placeholder={"Adicione uma categoria"}/>
+                              <S.CategoryInput autoComplete="off" required name='category' id="category" type="text"  placeholder={"Categoria"}/>
                             </S.Row1Content>
                           </S.Row1Wrap>
                         </S.Row1Div>
@@ -132,27 +130,27 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
                       <S.Row2>
                         <S.Row2Content>
                           <S.Text>Marca</S.Text>
-                            <S.Inputs autoComplete="off" required name='brand' id="brand" type="text"  placeholder={"Adicione a marca"}/>
+                            <S.Inputs autoComplete="off" required name='brand' id="brand" type="text"  placeholder={"Marca"}/>
                         </S.Row2Content>
                             
                         <S.Row2Content>
                           <S.Text>preço unitário</S.Text>
-                          <S.Inputs autoComplete="off" required name='price' id="price" type="text"  placeholder={"Adicione o preço unitário"}/>
+                          <S.Inputs autoComplete="off" required name='price' id="price" type="text"  placeholder={"Preço unitário"}/>
                         </S.Row2Content>
 
                         <S.Row2Content>
                           <S.Text>vida útil</S.Text>
-                          <S.Inputs autoComplete="off" required name='lifespan' id="lifespan" type="text"  placeholder={"Adicione a vida útil"}/>
+                          <S.Inputs autoComplete="off" required name='lifespan' id="lifespan" type="text"  placeholder={"Vida útil"}/>
                         </S.Row2Content>
 
                         <S.Row2Content>
                           <S.Text>medidas</S.Text>
-                          <S.Inputs autoComplete="off" required name='measurements' id="measurements" type="text"  placeholder={"Adicione as medidas"}/>
+                          <S.Inputs autoComplete="off" required name='measurements' id="measurements" type="text"  placeholder={"Medidas"}/>
                         </S.Row2Content>
                       </S.Row2>
 
                       <S.Text>Descrição</S.Text>
-                      <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text" placeholder="Adicione uma descrição"/>
+                      <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text" placeholder="Descrição"/>
                     </S.Form> 
                   </S.Div>
 
