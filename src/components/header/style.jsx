@@ -12,7 +12,7 @@ export const HeaderContainer = styled.div`
 
 export const ContainerLogo = styled.div`
  background-color:#f4f7ff;
- padding: 25px 35px;
+ padding: 20px;
  padding-right:62.2px;
   font-size: 25px;
   font-weight: bold;
