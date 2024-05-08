@@ -1,7 +1,7 @@
  import * as S from "./style";
 import Nav from "../../components/nav/nav";
 import Header from "../../components/header/header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import data from "../Data/DBpedidos.json";
 import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,22 @@ const Pedidos = () => {
   const [filteredData, setFilteredData] = useState(data);
   const [offset, setOffSet] = useState(0)
 
- 
+  //Status do pedido
+  const [pickedUp, setPickedUp] = useState(false);
+  const [read, setRead] = useState(false);
+  const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    setRead(true);
+  }, []);
+
+  const handlePickUpButtonClick = () => {
+    setPickedUp(true);
+  };
+
+  const handleFinishButtonClick = () => {
+    setFinished(true);
+  };
  
 
   return (
@@ -29,9 +44,13 @@ const Pedidos = () => {
         <S.Container>
           <S.SectionConatiner>
             <S.Title>Pedidos</S.Title>
+            
             <S.ButtonContainer>
-               <ButtonConfirm Title="Finalizar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
-               <ButtonConfirm Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>
+              <ButtonConfirm onClick={handleFinishButtonClick} Title="Finalizar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
+              <ButtonConfirm onClick={handlePickUpButtonClick} Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>
+              {read && <p>Pedido lido.</p>}
+              {pickedUp && <p>Pedido Retirado.</p>}
+              {finished && <p>Pedido finalizado.</p>}
                </S.ButtonContainer>
           </S.SectionConatiner>
           
