@@ -13,25 +13,50 @@ export const Container = styled.div`
   width: 100%;
   height: 90vh;
   flex-direction: column;
-  gap: 20px;
   justify-content: center;
   align-items: center;
 
 `;
 
 export const LibConatiner = styled.div`
+margin-top: 50px;
 display: flex;
-flex-wrap: wrap;
 flex-direction: row;
-/* gap: 20px; */
 justify-content: space-around;
   width: 100%;
-  height: 700px;
+
   
 `;
 export const Lib = styled.div`
+height: 350px;
+width: 500px ; 
 
-/* width: ; */
-/* height: 800px; */
-
+`;
+export const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  width: 90%;
+  gap: 20px;
+`;
+export const Option = styled.div`
+margin-left: 150PX;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+`;
+export const Op = styled.button`
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #d9d9d9;
+  cursor: pointer;
+  background-color: ${(props) =>
+    props.select === "true" || props.select === "false"
+      ? "#277DFF"
+      : "#d9d9d9"};
+  color: ${(props) =>
+    props.select === "true" || props.select === "false"
+      ? "#ffffff"
+      : "#000000"};
 `;
