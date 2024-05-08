@@ -6,6 +6,7 @@ import data from "../Data/DBpedidos.json";
 import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
+import HorizontalLinearStepper from "../../components/Steps/stepper.jsx";
 
 
   const limit = 8;
@@ -65,6 +66,9 @@ const Pedido = () => {
               
             </S.PaginationConatiner>
           </S.TableContainer>     
+
+          {/* Passos */}
+          <HorizontalLinearStepper />
         </S.Container>
       </S.Main>
     </S.Body>
