@@ -43,20 +43,31 @@ export const Option = styled.div`
 margin-left: 150PX;
   display: flex;
   flex-direction: row;
-  gap: 32px;
+ align-items: center;
+ justify-content: center;
+  width: 35%;
+  background-color: #d9d9d9;
+  padding: 5px;
+  border-radius: 5px;
+  gap: 15px;
 `;
 export const Op = styled.button`
   font-size: 15px;
   padding: 10px;
   border-radius: 5px;
   background-color: #d9d9d9;
+  color: black;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.select === "true" || props.select === "false"
-      ? "#277DFF"
-      : "#d9d9d9"};
-  color: ${(props) =>
-    props.select === "true" || props.select === "false"
-      ? "#ffffff"
-      : "#000000"};
-`;
+  background-color: ${(props) =>{
+    switch (props.select) {
+      case "true":
+        return "#ffffff";
+      case "false":
+        return "#ffffff";
+      case "mov":
+        return "#ffffff";
+      default:
+        return "#d9d9d9";
+    }
+  }}
+ `;  
