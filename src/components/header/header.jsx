@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as S from "./style";
 import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
+import { slide as Menu } from 'react-burger-menu';
  
 const MAX_IMAGE_WIDTH= 300; // Define o limite máximo de tamanho do arquivo em px
 const MAX_IMAGE_HEIGHT = 300;
@@ -14,6 +15,10 @@ const Header = () => {
   const [email, setEmail] = useState('');
   const dropdownRef = useRef(null); // Referência para o elemento dropdown
   const navigate = useNavigate();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+
  
   useEffect(() => {
     // Adiciona event listener para detectar cliques fora do dropdown
@@ -74,9 +79,24 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       <S.ContainerLogo>
-        <S.Logo>Stock Box</S.Logo>
+        <S.Button onClose={() => setMenuOpen(true)}>
+        <S.Logo />
+        </S.Button>
+        <S.Button>
+        <Menu  onClose={() => setMenuOpen(false)}>
+          <S.Container>
+          <S.Op onClick={() => {navigate("/dashboard")}}>Dashboard</S.Op>
+        <S.Op onClick={() => {navigate("/solicitacoes")}}>Solicitações</S.Op>
+        <S.Op onClick={() => {navigate("/controle")}}>Controle</S.Op>
+        <S.Op onClick={() => {navigate("/relatorios")}}>Relatórios</S.Op>
+        <S.Op onClick={() => {navigate("/catalogacao")}}>Catalogação</S.Op>
+          </S.Container>
+        </Menu>
+        </S.Button>
+        
+        
       </S.ContainerLogo>
-      <S.IconContainer></S.IconContainer>
+    
       <S.Areaconta>
         <S.TitlecontaWrapper onClick={toggleDropdown}>
           <S.FotoperfilContainer onClick={openModal}>
