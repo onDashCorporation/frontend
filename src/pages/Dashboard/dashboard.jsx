@@ -3,6 +3,7 @@ import Nav from "../../components/nav/nav";
 import Header from "../../components/header/header";
 import React, {useState} from 'react';
 import Chart from 'react-apexcharts';
+import Card from "../../components/card/card";
 const Dashboard = () => {
 
   const [opset, setOpset] = useState(true);
@@ -146,36 +147,37 @@ const Dashboard = () => {
         <Nav />
         <S.Container>
         <S.Section>
+          <S.SectionContainer>
+          <S.Title>Solicitações</S.Title>
         <S.Option>
                 <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{setOpset(true)} }>Estoque</S.Op>
                 <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false)}}>Movimentações</S.Op>
                 <S.Op select={opset === 'mov' ? 'mov' : undefined} onClick={() => {setOpset('mov')}}>Controle</S.Op>
               </S.Option>
+          </S.SectionContainer>
+        
         </S.Section>
           <S.LibConatiner>
-            {opset === true  && <S.Lib>
+            {opset === true  && 
+            <S.ContainerGrafic>
+              <S.Lib>
             <Chart options={bar} series={bar.series} type="line" height={chartHeight} width={chartWidth} />
-            </S.Lib>} 
+            </S.Lib>
+             <S.ConatinerCard>
+             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             <Card Title=" Valor de Estoque" Info="R$ 100,23"   SubTitle="valor atualizado hoje"/>
+             </S.ConatinerCard>
+            </S.ContainerGrafic>
+           
+            } 
             {opset === false && <S.Lib>
           <Chart options={line} series={line.series} type="line" height={chartHeight} width={chartWidth} />
           </S.Lib>}
             {opset === 'mov' && <S.Lib>
           <Chart options={state} series={state.series} type="bar" height={chartHeight} width={chartWidth} />
           </S.Lib>}
-            
-          
-           
           </S.LibConatiner>
-         
-          {/* <S.LibConatiner>
-          <S.Lib>
-          <Chart options={bar} series={bar.series} type="area" height={chartHeight} width={chartWidth} />
-          </S.Lib>
-
-            <S.Lib>
-            <Chart options={line} series={line.series} type="line" height={chartHeight} width={chartWidth} />
-            </S.Lib>
-          </S.LibConatiner> */}
         </S.Container>
       </S.test>
     </S.Content>
