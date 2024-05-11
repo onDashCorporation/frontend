@@ -28,7 +28,7 @@ const Controle = () => {
   const [opset, setOpset] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
-
+  const options = ["Status","Id", "Nome", "Departamento", "Data"]
   const [openProductM, setOpenProductM] = useState(false);
 
 
@@ -88,7 +88,7 @@ const Controle = () => {
                   onChange={handleSearch}/>
                 </S.SearchContainer>
                 <S.FilterContainer>
-                  <Filter filterop={filterop} setFilterop={setFilterop} />
+                  <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer>
                  {opset ? ( <ButtonConfirm onClick={() => setOpenProductM(true)} Title="Adicionar" backgroundColor={'#38AD68'} fontSize={'15px'} color={'#fafafa'} width={'110px'} height={'100%'} padding={'10px'}/>) : (<Dropdown Title="Movimento" 

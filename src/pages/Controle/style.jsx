@@ -159,7 +159,7 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  /* gap: 15px; */
 `;
 export const More = styled(I.MoreHoriz)`
 width: 30px;
