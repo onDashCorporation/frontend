@@ -88,7 +88,8 @@ const Dashboard = () => {
         offsetY: 330,
         align: 'center',
         style: {
-          color: '#444'
+          // color: '#444'
+
         }
       }
     },
@@ -112,6 +113,13 @@ const Dashboard = () => {
         data: [16, 11, 10, 16, 18, 25]
       },
     ],
+    stroke: {
+      curve: 'straight',
+    },
+    dataLabels: {
+      enabled: false
+    },
+   
     
     labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept'],
     colors:['#F44336', '#E91E63', '#9C27B0']
@@ -132,13 +140,101 @@ const Dashboard = () => {
         data: [16, 11, 10, 16, 8, 25]
       },
     ],
+    stroke: {
+      curve: 'smooth',
+    },
+    dataLabels: {
+      enabled: false
+    },
+   
     chart: {
       stacked: true
   },
     labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept'],
-    // colors:['#F44336', '#E91E63', '#9C27B0']
-    
+    // colors:['#53C29B', '#3349F2', '#ED8C85']
+    colors:[ '#E91E63', '#007bff', '#28a745',]
+   
+
   }
+ const bar1 = {
+    series: [
+      {
+        name: "Radar  1",
+        data: [45, 52, 38, 24, 3, 10]
+      },
+   
+    ],
+    chart: {
+      stacked: true
+  },
+    labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept'],
+    // colors:['#53C29B', '#3349F2', '#ED8C85']
+    colors:[  '#007bff', '#28a745',]
+   
+
+  }
+
+  const Radialbar = {
+    chart: {
+      height: 100,
+      type: 'radialBar',
+    },
+    series: [70],
+    plotOptions: {
+      radialBar: {
+        
+        dataLabels: {
+          name: {
+            show: false
+          },
+          value: {
+            show: true,
+            fontSize: '52px',
+            color: '#1635e6',
+            offsetY: 5
+          },
+          total: {
+            show: true
+          }
+        }
+      }
+    },
+    labels: ['Percent']
+  };
+  const Radialbar1 = {
+    chart: {
+      height: 100,
+      type: 'radialBar',
+    },
+    series: [86],
+    plotOptions: {
+      radialBar: {
+        startAngle: -90,
+      endAngle: 90,
+      track: {
+        background: '#c4c2c2',
+        startAngle: -90,
+        endAngle: 90,
+      },
+    
+        dataLabels: {
+          name: {
+            show: false
+          },
+          value: {
+            show: true,
+            fontSize: '52px',
+            color: '#1635e6',
+            offsetY: 5
+          },
+          total: {
+            show: true
+          }
+        }
+      }
+    },
+    labels: ['Percent']
+  };
 
   return (
     <S.Content>
@@ -155,28 +251,83 @@ const Dashboard = () => {
                 <S.Op select={opset === 'mov' ? 'mov' : undefined} onClick={() => {setOpset('mov')}}>Controle</S.Op>
               </S.Option>
           </S.SectionContainer>
-        
         </S.Section>
           <S.LibConatiner>
             {opset === true  && 
             <S.ContainerGrafic>
+                 <S.ConatinerBottom>
               <S.Lib>
-            <Chart options={bar} series={bar.series} type="line" height={chartHeight} width={chartWidth} />
+              <Chart options={bar} series={bar.series} type="area" height={chartHeight} width={chartWidth} />
             </S.Lib>
-             <S.ConatinerCard>
+            </S.ConatinerBottom>
+              <S.ConatinerCard>
              <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             <S.Radar>
+              <S.RadarText>
+                Progresso atual
+              </S.RadarText>
+             <Chart options={Radialbar} series={Radialbar.series} type="radialBar" />
+             </S.Radar>
+             <S.Radar>
+              <S.RadarText>
+                Progresso semestral
+              </S.RadarText>
+             <Chart options={Radialbar1} series={Radialbar1.series} type="radialBar" />
+             </S.Radar>
              <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
-             <Card Title=" Valor de Estoque" Info="R$ 100,23"   SubTitle="valor atualizado hoje"/>
              </S.ConatinerCard>
             </S.ContainerGrafic>
-           
             } 
-            {opset === false && <S.Lib>
-          <Chart options={line} series={line.series} type="line" height={chartHeight} width={chartWidth} />
-          </S.Lib>}
-            {opset === 'mov' && <S.Lib>
-          <Chart options={state} series={state.series} type="bar" height={chartHeight} width={chartWidth} />
-          </S.Lib>}
+            {opset === false && 
+          <S.ContainerGrafic>
+                 <S.ConatinerBottom>
+              <S.Lib>
+          <Chart options={line} series={line.series} type="area" height={chartHeight} width={chartWidth} />
+          </S.Lib>
+            </S.ConatinerBottom>
+              <S.ConatinerCard>
+             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             <S.Radar>
+              <S.RadarText>
+                Progresso atual
+              </S.RadarText>
+             <Chart options={Radialbar} series={Radialbar.series} type="radialBar" />
+             </S.Radar>
+             <S.Radar>
+              <S.RadarText>
+                Progresso semestral
+              </S.RadarText>
+             <Chart options={Radialbar1} series={Radialbar1.series} type="radialBar" />
+             </S.Radar>
+             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             </S.ConatinerCard>
+            </S.ContainerGrafic>
+          }
+            {opset === 'mov' && 
+          <S.ContainerGrafic>
+                 <S.ConatinerBottom>
+              <S.Lib>
+          <Chart options={state} series={state.series} type="bar" height={chartHeight} width={chartWidth} />:
+          </S.Lib>
+            </S.ConatinerBottom>
+              <S.ConatinerCard>
+             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             <S.Radar>
+              <S.RadarText>
+                Progresso atual
+              </S.RadarText>
+             <Chart options={Radialbar} series={Radialbar.series} type="radialBar" />
+             </S.Radar>
+             <S.Radar>
+              <S.RadarText>
+                Progresso semestral
+              </S.RadarText>
+             <Chart options={Radialbar1} series={Radialbar1.series} type="radialBar" />
+             </S.Radar>
+             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             </S.ConatinerCard>
+            </S.ContainerGrafic>
+        }
           </S.LibConatiner>
         </S.Container>
       </S.test>
