@@ -1,10 +1,10 @@
 import { useState } from "react";
 import * as S from "./style"
 
-const Filter = ({filterop, setFilterop}) => {
+const Filter = ({filterop, setFilterop, options}) => {
 
     const [isActive, setIsActive] = useState(false);
-    const options = ["Data","Id", "Departamento", "Status", "Nome"]
+    // const options = ["Data","Id", "Departamento", "Status", "Nome"]
 
 
 
