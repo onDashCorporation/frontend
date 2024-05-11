@@ -22,6 +22,8 @@ const solicitante = () => {
   const [offset, setOffSet] = useState(0)
   const [opset, setOpset] = useState(true);
   const [openModal, setOpenModal] = useState(false);
+  const options = [ "Status","Id", "Nome", "Departamento", "Data"]
+
 
 
   const normalizeString = (str) => {
@@ -79,7 +81,7 @@ const solicitante = () => {
                   onChange={handleSearch}/>
                 </S.SearchContainer>
                 <S.FilterContainer>
-                  <Filter filterop={filterop} setFilterop={setFilterop} />
+                  <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
                 <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav("/novopedido")}}/>
