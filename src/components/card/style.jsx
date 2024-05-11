@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: space-evenly;
+justify-content: space-between;
 align-items: start;
 
   background-color: #ffffff;
   border: 0.5px solid  #e0e0e0;
-  width: 100%;
-  height: 80px;
+  width: 300px;
+  height: auto;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -17,22 +17,16 @@ align-items: start;
   &:hover {
     background-color: #e0e0e0;
   }
-  /* &:active {
-    transform: scale(99%);
-    transition: transform 0.3s ease;
-    background-color: #000000;
-    
-  } */
 `;
 export const Title = styled.div`
-  font-size: 18px;
+  font-size: 1vw;
   font-weight: bold;
   color: #000000;
+  word-wrap: break-word;
 
 `;
 export const Info = styled(Title)`
-font-size: 20px;
-/* color: #169727; */
+font-size: 1.6vw;
 
 `;
 export const Sub = styled(Title)`

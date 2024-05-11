@@ -6,6 +6,9 @@ const Card = ({ Title,Info, SubTitle, sub }) => {
         <S.Title>{Title}</S.Title>
         <S.Info>{Info}</S.Info>
        {sub === true && <S.Sub>{SubTitle}</S.Sub>}
+
+
+       
       </S.Container>
   );
 };
