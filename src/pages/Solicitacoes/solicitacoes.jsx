@@ -4,11 +4,9 @@ import Header from "../../components/header/header";
 import Filter from "../../components/filter/filter";
 import { useState } from "react";
 import Search from "../../components/search/search";
-import Folder from "../../assets/images/folder.svg"
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
-import DropDelete from "../../components/dropdelete/dropdelete";
 
 
   const limit = 7;
@@ -23,6 +21,7 @@ const solicitacoes = () => {
   const [offset, setOffSet] = useState(0)
   const [offset1, setOffSet1] = useState(0)
   const [opset, setOpset] = useState(true);
+    const options = ["Status","Id", "Nome", "Departamento", "Data"]
 
   const normalizeString = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -80,7 +79,7 @@ const solicitacoes = () => {
                   onChange={handleSearch}/>
                 </S.SearchContainer>
                 <S.FilterContainer>
-                  <Filter filterop={filterop} setFilterop={setFilterop} />
+                  <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
               </S.InsertContainer>
             </S.Header>
