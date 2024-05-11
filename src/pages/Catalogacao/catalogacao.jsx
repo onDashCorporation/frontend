@@ -28,6 +28,8 @@ const Catalogacao = () => {
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
   const [isActive, setIsActiveCategoria] = useState(false);
+  const options = ["Id", "Nome", "Quantidade", "Categoria"]
+
 
 
 
@@ -42,7 +44,7 @@ const Catalogacao = () => {
     
     const normalizedSearch = normalizeString(searchValue);
         const newFilteredData = data.filter((item) => {
-          if (filterop === "Departamento") {
+          if (filterop === "Quantidade") {
             return normalizeString(item.departamento.toString()).includes(normalizedSearch);
           } 
            else if (filterop === "Nome") {         
@@ -54,7 +56,7 @@ const Catalogacao = () => {
            else if (filterop === "Id") {         
             return normalizeString(item.id.toString()).includes(normalizedSearch);
           } 
-           else if (filterop === "Data") {
+           else if (filterop === "Categoria") {
             return normalizeString(item.data.toString()).includes(normalizedSearch);
           }  else {
             return Object.values(item).some((value) =>
@@ -84,7 +86,7 @@ const Catalogacao = () => {
                   onChange={handleSearch}/>
                 </S.SearchContainer>
                 <S.FilterContainer>
-                  <Filter filterop={filterop} setFilterop={setFilterop} />
+                  <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
                 <Dropdown Title="Adicionar" PlusOP={true}
