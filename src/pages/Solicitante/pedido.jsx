@@ -65,10 +65,12 @@ const Pedido = () => {
                />
               
             </S.PaginationConatiner>
+
+            {/* Passos */}
+            <HorizontalLinearStepper />
           </S.TableContainer>     
 
-          {/* Passos */}
-          <HorizontalLinearStepper />
+
         </S.Container>
       </S.Main>
     </S.Body>
