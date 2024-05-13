@@ -1,6 +1,7 @@
 import * as S from "./style"
 import ButtonConfirm from "../ButtonConfirm/ButtonConfirm";
 import "./switch.css";
+import { useState } from "react";
 
 
 export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
@@ -21,6 +22,23 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
   // }
   let handleCloseModal = () => {
     setOpenModal(false);
+  };
+
+  const [inputValues, setInputValues] = useState({
+    name: '',
+    desc: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleAddButtonClick = () => {
+    console.log('Valores dos inputs:', inputValues);
   };
  
     return(
@@ -48,7 +66,16 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
                     </label>
                   </S.Switch>
                   </S.HeaderM>
-                  <S.Input autoComplete="off" required name='name' id="name" type="text"  placeholder={placeholder || "Nome"}/>
+                  <S.Input
+                    autoComplete="off"
+                    required
+                    name='name'
+                    id="name"
+                    type="text"
+                    placeholder={placeholder || "Nome"}
+                    value={inputValues.name}
+                    onChange={handleChange}
+                  />
                   { func == true ?(
                       <div></div>
                       ) : 
@@ -58,11 +85,21 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
                     
                     )}
                   <S.Text>Descrição</S.Text>
-                  <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text" placeholder="Adicione uma descrição"/>
+                  <S.Textarea
+                    autoComplete="off"
+                    name='desc'
+                    id="desc"
+                    rows="5"
+                    maxLength="130"
+                    type="text"
+                    placeholder="Adicione uma descrição"
+                    value={inputValues.desc}
+                    onChange={handleChange}
+                  />
                 </S.Form>
             </S.Div>
             <S.ConatinerButton>
-            <ButtonConfirm Title="Adicionar" color="white"  width="150px" height="40px" backgroundColor="#38AD68" fontSize="15px"/>
+            <ButtonConfirm Title="Adicionar" onClick={handleAddButtonClick} color="white"  width="150px" height="40px" backgroundColor="#38AD68" fontSize="15px"/>
             </S.ConatinerButton>
 
           </S.ContainerM>
