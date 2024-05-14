@@ -2,6 +2,7 @@ import * as S from "./style"
 import ButtonConfirm from "../ButtonConfirm/ButtonConfirm";
 import "./switch.css";
 import { useState } from "react";
+import app from "../../services/api_login";
 
 
 export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
@@ -37,8 +38,28 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
     }));
   };
 
-  const handleAddButtonClick = () => {
+  const handleAddButtonClick = async () => {
     console.log('Valores dos inputs:', inputValues);
+    if (inputValues.name.trim() === '') {
+      console.log('Insira o nome.');
+      return;
+    }
+    if (inputValues.desc.trim() === '') {
+      console.log('Insira a descrição.');
+      return;
+    }
+    try {
+      const response = await app.post('/departamento/', { // endpoint da API
+        name: inputValues.name,
+        desc: inputValues.desc
+      });
+      console.log('Adicionado:', response.data);
+      // Limpar os campos depois de enviar
+      setInputValues({ name: '', desc: '' });
+      setOpenModal(false); // Fechar modal depois do envio ser feito
+    } catch (error) {
+      console.error('Erro ao adicionar', error);
+    }
   };
  
     return(
@@ -99,7 +120,14 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
                 </S.Form>
             </S.Div>
             <S.ConatinerButton>
-            <ButtonConfirm Title="Adicionar" onClick={handleAddButtonClick} color="white"  width="150px" height="40px" backgroundColor="#38AD68" fontSize="15px"/>
+            <ButtonConfirm 
+              Title="Adicionar" 
+              onClick={handleAddButtonClick} 
+              color="white"  
+              width="150px" 
+              height="40px" 
+              backgroundColor="#38AD68" 
+              fontSize="15px"/>
             </S.ConatinerButton>
 
           </S.ContainerM>
