@@ -49,9 +49,9 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
       return;
     }
     try {
-      const response = await app.post('/departamento/', { // endpoint da API
-        name: inputValues.name,
-        desc: inputValues.desc
+      const response = await app.post('/departamento', { // endpoint da API
+        nome_depart: inputValues.name,
+        // desc: inputValues.desc
       });
       console.log('Adicionado:', response.data);
       // Limpar os campos depois de enviar
@@ -134,41 +134,5 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
 
         </S.Modal></S.Overlay>)}
         </div>
-        
-
-      
-  
     )
   }
-
-
-
-//   const [infos, setInfos] = useState([]);
- 
-//     const [nameInfo, setNameInfo] = useState('');
-//     const [descInfo, setDescInfo] = useState('');
- 
- 
-//     // ADICIONAR
-//     const addInfos= async () => {
-//       if (nameInfo.trim() === '') {
-//         console.log('Insira o nome.');
-//         return;
-//       }
-//       if (descInfo.trim() === '') {
-//         console.log('Insira a descrição.');
-//         return;
-//       }
-//       try {
-// const response = await axios.post(API_URL, {
-//           name: nameInfo,
-//           desc: descInfo,
-//         });
-//         setInfos([...infos, response.data]);
-//         setNameInfo('');
-//         setDescInfo('');
-//         Console.log('Adicionado',);
-//       } catch (error) {
-//         console.error('Erro ao adicionar', error);
-//       }
-//     };
