@@ -112,6 +112,10 @@ export const Input = styled.input`
   margin-bottom: 1rem;
   border-radius: 5px;
 
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
 `
 export const Textarea = styled.textarea`
   font-weight: 400;
