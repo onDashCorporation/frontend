@@ -4,25 +4,24 @@ import Header from "../../components/header/header";
 import { useState } from "react";
 import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
-import Pagination from "../../components/pagination/pagination"
+import Pagination from "../../components/pagination/pagination";
 import CountItem from "../../components/countItem/countItem";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-  const limit = 7;
-  const total =  data.length;
+const limit = 7;
+const total =  data.length;
 
 const Entrada = () => {
 
-  
-      const [searchTerm, setSearchTerm] = useState("");
-      const [filteredData, setFilteredData] = useState(data);
-      const [offset, setOffSet] = useState(0);
-      const [offset1, setOffSet1] = useState(0);
-      const [opset, setOpset] = useState(true);
-      const [selectedItems, setSelectedItems] = useState([]);
-      const [itemValor, setItemValor] = useState();
-      const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredData, setFilteredData] = useState(data);
+  const [offset, setOffSet] = useState(0);
+  const [offset1, setOffSet1] = useState(0);
+  const [opset, setOpset] = useState(true);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [itemValor, setItemValor] = useState();
 
   const normalizeString = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -32,43 +31,43 @@ const Entrada = () => {
     const searchValue = event.target.value;
     setSearchTerm(searchValue);
 
-    
     const normalizedSearch = normalizeString(searchValue);
-        const newFilteredData = data.filter((item) => {
-            return Object.values(item).some((value) =>
-              normalizeString(value.toString()).includes(normalizedSearch)
-            );
-          }
-        );
-        setFilteredData(newFilteredData);
-      };
+    const newFilteredData = data.filter((item) => {
+      return Object.values(item).some((value) =>
+        normalizeString(value.toString()).includes(normalizedSearch)
+      );
+    });
+    setFilteredData(newFilteredData);
+  };
 
-    const handleAddToEntrada = (item) => {
-      const isItemAlreadySelected = selectedItems.some(selectedItem => selectedItem.id === item.id);
-      // Se o item já estiver na lista, não faz nada
-      if (isItemAlreadySelected) {
-        setError("Item ja selecionado");
+  const handleAddToEntrada = (item) => {
+    const isItemAlreadySelected = selectedItems.some(selectedItem => selectedItem.id === item.id);
+    if (isItemAlreadySelected) {
+      toast.error('Item já selecionado');
+      return;
+    }
+    setSelectedItems([...selectedItems, item]);
+  };
 
-        return;
-      }
-      setSelectedItems([...selectedItems, item]);
-    
-    ;
-  }
   const handleRemoveFromEntrada = (index) => {
-  const updatedItems = [...selectedItems];
-  updatedItems.splice(index, 1); // Remove o item com o índice fornecido
-  setSelectedItems(updatedItems); // Atualiza o estado com o novo array sem o item removido
-};
+    const updatedItems = [...selectedItems];
+    updatedItems.splice(index, 1);
+    setSelectedItems(updatedItems);
+  };
 
-const handleNovoValor = (novoValor) => {
-  setItemValor(novoValor); // Atualiza o estado com o novo valor
-
-};
- 
+  const handleNovoValor = (novoValor) => {
+    setItemValor(novoValor);
+  };
 
   return (
     <S.Body>
+      <ToastContainer
+    autoClose={9000} // Fechar automaticamente após 9 segundos
+    closeOnClick // Fechar ao clicar na notificação
+    newestOnTop // Colocar as notificações mais recentes em cima
+    position="top-right" // Posição das notificações
+    hideProgressBar // Esconder a barra de progresso 
+    />
       <Header />
       <S.Main>
         <Nav />
@@ -171,7 +170,6 @@ const handleNovoValor = (novoValor) => {
                 <S.StyledTableCell >
                     <S.ItemContainer onClick={() => {handleAddToEntrada(item)}}>
                      <S.ButtonContainer >Adicionar</S.ButtonContainer>
-                    {/* {error && <S.TextErro>{error}</S.TextErro>}  */}
                     </S.ItemContainer>
                  </S.StyledTableCell>
               </S.TrBody>

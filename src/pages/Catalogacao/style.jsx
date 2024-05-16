@@ -17,6 +17,8 @@ export const Container = styled.div`
   width: 100%;
   height: 90vh;
   gap: 30px;
+  background-color: #fafafa;
+
 `;
 export const Section = styled.div`
   display: flex;
@@ -35,13 +37,10 @@ export const SectionConatiner = styled.div`
 `;
 
 export const Title = styled.div`
-  margin-top : -20px ;
   font-size: 35px;
   font-weight: bold;
 `;
 export const Header = styled.div`
-  margin-top : -30px ;
-  margin-bottom: 15px;
   display: flex;
   flex-direction: row;
   justify-content: right;

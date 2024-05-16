@@ -6,6 +6,8 @@ import TextImg from "../../components/textimg/textimg";
 import { useNavigate, useParams } from "react-router-dom";
 import app from "../../services/api_login";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Reset = () => {
   const nav = useNavigate();
@@ -18,27 +20,51 @@ const Reset = () => {
     token
   })
 
+  const handleSubmit = () => {
+    // Verificação se os campos de senha estão em branco
+    if (!values.newPassword.trim() || !values.confPassword.trim()) {
+      toast.error("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    // Verificação se as senhas correspondem
+    if (values.newPassword !== values.confPassword) {
+      setError("As senhas não correspondem.");
+      toast.error("Por favor, insira a senha novamente");
+      return;
+    }
+
+    // Verificação se a nova senha atende aos critérios mínimos
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(values.newPassword)) {
+      setError("A senha deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 caractere especial e 1 número.");
+      toast.error("A senha não preenche os requisitos");
+      return;
+    }
+
+    // Se todas as validações passarem, procedemos com a solicitação de reset de senha
+    app.post('/reset-password', { newPassword: values.newPassword, token })
+      .then(res => {
+        toast.success("Senha alterada com sucesso");
+        console.log(res);
+      })
+      .catch(error => {
+        toast.error("Erro ao tentar alterar a senha");
+        console.error(error);
+      });
+};
+
   
-    const handleSubmit = (event) => {
-      console.log(values.confPassword)
-      console.log(values.newPassword)
-
-      if(values.newPassword  !== values.confPassword){
-        setError("senhas invalidas ou diferentes")
-        console.log("erro senha")
-      }
-      else{
-        console.log("senha certa")
-        setError('')
-      app.post('/reset-password' , {newPassword: values.newPassword, token})
-    .then(res => console.log(res))
-    .catch(res => console.log(res.response.data.message))
-  }
-
-  }
   
   return (
     <S.Main>
+    <ToastContainer
+    autoClose={9000} // Fechar automaticamente após 9 segundos
+    closeOnClick // Fechar ao clicar na notificação
+    newestOnTop // Colocar as notificações mais recentes em cima
+    position="top-right" // Posição das notificações
+    hideProgressBar // Esconder a barra de progresso 
+    />
       <S.Login>
         <S.TitleContainer>
           <S.Title>Nova Senha</S.Title>

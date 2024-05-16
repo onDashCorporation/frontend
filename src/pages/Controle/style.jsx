@@ -35,8 +35,6 @@ export const SectionConatiner = styled.div`
 `;
 
 export const Title = styled.div`
-  margin-top : -20px ;
- 
   font-size: 35px;
   font-weight: bold;
 `;
@@ -44,7 +42,6 @@ export const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
 `;
 export const Option = styled.div`
   display: flex;
@@ -141,14 +138,7 @@ export const Test = styled.div`
 export const ItemButton = styled.button`
   width: 20px;
 `;
-export const Edit = styled(I.EditPencil)`
-  width: 20px;
-  color: #ffffff;
-`;
-export const Trash = styled(I.TrashSolid)`
-  color: #ffffff;
-  width: 20px;
-`;
+
 export const Active = styled.div`
   width: 10px;
   height: 10px;
@@ -169,8 +159,22 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  /* gap: 15px; */
 `;
+export const More = styled(I.MoreHoriz)`
+width: 30px;
+stroke-Width: 2.0;
+color: #277DFF;
+`;
+export const Edit = styled(I.EditPencil)`
+  width: 20px;
+  color: #38ad68;
+`;
+export const Trash = styled(I.TrashSolid)`
+  color: #af3939;
+  width: 20px;
+`;
+
 export const ButtonEdit = styled.button`
   width: 30px;
   height: 30px;

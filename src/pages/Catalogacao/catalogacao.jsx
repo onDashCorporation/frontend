@@ -10,13 +10,14 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/dropdown/dropdown";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 import Modal from '../../components/Modal/Modal.jsx'
-
-
+import DropDelete from "../../components/dropdelete/dropdelete.jsx";
+import { useLocation } from 'react-router-dom';
   const limit = 7;
   const total =  data.length;
 const Catalogacao = () => {
   const nav = useNavigate();
-
+  const location = useLocation();
+  const showBackButton = location.pathname == '/catalogacao';
   
   const [filterop, setFilterop] = useState("Filtro");
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +29,8 @@ const Catalogacao = () => {
   const [openModal2, setOpenModal2] = useState(false);
   const [openModal3, setOpenModal3] = useState(false);
   const [isActive, setIsActiveCategoria] = useState(false);
+  const options = ["Id", "Nome", "Quantidade", "Categoria"]
+
 
 
 
@@ -42,7 +45,7 @@ const Catalogacao = () => {
     
     const normalizedSearch = normalizeString(searchValue);
         const newFilteredData = data.filter((item) => {
-          if (filterop === "Departamento") {
+          if (filterop === "Quantidade") {
             return normalizeString(item.departamento.toString()).includes(normalizedSearch);
           } 
            else if (filterop === "Nome") {         
@@ -54,7 +57,7 @@ const Catalogacao = () => {
            else if (filterop === "Id") {         
             return normalizeString(item.id.toString()).includes(normalizedSearch);
           } 
-           else if (filterop === "Data") {
+           else if (filterop === "Categoria") {
             return normalizeString(item.data.toString()).includes(normalizedSearch);
           }  else {
             return Object.values(item).some((value) =>
@@ -69,7 +72,7 @@ const Catalogacao = () => {
 
   return (
     <S.Body>
-      <Header />
+       <Header showBackButton={showBackButton} />
       <S.Main>
         <Nav />
         <S.Container>
@@ -84,7 +87,7 @@ const Catalogacao = () => {
                   onChange={handleSearch}/>
                 </S.SearchContainer>
                 <S.FilterContainer>
-                  <Filter filterop={filterop} setFilterop={setFilterop} />
+                  <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
                 <Dropdown Title="Adicionar" PlusOP={true}
@@ -118,14 +121,13 @@ const Catalogacao = () => {
                     </S.StyledTableCell>
                 ))}
                 <S.StyledTableCell >
-                  <S.ButtonContainer>
-                  <S.ButtonEdit onClick={() => setOpenModal(true)}>
-                  <S.Edit/>
-                  </S.ButtonEdit>
-                  <S.ButtonDelete onClick={() => setOpenModal(true)}>
-                 <S.Trash/>   
-                 </S.ButtonDelete>  
-                 </S.ButtonContainer>           
+                <S.ButtonContainer >
+                <DropDelete Vizu={true} Mix={true} Mix1={true}
+                 onClickOP1={() => setOpenModal1(true)} 
+                onClickOP2={() => setOpenModal(true)}
+                onClickOP3={() => {nav("/pedidos")}}
+             />
+               </S.ButtonContainer>          
                  </S.StyledTableCell>
               </S.TrBody>
             ))}
