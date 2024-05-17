@@ -9,6 +9,7 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
+
   const limit = 7;
   const total =  data.length;
 const solicitacoes = () => {
