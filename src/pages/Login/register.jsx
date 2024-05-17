@@ -7,6 +7,8 @@ import { useState } from "react";
 import app from "../../services/api_login";
 import { Import } from "iconoir-react";
 import TextImg from "../../components/textimg/textimg";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const nav = useNavigate();
@@ -15,16 +17,51 @@ const Register = () => {
     email: '',
     senha: '',
   })
-  const handleSubmit = (event) => {
-    
-    // event.preventDefault();
-    app.post('/signup' , values)
-    .then(res => console.log(res))
-    .catch(res => console.log(res.response.data.message))
+  const handleSubmit = () => {
+    // Verificação se os campos de email e senha estão em branco
+    if (!values.email.trim() || !values.senha.trim()) {
+        toast.error("Por favor, preencha todos os campos.");
+        return;
+    }
 
-  }
+    // Verificação do formato do email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(values.email)) {
+        toast.error("Por favor, insira um email válido.");
+        return;
+    }
+
+    // Verificação da senha
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(values.senha)) {
+        toast.error("A senha deve ter pelo menos 8 caracteres incluindo: letras maiúsculas, minúsculas, caracteres especiais e números.");
+        return;
+    }
+
+    // Se todas as validações passarem, procedemos com o cadastro
+    app.post('/signup', values)
+        .then(res => {
+            console.log(res);
+            toast.success("Cadastro realizado com sucesso.");
+        })
+        .catch(error => {
+            if (error.response && error.response.data && error.response.data.message) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error("Erro ao tentar realizar o cadastro.");
+            }
+        });
+};
+
   return (
     <S.Main>
+       <ToastContainer 
+       autoClose={9000} // Fechar automaticamente após 9 segundos
+       closeOnClick // Fechar ao clicar na notificação
+       newestOnTop // Colocar as notificações mais recentes em cima
+       position="top-right" // Posição das notificações
+       hideProgressBar // Esconder a barra de progresso
+       />
       <S.Login>
         <S.TitleContainer>
           <S.Title>Cadastro</S.Title>

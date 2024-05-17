@@ -18,6 +18,8 @@ export const Body = styled.div`
 `;
 export const Main = styled.div`
   display: flex;
+  flex-direction: row;
+  height: 100vh;
 `;
 export const Container = styled.div`
   display: flex;
@@ -112,7 +114,9 @@ export const StyledTable = styled.table`
 `;
 
 export const TableHeader = styled.thead`
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+  background-color: #cccbcb;
+
 `;
 export const Overflow = styled.div``;
 export const ThHeader = styled.th`

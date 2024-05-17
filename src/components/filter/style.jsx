@@ -17,12 +17,9 @@ export const Title = styled.text`
     align-items: center;
     justify-content: space-between;
     padding: 5px 15px;
-    /* border: 1px solid rgb(221, 221, 221); */
     background-color: #ffff;
-
     border-radius: 5px;
     font-size: 15px;
-    /* font-weight: bold; */
     color: #333;
     cursor: pointer;
     transition: border-color 0.3s ease;
@@ -34,6 +31,7 @@ export const ContainerOp = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
+    z-index: 1;
     top: 110%;
     background-color: #ffffff;
     font-weight: 500;

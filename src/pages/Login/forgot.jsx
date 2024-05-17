@@ -6,23 +6,44 @@ import TextImg from "../../components/textimg/textimg"
 import { useNavigate } from "react-router-dom";
 import app from "../../services/api_login";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Forgot = () => {
   const nav = useNavigate();
   const [ values , setValues] = useState({
     email: '',
   })
-  const handleSubmit = (event) => {
-    
-    // event.preventDefault();
-    app.post('/forgot-password' , values)
-    .then(res => console.log(res))
-    .catch(res => console.log(res))
+  const handleSubmit = () => {
+    // Verificação se o campo de email está em branco
+    if (!values.email.trim()) {
+      toast.error("Por favor, insira seu email.");
+      return;
+    }
 
-  }
+    // Verificação do formato do email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(values.email)) {
+      toast.error("Por favor, insira um email válido.");
+      return;
+    }
+
+    // Se todas as validações passarem, procedemos com a solicitação de reset de senha
+    app.post('/forgot-password', values)
+      .then(res => console.log(res))
+      .catch(res => console.log(res));
+};
+
 
   return (
     <S.Main>
+      <ToastContainer 
+      autoClose={9000} // Fechar automaticamente após 9 segundos
+      closeOnClick // Fechar ao clicar na notificação
+      newestOnTop // Colocar as notificações mais recentes em cima
+      position="top-right" // Posição das notificações
+      hideProgressBar // Esconder a barra de progresso
+      />
       <S.Login>
         <S.TitleContainer>
           <S.Title>Esqueceu?</S.Title>

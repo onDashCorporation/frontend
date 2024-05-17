@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as S from "./style";
 import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
+import BackButton from '../BackButton/BackButton'
+
+import { slide as Menu } from 'react-burger-menu';
+import * as I from "iconoir-react";
  
 const MAX_IMAGE_WIDTH= 300; // Define o limite máximo de tamanho do arquivo em px
 const MAX_IMAGE_HEIGHT = 300;
 
-const Header = () => {
+const Header = ({ showBackButton }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
@@ -14,6 +18,10 @@ const Header = () => {
   const [email, setEmail] = useState('');
   const dropdownRef = useRef(null); // Referência para o elemento dropdown
   const navigate = useNavigate();
+  
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const cargoText = "Adm";
  
   useEffect(() => {
     // Adiciona event listener para detectar cliques fora do dropdown
@@ -73,10 +81,12 @@ const Header = () => {
  
   return (
     <S.HeaderContainer>
+      <BackButton text="Voltar" showButton={showBackButton} /> 
       <S.ContainerLogo>
-        <S.Logo>Stock Box</S.Logo>
+        <S.Logo>
+          StockBox
+        </S.Logo>
       </S.ContainerLogo>
-      <S.IconContainer></S.IconContainer>
       <S.Areaconta>
         <S.TitlecontaWrapper onClick={toggleDropdown}>
           <S.FotoperfilContainer onClick={openModal}>
@@ -95,7 +105,7 @@ const Header = () => {
             <S.Perfil>
               <S.Perfiltext onClick={openModal}>Perfil</S.Perfiltext>
             </S.Perfil>
-            <S.Cargo><S.Cargotext>Cargo</S.Cargotext></S.Cargo>
+            <S.Cargo><S.Cargotext>{cargoText}</S.Cargotext></S.Cargo>
             <S.Sair><S.Sairtext onClick={() => navigate("/")}>Sair</S.Sairtext></S.Sair>
           </S.Drop>
         )}

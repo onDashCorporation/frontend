@@ -7,7 +7,7 @@ WORKDIR /frontend/
 ENV NODE_ENV=production
 
 # exportação da porta do frotend 
-EXPOSE 3000
+EXPOSE 5173
 
 # copia os arquivos de configuração
 COPY vite.config.js .

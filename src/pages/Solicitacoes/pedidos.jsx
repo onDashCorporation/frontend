@@ -6,13 +6,14 @@ import data from "../Data/DBpedidos.json";
 import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
-
+import { useLocation } from 'react-router-dom';
 
   const limit = 8;
   const total =  data.length;
 const Pedidos = () => {
   const nav = useNavigate();
-
+  const location = useLocation();
+  const showBackButton = location.pathname !== '/dashboard';
   
 
   const [filteredData, setFilteredData] = useState(data);
@@ -38,7 +39,7 @@ const Pedidos = () => {
 
   return (
     <S.Body>
-      <Header />
+      <Header showBackButton={showBackButton} />
       <S.Main>
         <Nav />
         <S.Container>

@@ -17,6 +17,8 @@ export const Container = styled.div`
   width: 100%;
   height: 90vh;
   gap: 30px;
+  background-color: #fafafa;
+
 `;
 export const Section = styled.div`
   display: flex;

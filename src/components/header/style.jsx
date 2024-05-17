@@ -1,29 +1,39 @@
 
 import styled from "styled-components";
-
+import * as I from "iconoir-react"
 export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  /* background-color: #f4f7ff; */
   background-color: #ffff;
   border-bottom: 0.5px solid rgba(179, 178, 178, 0.2);
 `;
 
-export const ContainerLogo = styled.div`
- background-color:#f4f7ff;
- padding: 25px 35px;
- padding-right:62.2px;
-  font-size: 25px;
-  font-weight: bold;
-  border-right: 0.5px solid rgba(179, 178, 178, 0.2);
+export const Logo = styled.div`
+padding: 10px;
+font-size: 30px;
+font-weight: bold;
 `;
 
-export const Logo = styled.div`
-  font-size: 25px;
-  font-weight: bold;
+export const ContainerLogo = styled.div`
+
 `;
+
+export const Container = styled.div`
+  width: 240px;
+  height: 100vh;
+  padding: 0px 10px;
+  background-color: #c41a1a;
+  border-right:  0.5px solid rgba(179, 178, 178, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 40px;
+
+`;
+
+
 
 export const IconContainer = styled.div`
 `;
@@ -85,7 +95,7 @@ export const Drop = styled.ul`
   border-radius: 4px;
   padding: 15px;
   padding-left: 6px;
- 
+  z-index: 5;
 `;
 
 export const Titleconta = styled.a`
@@ -163,7 +173,7 @@ export const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
- z-index: 10;
+ z-index: 30;
 
 `;
 

@@ -12,13 +12,14 @@ import ModalDelete from "../../components/modalDelete/modalDelete";
 import DropDelete from "../../components/dropdelete/dropdelete.jsx";
 import ProductModal from "../../components/ProductModal/ProductModal";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm.jsx";
-
-
+import Dropdown from "../../components/dropdown/dropdown.jsx";
+import { useLocation } from 'react-router-dom';
   const limit = 7;
   const total =  data.length;
 const Controle = () => {
   const nav = useNavigate();
-
+  const location = useLocation();
+  const showBackButton = location.pathname == '/controle'; 
   
   const [filterop, setFilterop] = useState("Filtro");
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,7 +29,7 @@ const Controle = () => {
   const [opset, setOpset] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
-
+  const options = ["Status","Id", "Nome", "Departamento", "Data"]
   const [openProductM, setOpenProductM] = useState(false);
 
 
@@ -69,7 +70,7 @@ const Controle = () => {
 
   return (
     <S.Body>
-      <Header />
+      <Header showBackButton={showBackButton} />
       <S.Main>
         <Nav />
         <S.Container>
@@ -77,8 +78,8 @@ const Controle = () => {
             <S.Title>Controle</S.Title>
             <S.Header>
               <S.Option>
-                <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{ console.log("true"); setOpset(true)} }>Estoque</S.Op>
-                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false); console.log("falseee")}}>Movimentações</S.Op>
+                <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{setOpset(true)} }>Estoque</S.Op>
+                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false)}}>Movimentações</S.Op>
               </S.Option>
               <S.InsertContainer>
                 <S.SearchContainer>
@@ -88,10 +89,12 @@ const Controle = () => {
                   onChange={handleSearch}/>
                 </S.SearchContainer>
                 <S.FilterContainer>
-                  <Filter filterop={filterop} setFilterop={setFilterop} />
+                  <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer>
-                  <ButtonConfirm onClick={() => setOpenProductM(true)} Title="Adicionar" backgroundColor={'#38AD68'} fontSize={'15px'} color={'#fafafa'} width={'110px'} height={'100%'} padding={'10px'}/>
+                 {opset ? ( <ButtonConfirm onClick={() => setOpenProductM(true)} Title="Adicionar" backgroundColor={'#38AD68'} fontSize={'15px'} color={'#fafafa'} width={'110px'} height={'100%'} padding={'10px'}/>) : (<Dropdown Title="Movimento" 
+                OP1="Entrada" onClickOP1={() => nav("/entrada")} 
+                OP2="Saida"  onClickOP2={() => nav("/saida")}/>)}
                 </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
