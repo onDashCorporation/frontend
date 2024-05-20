@@ -15,20 +15,20 @@ const Reset = () => {
   const [error, setError] = useState('');
   
   const [ values , setValues] = useState({
-    newPassword: '',
+    novaSenha: '',
     confPassword: '',
     token
   })
 
   const handleSubmit = () => {
     // Verificação se os campos de senha estão em branco
-    if (!values.newPassword.trim() || !values.confPassword.trim()) {
+    if (!values.novaSenha.trim() || !values.confPassword.trim()) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
 
     // Verificação se as senhas correspondem
-    if (values.newPassword !== values.confPassword) {
+    if (values.novaSenha !== values.confPassword) {
       setError("As senhas não correspondem.");
       toast.error("Por favor, insira a senha novamente");
       return;
@@ -36,14 +36,14 @@ const Reset = () => {
 
     // Verificação se a nova senha atende aos critérios mínimos
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(values.newPassword)) {
+    if (!passwordRegex.test(values.novaSenha)) {
       setError("A senha deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 caractere especial e 1 número.");
       toast.error("A senha não preenche os requisitos");
       return;
     }
 
     // Se todas as validações passarem, procedemos com a solicitação de reset de senha
-    app.post('/reset-password', { newPassword: values.newPassword, token })
+    app.post('/reset-password', { novaSenha: values.novaSenha, token })
       .then(res => {
         toast.success("Senha alterada com sucesso");
         console.log(res);
@@ -77,7 +77,7 @@ const Reset = () => {
           <Input 
           placeholder="Nova Senha" 
           type="password"
-          onChange={e => setValues({...values, newPassword: e.target.value})}/>
+          onChange={e => setValues({...values, novaSenha: e.target.value})}/>
           <Input 
           placeholder="Confirmar Senha" 
           type="password"

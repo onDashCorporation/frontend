@@ -3,7 +3,7 @@ import Button from "../../components/buttonLogin/button";
 import login from "../../assets/images/login.svg";
 import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import app from "../../services/api_login";
 import { Import } from "iconoir-react";
 import TextImg from "../../components/textimg/textimg";
@@ -16,7 +16,24 @@ const Register = () => {
     usuNome: '',
     email: '',
     senha: '',
+    fk_cargoId: '',
+    fk_depId: ''
   })
+
+  const [cargos, setCargos] = useState([]);
+  const [departamentos, setDepartamentos] = useState([]);
+
+  useEffect(() => {
+    app.get('/cargo')
+      .then(res => setCargos(res.data))
+      .catch(err => toast.error("Erro ao buscar cargos"));
+
+    app.get('/departamento')
+      .then(res => setDepartamentos(res.data))
+      .catch(err => toast.error("Erro ao buscar departamentos"));
+  }, []);
+
+
   const handleSubmit = () => {
     // Verificação se os campos de email e senha estão em branco
     if (!values.email.trim() || !values.senha.trim()) {
@@ -78,6 +95,18 @@ const Register = () => {
           <Input placeholder="Nome" type="text" onChange={e => setValues({...values, usuNome: e.target.value})}/>
           <Input placeholder="E-mail" type="text" onChange={e => setValues({...values, email: e.target.value})} />
           <Input placeholder="Senha" type="password" onChange={e => setValues({...values, senha: e.target.value})}/>
+          <select onChange={e => setValues({ ...values, fk_cargoId: e.target.value })}>
+              <option value="" style={{ color: 'gray' }}>Selecione um cargo</option>
+              {cargos.map(cargo => (
+                <option key={cargo.cargoId} value={cargo.cargoId}>{cargo.cargo_nome}</option>
+              ))}
+            </select>
+            <select onChange={e => setValues({ ...values, fk_depId: e.target.value })}>
+              <option value="" style={{ color: 'black' }}>Selecione um departamento</option>
+              {departamentos.map(dep => (
+                <option key={dep.depId} value={dep.depId}>{dep.nome_depart}</option>
+              ))}
+            </select>
         </S.InputContainer>
         </S.ContainerErro>
 

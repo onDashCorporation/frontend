@@ -1,0 +1,8 @@
+Consegui fazer o consumo de todas as rotas da pasta "login"
+
+Alterações:
+- Register: corrigir os "selects" (estão em baixo dos "inputs")
+
+Observações:
+- Não achei o logout
+- No signup usei o "useEffect" não sei se vcs não estavam querendo utilizar ele por algum motivo, mas funcionou

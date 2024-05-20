@@ -1,6 +1,6 @@
 import * as S from "./novoPedidoStyle";
 import Header from "../../components/header/header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
@@ -8,12 +8,44 @@ import CountItem from "../../components/countItem/countItem";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 
-
   const limit = 7;
   const total =  data.length;
 
 const NovoPedido = () => {
 
+  // const [ values , setValues] = useState({
+  //   qtdEntrada: '',
+  //   qtdSaida: '',
+  //   fk_tipoMoviId: '',
+  //   fk_usuarioId: '',
+  //   fk_qtdItemId: '',
+  //   fk_cadItemId: '',
+  //   status: '',
+  //   valor_entrada: ''
+  // })
+
+  // const [tipoMovi, setmovimentacao] = useState([]);
+  // const [usuario, setUsuario] = useState([]);
+  // const [qtdItem, setQtdItem] = useState([]);
+  // const [cadItem, setCadItem] = useState([]);
+
+  // useEffect(() => {
+  //   app.get('/movimentacao')
+  //     .then(res => setmovimentacao(res.data))
+  //     .catch(err => toast.error("Erro ao buscar movimentacao"));
+
+  //   app.get('/signup')
+  //     .then(res => setUsuario(res.data))
+  //     .catch(err => toast.error("Erro ao buscar usuario"));
+
+  //   app.get('/cadItem')
+  //     .then(res => setsetCadItem(res.data))
+  //     .catch(err => toast.error("Erro ao buscar cadastro de item"));
+
+  //   app.get('/qtdItem')
+  //     .then(res => setsetQtdItem(res.data))
+  //     .catch(err => toast.error("Erro ao buscar quantidade de item"));
+  // }, []);
   
       const [searchTerm, setSearchTerm] = useState("");
       const [filteredData, setFilteredData] = useState(data);
