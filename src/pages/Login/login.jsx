@@ -18,6 +18,8 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate(); // Correção: useNavigate deve ser atribuído a 'navigate'
+
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -50,7 +52,8 @@ const Login = () => {
       console.log(response.data);
   
       // Se o login for bem-sucedido, redirecionamos o usuário para outra página
-      history.push("/dashboard");
+      //history.push("/dashboard");
+      navigate("/dashboard"); // Correção: redirecionamento deve usar 'navigate' em vez de 'history'
     } catch (error) {
       setLoading(false);
   
@@ -64,7 +67,7 @@ const Login = () => {
 
   
 
-  const nav = useNavigate();
+  //const nav = useNavigate();
   
   return (
     <S.Main>

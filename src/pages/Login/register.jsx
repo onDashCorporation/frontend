@@ -38,6 +38,9 @@ const Register = () => {
         return;
     }
 
+    // Log dos valores que serão enviados
+    console.log("Dados enviados:", values);
+
     // Se todas as validações passarem, procedemos com o cadastro
     app.post('/signup', values)
         .then(res => {
@@ -52,6 +55,7 @@ const Register = () => {
             }
         });
 };
+
 
   return (
     <S.Main>
