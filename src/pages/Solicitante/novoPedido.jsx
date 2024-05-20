@@ -7,6 +7,8 @@ import Pagination from "../../components/pagination/pagination"
 import CountItem from "../../components/countItem/countItem";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import ModalDelete from "../../components/modalDelete/modalDelete";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
   const limit = 7;
   const total =  data.length;
@@ -81,7 +83,7 @@ const NovoPedido = () => {
       const isItemAlreadySelected = selectedItems.some(selectedItem => selectedItem.id === item.id);
       // Se o item já estiver na lista, não faz nada
       if (isItemAlreadySelected) {
-        setError("Item ja selecionado");
+        toast.error('Item já selecionado');
 
         return;
       }
@@ -103,6 +105,13 @@ const handleNovoValor = (novoValor) => {
 
   return (
     <S.Body>
+      <ToastContainer
+    autoClose={9000} // Fechar automaticamente após 9 segundos
+    closeOnClick // Fechar ao clicar na notificação
+    newestOnTop // Colocar as notificações mais recentes em cima
+    position="top-right" // Posição das notificações
+    hideProgressBar // Esconder a barra de progresso 
+    />
       <Header />
       <S.Main>
         <S.Container>
