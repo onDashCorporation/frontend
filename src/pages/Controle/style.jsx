@@ -131,8 +131,16 @@ export const StyledTableCell = styled(TableCell)`
   height: 30px;
   text-align: center;
 `;
+
 export const Test = styled.div`
+ background-color: ${(props) => (props.mov ? '#D4F4E1' : '#FCCCE0')};
   text-align: center;
+  text-transform: capitalize;
+  color: ${(props) => (props.mov ? '#38AD68' : '#F22B7C')};
+  width: ${(props) => (props.mov ? '80px' : '80px')};
+  margin-left: ${(props) => (props.mov ? '35%' : '35%')};
+  padding: ${(props) =>(props.mov ? '5px' : '5px')};
+  border-radius: ${(props) => (props.mov ? '2em' : '2em')};
 `;
 
 export const ItemButton = styled.button`
