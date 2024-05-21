@@ -2,8 +2,7 @@
 import Nav from "../../components/nav/nav";
 import Header from "../../components/header/header";
 import Filter from "../../components/filter/filter";
-import Folder from "../../assets/images/folder.svg"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
@@ -14,6 +13,11 @@ import ProductModal from "../../components/ProductModal/ProductModal";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm.jsx";
 import Dropdown from "../../components/dropdown/dropdown.jsx";
 import { useLocation } from 'react-router-dom';
+import app from '../../services/api_login';
+
+import { Buffer } from 'buffer';
+
+
   const limit = 7;
   const total =  data.length;
 const Controle = () => {
@@ -23,7 +27,7 @@ const Controle = () => {
   
   const [filterop, setFilterop] = useState("Filtro");
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState([]);
   const [offset, setOffSet] = useState(0);
   const [offset1, setOffSet1] = useState(0);
   const [opset, setOpset] = useState(true);
@@ -31,10 +35,52 @@ const Controle = () => {
   const [isActive, setIsActive] = useState(false);
   const options = ["Status","Id", "Nome", "Departamento", "Data"]
   const [openProductM, setOpenProductM] = useState(false);
+  const [ error, setErro] = useState(false)
 
+  const getEstoque = () => {
+    app
+    .get('/estoque/', )
+    .then((res) => {
+      const dataTable = res.data;
+      setFilteredData(dataTable);
+    })
+    .catch((error) => {
+      setErro(true)
+      console.error('Erro ao tentar acessar o estoque', error);
+    });
 
+  }
+  const getMovimento = () => {
+    app
+    .get('/solicitacao/', )
+    .then((res) => {
+      const dataMovimento = res.data;
+      setFilteredData(dataMovimento);
+    })
+    .catch((error) => {
+      console.error('Erro ao tentar acessar o movimento', error);
+    });
+
+  }
+  useEffect(() => {
+    getEstoque()
+    getMovimento()
+  }, []);
   const normalizeString = (str) => {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return str
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  };
+
+
+
+  // const normalizeString = (str) => {
+  //   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  // };
+
+  const convertBufferToBase64 = (buffer) => {
+    return Buffer.from(buffer).toString('base64');
   };
 
   const handleSearch = (event) => {
@@ -99,6 +145,7 @@ const Controle = () => {
               </S.InsertContainer>
             </S.Header>
           </S.Section>
+          
          {opset ?( <S.TableContainer>
             <S.StyledTable>
               <S.TableHeader>
@@ -112,15 +159,37 @@ const Controle = () => {
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
-              {filteredData.slice(offset1,offset1 + limit).map((item, index) => (
-              <S.TrBody key={index}>
-                {Object.entries(item).map(([key, value], index) => (
-                  <S.StyledTableCell key={index} >
-                    <S.Test  >
-                    {value}
-                    </S.Test>
+              {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      <S.TrBody key={index}>
+                       
+                       {error? (
+                        <S.Container>
+                          oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                          {console.log("oioii")}
+                        </S.Container>
+
+                       ):( 
+                       <>
+                       <S.StyledTableCell>
+                        {item.foto && item.foto.data ? (
+                        <img
+                          src={`data:image/jpeg;base64,${convertBufferToBase64(item.foto.data)}`}
+                          alt="Foto"
+                          style={{ width: '80px', height: '80px' }}
+                        />
+                      ) : (
+                        "No Image"
+                      )}
                     </S.StyledTableCell>
-                ))}
+                    <S.StyledTableCell>{item.estoqueId}</S.StyledTableCell>
+                    <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
+                    <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
+                    <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+                       </>)}
+                       
+                    
                 <S.StyledTableCell >
                   <S.ButtonContainer>
                   <DropDelete Mix={true} Mix1={true}
@@ -156,15 +225,17 @@ const Controle = () => {
               </S.TrHeader>
             </S.TableHeader>
             <S.TableBody>
-            {filteredData.slice(offset,offset + limit).map((item, index) => (
-            <S.TrBody key={index}>
-              {Object.entries(item).map(([key, value], index) => (
-                <S.StyledTableCell key={index} >
-                  <S.Test  status={key === 'status' ? value : undefined}>
-                  {value}
-                  </S.Test>
-                  </S.StyledTableCell>
-              ))}
+            {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      <S.TrBody key={index}>
+                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
+                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+               
+              
               <S.StyledTableCell  >
               <S.ButtonContainer onClick={() => nav("/pedidos")}>
               <S.More/>       
