@@ -129,9 +129,24 @@ const Register = () => {
             opTitle={cargo_nome}
           /> */}
           
-          <SelectBox/>
+          <SelectBox
+            Title={'Selecione um cargo'}
+            opsMap={cargos}
+            opId="cargoId"
+            opName="cargo_nome"
+            onChange={e => setValues({ ...values, fk_cargoId: e.target.value })}
+            onFocus={fetchCargos}
+          />
 
-          <select 
+          <SelectBox
+            Title={'Selecione um departamento'}
+            opsMap={departamentos}
+            opId="depId"
+            opName="nome_depart"
+            onChange={value => setValues({ ...values, fk_depId: value })}
+          />
+
+          {/* <select 
             onFocus={fetchCargos}
             onChange={e => setValues({ ...values, fk_cargoId: e.target.value })}
           >
@@ -139,7 +154,7 @@ const Register = () => {
             {cargos.map(cargo => (
               <option key={cargo.cargoId} value={cargo.cargoId}>{cargo.cargo_nome}</option>
             ))}
-          </select>
+          </select> */}
           
           <select 
             onFocus={fetchDepartamentos}
