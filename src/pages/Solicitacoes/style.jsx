@@ -150,6 +150,7 @@ export const StyledTableCell = styled(TableCell)`
 `;
 export const Test = styled.div`
   text-align: center;
+    text-transform: capitalize;
   color: ${(props) => getColorStatus(props.status)};
   background-color: ${(props) => getBackgroudStatus(props.status)};
   width: ${(props) => getWidthStatus(props.status)};
