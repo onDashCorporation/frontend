@@ -7,6 +7,9 @@ const SelectBox = ({ Title, opsMap, opName, onChange, opId, onFocus }) => {
 
   const handleSelectClick = () => {
     setIsActive(!isActive);
+    if (onFocus) {
+      onFocus();
+    }
   };
 
   const handleOptionClick = (value) => {
@@ -18,10 +21,10 @@ const SelectBox = ({ Title, opsMap, opName, onChange, opId, onFocus }) => {
 
   return (
     <S.SelectContainer className="custom-select">
-      <S.HiddenSelect onChange={onChange} onFocus={onFocus}>
+      <S.HiddenSelect onFocus={handleSelectClick} onChange={e => onChange(e.target.value)}>
         <option value="" style={{ color: 'gray' }}>{Title}</option>
         {opsMap.map(op => (
-          <option key={op.cargoId} value={op.cargoId}>{op[opName]}</option>
+          <option key={op[opId]} value={op[opId]}>{op[opName]}</option>
         ))}
       </S.HiddenSelect>
 
@@ -34,7 +37,7 @@ const SelectBox = ({ Title, opsMap, opName, onChange, opId, onFocus }) => {
 
       <S.SelectItems className={isActive ? '' : 'select-hide'}>
         {opsMap.map(op => (
-          <div key={op.cargoId} onClick={() => handleOptionClick(op.cargoId)}>
+          <div key={op[opId]} onClick={() => handleOptionClick(op[opId])}>
             {op[opName]}
           </div>
         ))}

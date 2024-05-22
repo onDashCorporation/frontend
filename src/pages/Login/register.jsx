@@ -21,19 +21,10 @@ const Register = () => {
     fk_depId: ''
   })
 
-  const [cargos, setCargos] = useState([]);
+  
   const [departamentos, setDepartamentos] = useState([]);
 
-  // useEffect(() => {
-  //   app.get('/cargo')
-  //     .then(res => setCargos(res.data))
-  //     .catch(err => toast.error("Erro ao buscar cargos"));
-
-  //   app.get('/departamento')
-  //     .then(res => setDepartamentos(res.data))
-  //     .catch(err => toast.error("Erro ao buscar departamentos"));
-  // }, []);
-
+  const [cargos, setCargos] = useState([]);
   const fetchCargos = () => {
     app.get('/cargo')
       .then(res => setCargos(res.data))
@@ -119,52 +110,22 @@ const Register = () => {
           <Input placeholder="Nome" type="text" onChange={e => setValues({...values, usuNome: e.target.value})}/>
           <Input placeholder="E-mail" type="text" onChange={e => setValues({...values, email: e.target.value})} />
           <Input placeholder="Senha" type="password" onChange={e => setValues({...values, senha: e.target.value})}/>
-
-          {/* <SelectBox 
-            onFocus={fetchCargos}
-            onChange={e => setValues({ ...values, fk_cargoId: e.target.value })} 
-            Title={'Selecione um argo'} 
-            opsMap={cargos} 
-            key={cargoId} value={cargoId} 
-            opTitle={cargo_nome}
-          /> */}
-          
           <SelectBox
             Title={'Selecione um cargo'}
             opsMap={cargos}
             opId="cargoId"
             opName="cargo_nome"
-            onChange={e => setValues({ ...values, fk_cargoId: e.target.value })}
+            onChange={value => setValues({ ...values, fk_cargoId: value })}
             onFocus={fetchCargos}
           />
-
           <SelectBox
             Title={'Selecione um departamento'}
             opsMap={departamentos}
             opId="depId"
             opName="nome_depart"
             onChange={value => setValues({ ...values, fk_depId: value })}
-          />
-
-          {/* <select 
-            onFocus={fetchCargos}
-            onChange={e => setValues({ ...values, fk_cargoId: e.target.value })}
-          >
-            <option value="" style={{ color: 'gray' }}>Selecione um cargo</option>
-            {cargos.map(cargo => (
-              <option key={cargo.cargoId} value={cargo.cargoId}>{cargo.cargo_nome}</option>
-            ))}
-          </select> */}
-          
-          <select 
             onFocus={fetchDepartamentos}
-            onChange={e => setValues({ ...values, fk_depId: e.target.value })}
-          >
-            <option value="" style={{ color: 'black' }}>Selecione um departamento</option>
-            {departamentos.map(dep => (
-              <option key={dep.depId} value={dep.depId}>{dep.nome_depart}</option>
-            ))}
-          </select>
+          />
         </S.InputContainer>
         </S.ContainerErro>
 
@@ -172,6 +133,7 @@ const Register = () => {
           <Button Title="Criar" onClick={() => {
             console.info('teste')
             handleSubmit()
+            nav('/')
             }}/>
           <S.SubText>
             Faça seu{" "}

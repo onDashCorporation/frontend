@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-//CHAT GPT:
 export const SelectContainer = styled.div`
   position: relative;
   font-family: Arial, sans-serif;
