@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SelectContainer = styled.div`
   position: relative;
-  font-family: Arial, sans-serif;
 `;
 
 export const HiddenSelect = styled.select`
@@ -14,7 +13,6 @@ export const SelectSelected = styled.div`
   color: #000;
   padding: 8px 16px;
   border: 2px solid rgb(182, 181, 181);
-  //border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   border-radius: 10px;
   cursor: pointer;
   position: relative;
@@ -44,7 +42,7 @@ export const SelectItems = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 99;
+  z-index: 2;
 
   &.select-hide {
     display: none;
