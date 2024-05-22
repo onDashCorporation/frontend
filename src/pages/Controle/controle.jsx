@@ -4,7 +4,7 @@ import Header from "../../components/header/header";
 import Filter from "../../components/filter/filter";
 import { useState, useEffect } from "react";
 import Search from "../../components/search/search";
-import data from "../Data/tabledb.json";
+// import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../../components/modalDelete/modalDelete";
@@ -19,24 +19,24 @@ import { Buffer } from 'buffer';
 
 
   const limit = 7;
-  const total =  data.length;
-const Controle = () => {
-  const nav = useNavigate();
-  const location = useLocation();
-  const showBackButton = location.pathname == '/controle'; 
-  
-  const [filterop, setFilterop] = useState("Filtro");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
-  const [offset, setOffSet] = useState(0);
-  const [offset1, setOffSet1] = useState(0);
-  const [opset, setOpset] = useState(true);
-  const [openModal, setOpenModal] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const options = ["Status","Id", "Nome", "Departamento", "Data"]
-  const [openProductM, setOpenProductM] = useState(false);
-  const [ error, setErro] = useState(false)
-
+  const Controle = () => {
+    const nav = useNavigate();
+    const location = useLocation();
+    const showBackButton = location.pathname == '/controle'; 
+    
+    const [filterop, setFilterop] = useState("Filtro");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredData, setFilteredData] = useState([]);
+    const [offset, setOffSet] = useState(0);
+    const [offset1, setOffSet1] = useState(0);
+    const [opset, setOpset] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
+    const [isActive, setIsActive] = useState(false);
+    const options = ["Status","Id", "Nome", "Departamento", "Data"]
+    const [openProductM, setOpenProductM] = useState(false);
+    const [ error, setErro] = useState(false)
+    const total =  filteredData.length;
+    
   const getEstoque = () => {
     app
     .get('/estoque/', )
@@ -62,10 +62,11 @@ const Controle = () => {
     });
 
   }
+ 
   useEffect(() => {
-    getEstoque()
-    getMovimento()
+      getEstoque()
   }, []);
+  
   const normalizeString = (str) => {
     return str
       .normalize('NFD')
@@ -89,7 +90,7 @@ const Controle = () => {
 
     
     const normalizedSearch = normalizeString(searchValue);
-        const newFilteredData = data.filter((item) => {
+        const newFilteredData = filteredData.filter((item) => {
           if (filterop === "Departamento") {
             return normalizeString(item.departamento.toString()).includes(normalizedSearch);
           } 
@@ -124,8 +125,8 @@ const Controle = () => {
             <S.Title>Controle</S.Title>
             <S.Header>
               <S.Option>
-                <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{setOpset(true)} }>Estoque</S.Op>
-                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false)}}>Movimentações</S.Op>
+                <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{setOpset(true), getEstoque() } }>Estoque</S.Op>
+                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false), getMovimento()}}>Movimentações</S.Op>
               </S.Option>
               <S.InsertContainer>
                 <S.SearchContainer>
@@ -219,8 +220,8 @@ const Controle = () => {
               <S.ThHeader isFirst className={filterop === 'status' ? "Houver" : ""}>Tipo</S.ThHeader>
                 <S.ThHeader>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader> Quantidade</S.ThHeader>
-                <S.ThHeader >Categoria</S.ThHeader>          
+                <S.ThHeader> Data</S.ThHeader>
+                <S.ThHeader >Valor</S.ThHeader>          
               <S.ThHeader isLast></S.ThHeader>       
               </S.TrHeader>
             </S.TableHeader>
@@ -228,12 +229,17 @@ const Controle = () => {
             {filteredData
                     .slice(offset, offset + limit)
                     .map((item, index) => (
+                      
                       <S.TrBody key={index}>
+                        <S.StyledTableCell >
+                        <S.Test mov={item.fk_tipoMoviId === 1}>
+                        {item.fk_tipoMoviId == 1 ? 'entrada' : 'saida' }
+                        </S.Test>
+                        </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
-                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
-                <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
-                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
-                <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+                <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
+                <S.StyledTableCell>{item.valor_entrada}</S.StyledTableCell>
                
               
               <S.StyledTableCell  >
