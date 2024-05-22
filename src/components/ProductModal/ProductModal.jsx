@@ -1,6 +1,7 @@
 import * as S from "./style"
 import ButtonConfirm from "../ButtonConfirm/ButtonConfirm";
 import "./switch.css";
+import app from "../../services/api_login";
 
 import { useState, useEffect } from 'react';
 
@@ -20,6 +21,63 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
   //     textarea = "";
   //   }
   // }
+
+  // para os inputs
+  const [inputValues, setInputValues] = useState({
+    name: '',
+    qtde: '',
+    category: '',
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+  // axios
+  const handleAddButtonClick = async () => {
+    console.log('Valores dos inputs:', inputValues);
+    if (inputValues.name.trim() === '') {
+      console.log('Insira o nome.');
+      return;
+    }
+    if (inputValues.qtde.trim() === '') {
+      console.log('Insira a quantidade.');
+      return;
+    }
+    if (inputValues.category.trim() === '') {
+      console.log('Insira a categoria.');
+      return;
+    }
+    try {
+      const response = await app.post('/cadItem', { // endpoint da API
+        nome_item: inputValues.name,
+        qtdMin: inputValues.qtde,
+        fk_categoriaId: inputValues.category,        
+      }, {
+        headers: {
+          'Content-Type': 'application/json' // Assegura que o Content-Type seja application/json
+        }
+      });
+      console.log('Adicionado:', response.data);
+      // Limpar os campos depois de enviar
+      setInputValues({ name: '', qtde: '', category: '' });
+      setOpenModal(false); // Fechar modal depois do envio ser feito
+    } catch (error) {
+      if (error.response) {
+        // O servidor respondeu com um status diferente de 2xx
+        console.error('Erro ao adicionar:', error.response.data);
+      } else if (error.request) {
+        // A requisição foi feita, mas não houve resposta
+        console.error('Erro ao adicionar:', error.request);
+      } else {
+        // Outro erro ocorreu ao configurar a requisição
+        console.error('Erro ao adicionar:', error.message);
+      }
+    }
+  };
+
   let handleCloseModal = () => {
     setOpenModal(false);
   };
@@ -106,12 +164,30 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
                           <S.Row1Wrap>
                             <S.Row1Content>
                               <S.Text>Nome</S.Text>
-                              <S.NameInput autoComplete="off" required name='name' id="name" type="text"  placeholder={"Nome"}/>
+                              <S.NameInput 
+                                required 
+                                autoComplete="off" 
+                                name='name' 
+                                id="name" 
+                                type="text"  
+                                placeholder={"Nome"}
+                                value={inputValues.name}
+                                onChange={handleChange}
+                              />
                             </S.Row1Content>
 
                             <S.Row1Content>
                               <S.Text>Categoria</S.Text>
-                              <S.CategoryInput autoComplete="off" required name='category' id="category" type="text"  placeholder={"Categoria"}/>
+                              <S.CategoryInput
+                                required 
+                                autoComplete="off"  
+                                name='category' 
+                                id="category" 
+                                type="number"  
+                                placeholder={"Id Categoria"}
+                                value={inputValues.category}
+                                onChange={handleChange}
+                              />
                             </S.Row1Content>
                           </S.Row1Wrap>
                         </S.Row1Div>
@@ -129,8 +205,17 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
                           
                       <S.Row2>
                         <S.Row2Content>
-                          <S.Text>Marca</S.Text>
-                            <S.Inputs autoComplete="off" required name='brand' id="brand" type="text"  placeholder={"Marca"}/>
+                          <S.Text>Quantidade</S.Text>
+                            <S.Inputs 
+                            required 
+                            autoComplete="off" 
+                            name='qtde' 
+                            id="qtde" 
+                            type="number"  
+                            placeholder={"Quantidade"}
+                            value={inputValues.qtde}
+                            onChange={handleChange}
+                            />
                         </S.Row2Content>
                             
                         <S.Row2Content>
@@ -155,7 +240,10 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
                   </S.Div>
 
                   <S.ContainerButton>
-                    <ButtonConfirm Title="Adicionar" color="white"  width="150px" height="40px" backgroundColor="#38AD68" fontSize="15px"/>
+                    <ButtonConfirm 
+                      Title="Adicionar" color="white"  width="150px" height="40px" backgroundColor="#38AD68" fontSize="15px" 
+                        onClick={handleAddButtonClick}
+                    />
                   </S.ContainerButton>
 
                 </S.ContainerM>
