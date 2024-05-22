@@ -7,13 +7,16 @@ import Pagination from "../../components/pagination/pagination"
 import { useNavigate } from "react-router-dom";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
   const limit = 8;
-  const total =  data.length;
-const Pedidos = () => {
-  const nav = useNavigate();
-  const location = useLocation();
-  const showBackButton = location.pathname !== '/dashboard';
+  const Pedidos = () => {
+    const nav = useNavigate();
+    const location = useLocation();
+    const showBackButton = location.pathname !== '/dashboard';
+    const { solicId } = useParams();
+    const total =  data.length;
+
   
 
   const [filteredData, setFilteredData] = useState(data);
@@ -49,9 +52,9 @@ const Pedidos = () => {
             <S.ButtonContainer>
               <ButtonConfirm onClick={handleFinishButtonClick} Title="Finalizar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
               <ButtonConfirm onClick={handlePickUpButtonClick} Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>
-              {read && <p>Pedido lido.</p>}
+              {/* {read && <p>Pedido lido.</p>}
               {pickedUp && <p>Pedido Retirado.</p>}
-              {finished && <p>Pedido finalizado.</p>}
+              {finished && <p>Pedido finalizado.</p>} */}
                </S.ButtonContainer>
           </S.SectionConatiner>
           
@@ -67,17 +70,29 @@ const Pedidos = () => {
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
-              {filteredData.slice(offset,offset + limit).map((item, index) => (
-              <S.TrBody key={index}>
-                {Object.entries(item).map(([key, value], index) => (
-                  <S.StyledTableCell key={index} >
-                    <S.Test  >
-                    {value}
-                    </S.Test>
-                    </S.StyledTableCell>
-                ))}
-              </S.TrBody>
-            ))}
+              {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      
+                      <S.TrBody key={index}>
+                        <S.StyledTableCell >
+                        <S.Test >
+                        {item.status}
+                        </S.Test>
+                        </S.StyledTableCell>
+                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
+                <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
+               
+              
+              <S.StyledTableCell  >
+              <S.ButtonContainer onClick={() => nav("/pedidos/${item.solicId}")}>
+              <S.More/>       
+                  </S.ButtonContainer> 
+              </S.StyledTableCell>
+            </S.TrBody>
+          ))}
               </S.TableBody>
             </S.StyledTable>
             <S.PaginationConatiner>
