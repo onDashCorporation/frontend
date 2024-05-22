@@ -3,12 +3,13 @@ import Button from "../../components/buttonLogin/button";
 import login from "../../assets/images/login.svg";
 import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import app from "../../services/api_login";
 import { Import } from "iconoir-react";
 import TextImg from "../../components/textimg/textimg";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SelectBox from "../../components/SelectBox/select";
 
 const Register = () => {
   const nav = useNavigate();
@@ -16,7 +17,38 @@ const Register = () => {
     usuNome: '',
     email: '',
     senha: '',
+    fk_cargoId: '',
+    fk_depId: ''
   })
+
+  
+  const [departamentos, setDepartamentos] = useState([]);
+
+  const [cargos, setCargos] = useState([]);
+  const fetchCargos = () => {
+    app.get('/cargo')
+      .then(res => setCargos(res.data))
+      .catch(err => {
+        console.error("Erro ao buscar cargos:", {
+          message: err.message,
+          response: err.response
+        });
+        toast.error("Erro ao buscar cargos.");
+      });
+  };
+
+  const fetchDepartamentos = () => {
+    app.get('/departamento')
+    .then(res => setDepartamentos(res.data))
+    .catch(err => {
+      console.error("Erro ao buscar departamentos:", {
+        message: err.message,
+        response: err.response
+      });
+      toast.error("Erro ao buscar departamentos.");
+    });
+  };
+
   const handleSubmit = () => {
     // Verificação se os campos de email e senha estão em branco
     if (!values.email.trim() || !values.senha.trim()) {
@@ -54,7 +86,7 @@ const Register = () => {
                 toast.error("Erro ao tentar realizar o cadastro.");
             }
         });
-};
+  };
 
 
   return (
@@ -78,6 +110,22 @@ const Register = () => {
           <Input placeholder="Nome" type="text" onChange={e => setValues({...values, usuNome: e.target.value})}/>
           <Input placeholder="E-mail" type="text" onChange={e => setValues({...values, email: e.target.value})} />
           <Input placeholder="Senha" type="password" onChange={e => setValues({...values, senha: e.target.value})}/>
+          <SelectBox
+            Title={'Selecione um cargo'}
+            opsMap={cargos}
+            opId="cargoId"
+            opName="cargo_nome"
+            onChange={value => setValues({ ...values, fk_cargoId: value })}
+            onFocus={fetchCargos}
+          />
+          <SelectBox
+            Title={'Selecione um departamento'}
+            opsMap={departamentos}
+            opId="depId"
+            opName="nome_depart"
+            onChange={value => setValues({ ...values, fk_depId: value })}
+            onFocus={fetchDepartamentos}
+          />
         </S.InputContainer>
         </S.ContainerErro>
 
@@ -85,6 +133,7 @@ const Register = () => {
           <Button Title="Criar" onClick={() => {
             console.info('teste')
             handleSubmit()
+            nav('/')
             }}/>
           <S.SubText>
             Faça seu{" "}
