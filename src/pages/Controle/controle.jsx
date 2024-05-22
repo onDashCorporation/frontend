@@ -238,8 +238,11 @@ import { Buffer } from 'buffer';
                         </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
-                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
-                <S.StyledTableCell>{item.valor_entrada}</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('/')}</S.StyledTableCell>
+                <S.StyledTableCell>
+                  {item.valor_entrada !== undefined ? `R$ ${Number(item.valor_entrada).toFixed(2).replace('.', ',')}` : 'R$ 00,00'}
+                </S.StyledTableCell>
+
                
               
               <S.StyledTableCell  >
