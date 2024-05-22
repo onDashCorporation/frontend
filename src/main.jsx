@@ -82,7 +82,7 @@ const router = createBrowserRouter([
         element: <NovoPedido />,
       },
       {
-        path: "/pedido",
+        path: "/pedido/:solicId",
         element: <Pedido />,
       },
     ],
