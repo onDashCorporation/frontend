@@ -115,30 +115,30 @@ import { useLocation } from 'react-router-dom';
                 <S.ThHeader isFirst >Status</S.ThHeader>
                 <S.ThHeader>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader>Departamento</S.ThHeader>
-                <S.ThHeader >Data</S.ThHeader>       
+                <S.ThHeader>Data</S.ThHeader>
+                <S.ThHeader >Valor</S.ThHeader>       
                 <S.ThHeader isLast></S.ThHeader>       
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
               {filteredData
-                    .slice(offset, offset + limit)
+                    .slice(offset1, offset1 + limit)
                     .map((item, index) => (
                       
                       <S.TrBody key={index}>
                         <S.StyledTableCell >
-                        <S.Test mov={item.fk_tipoMoviId === 1}>
-                        {item.fk_tipoMoviId == 1 ? 'entrada' : 'saida' }
+                        <S.Test >
+                        {item.status}
                         </S.Test>
                         </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
                 <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
-                <S.StyledTableCell>{item.valor_entrada}</S.StyledTableCell>
+                <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
                
               
               <S.StyledTableCell  >
-              <S.ButtonContainer onClick={() => nav("/pedidos")}>
+              <S.ButtonContainer onClick={() => nav("/pedidos/${item.solicId}")}>
               <S.More/>       
                   </S.ButtonContainer> 
               </S.StyledTableCell>
@@ -160,28 +160,35 @@ import { useLocation } from 'react-router-dom';
           <S.StyledTable>
             <S.TableHeader>
               <S.TrHeader>
-              <S.ThHeader isFirst className={filterop === 'status' ? "Houver" : ""}>Status</S.ThHeader>
-              <S.ThHeader>id</S.ThHeader>
-              <S.ThHeader>Nome</S.ThHeader>
-              <S.ThHeader>Departamento</S.ThHeader>
-              <S.ThHeader >Data</S.ThHeader>       
-              <S.ThHeader isLast></S.ThHeader>       
+              <S.ThHeader isFirst >Status</S.ThHeader>
+                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader>Nome</S.ThHeader>
+                <S.ThHeader>Data</S.ThHeader>
+                <S.ThHeader >Valor</S.ThHeader>       
+                <S.ThHeader isLast></S.ThHeader>       
               </S.TrHeader>
             </S.TableHeader>
             <S.TableBody>
-            {filteredData.slice(offset,offset + limit).map((item, index) => (
-            <S.TrBody key={index}>
-              {Object.entries(item).map(([key, value], index) => (
-                <S.StyledTableCell key={index} >
-                  <S.Test  status={key === 'status' ? value : undefined}>
-                  {value}
-                  </S.Test>
-                  </S.StyledTableCell>
-              ))}
-              <S.StyledTableCell >
+            {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      
+                      <S.TrBody key={index}>
+                        <S.StyledTableCell >
+                        <S.Test >
+                        {item.status}
+                        </S.Test>
+                        </S.StyledTableCell>
+                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
+                <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
+               
+              
+              <S.StyledTableCell  >
               <S.ButtonContainer onClick={() => nav("/pedidos")}>
               <S.More/>       
-                  </S.ButtonContainer>  
+                  </S.ButtonContainer> 
               </S.StyledTableCell>
             </S.TrBody>
           ))}
