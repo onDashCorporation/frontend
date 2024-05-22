@@ -66,6 +66,7 @@ import { Buffer } from 'buffer';
   useEffect(() => {
       getEstoque()
   }, []);
+  
   const normalizeString = (str) => {
     return str
       .normalize('NFD')
