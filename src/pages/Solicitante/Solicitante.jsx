@@ -6,7 +6,7 @@ import Search from "../../components/search/search";
 import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 import DropDelete from "../../components/dropdelete/dropdelete";
 import api from "../../services/api_login";
@@ -16,7 +16,7 @@ import api from "../../services/api_login";
   const solicitante = () => {
     const nav = useNavigate();
 
-  
+    const {solicId} = useParams();
     const [filterop, setFilterop] = useState("Filtro");
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredData, setFilteredData] = useState([]);
@@ -29,7 +29,7 @@ import api from "../../services/api_login";
 
   const getSolicitacoes = () => {
     api
-    .get('/solicitacao/', )
+    .get(`/solicitacao/user/${solicId}` )
     .then((res) => {
       const dataTable = res.data;
       setFilteredData(dataTable);
@@ -119,8 +119,7 @@ import api from "../../services/api_login";
                 <S.TrHeader>
                 <S.ThHeader isFirst >Status</S.ThHeader>
                 <S.ThHeader>id</S.ThHeader>
-                <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader>Departamento</S.ThHeader>
+                <S.ThHeader>Valor</S.ThHeader>
                 <S.ThHeader >Data</S.ThHeader>       
                 <S.ThHeader isLast></S.ThHeader>       
                 </S.TrHeader>
@@ -137,11 +136,8 @@ import api from "../../services/api_login";
                         </S.Test>
                         </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
-                <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
+                <S.StyledTableCell>R${item.valor_entrada}</S.StyledTableCell>
                 <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
-                <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
-               
-              
               <S.StyledTableCell  >
              
                   <S.ButtonContainer>
@@ -161,8 +157,8 @@ import api from "../../services/api_login";
                <Pagination 
                limit={limit}
                total={total} 
-               offset={offset}
-               setOffset={setOffSet}
+               offset={offset1}
+               setOffset={setOffSet1}
                />
             </S.PaginationConatiner>
           </S.TableContainer>) 
@@ -171,29 +167,38 @@ import api from "../../services/api_login";
           <S.StyledTable>
             <S.TableHeader>
               <S.TrHeader>
-              <S.ThHeader isFirst className={filterop === 'status' ? "Houver" : ""}>Status</S.ThHeader>
-              <S.ThHeader>id</S.ThHeader>
-              <S.ThHeader>Nome</S.ThHeader>
-              <S.ThHeader>Departamento</S.ThHeader>
-              <S.ThHeader >Data</S.ThHeader>       
-              <S.ThHeader isLast></S.ThHeader>       
+              <S.ThHeader isFirst >Status</S.ThHeader>
+                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader>Valor</S.ThHeader>
+                <S.ThHeader >Data</S.ThHeader>       
+                <S.ThHeader isLast></S.ThHeader>       
               </S.TrHeader>
             </S.TableHeader>
             <S.TableBody>
-            {filteredData.slice(offset,offset + limit).map((item, index) => (
-            <S.TrBody key={index}>
-              {Object.entries(item).map(([key, value], index) => (
-                <S.StyledTableCell key={index} >
-                  <S.Test  status={key === 'status' ? value : undefined}>
-                  {value}
-                  </S.Test>
-                  </S.StyledTableCell>
-              ))}
-              <S.StyledTableCell >
-              <S.ButtonContainer onClick={() => nav("/pedido")}>
-              <S.More/>       
-                  </S.ButtonContainer>              
-                   </S.StyledTableCell>
+            {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      
+                      <S.TrBody key={index}>
+                        <S.StyledTableCell >
+                        <S.Test >
+                        {item.status}
+                        </S.Test>
+                        </S.StyledTableCell>
+                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell>R${item.valor_entrada}</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>               
+              <S.StyledTableCell  >
+             
+                  <S.ButtonContainer>
+                  <DropDelete Vizu={true} Mix1={true}
+                onClickOP2={() => setOpenModal(true)}
+                onClickOP3={() => nav("/pedido")}
+                op="Excluir"
+
+             />  
+                 </S.ButtonContainer>           
+              </S.StyledTableCell>
             </S.TrBody>
           ))}
             </S.TableBody>
