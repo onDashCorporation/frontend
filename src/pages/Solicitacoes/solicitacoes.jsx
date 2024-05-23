@@ -21,6 +21,7 @@ import { useLocation } from 'react-router-dom';
     const [filteredData, setFilteredData] = useState([]);
     const [offset, setOffSet] = useState(0)
     const [offset1, setOffSet1] = useState(0)
+    const [error, setErro] = useState()
     const [opset, setOpset] = useState(true);
     const options = ["Status","Id", "Nome", "Departamento", "Data"]
     const total =  filteredData.length;
@@ -93,7 +94,7 @@ import { useLocation } from 'react-router-dom';
             <S.Header>
               <S.Option>
                 <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{ getSolicitacoes(); setOpset(true)} }>Abertos</S.Op>
-                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false); console.log("falseee")}}>Historico</S.Op>
+                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false);}}>Historico</S.Op>
               </S.Option>
               <S.InsertContainer>
                 <S.SearchContainer>
@@ -127,18 +128,18 @@ import { useLocation } from 'react-router-dom';
                       
                       <S.TrBody key={index}>
                         <S.StyledTableCell >
-                        <S.Test >
+                        <S.Test status={item.status == 'Novo' ? 'novo' : 'lido'} >
                         {item.status}
                         </S.Test>
                         </S.StyledTableCell>
-                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell  >{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
                 <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
                 <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
                
               
               <S.StyledTableCell  >
-              <S.ButtonContainer onClick={() => nav("/pedidos/${item.solicId}")}>
+              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}`)}>
               <S.More/>       
                   </S.ButtonContainer> 
               </S.StyledTableCell>
@@ -175,7 +176,7 @@ import { useLocation } from 'react-router-dom';
                       
                       <S.TrBody key={index}>
                         <S.StyledTableCell >
-                        <S.Test >
+                        <S.Test status={item.status == 'Novo' ? 'novo' : 'lido'}>
                         {item.status}
                         </S.Test>
                         </S.StyledTableCell>
