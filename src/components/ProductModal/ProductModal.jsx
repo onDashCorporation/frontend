@@ -205,37 +205,37 @@ export default function ProductModal({isOpen, setOpenModal, title}) {
                           
                       <S.Row2>
                         <S.Row2Content>
-                          <S.Text>Quantidade</S.Text>
+                          <S.Text>Quantidade mínima</S.Text>
                             <S.Inputs 
-                            required 
-                            autoComplete="off" 
-                            name='qtde' 
-                            id="qtde" 
-                            type="number"  
-                            placeholder={"Quantidade"}
-                            value={inputValues.qtde}
-                            onChange={handleChange}
+                              required 
+                              autoComplete="off" 
+                              name='qtde' 
+                              id="qtde" 
+                              type="number"  
+                              placeholder={"Quantidade"}
+                              value={inputValues.qtde}
+                              onChange={handleChange}
                             />
                         </S.Row2Content>
                             
                         <S.Row2Content>
                           <S.Text>preço unitário</S.Text>
-                          <S.Inputs autoComplete="off" required name='price' id="price" type="text"  placeholder={"Preço unitário"}/>
+                          <S.Inputs autoComplete="off" required name='price' id="price" type="text"/>
                         </S.Row2Content>
 
                         <S.Row2Content>
                           <S.Text>vida útil</S.Text>
-                          <S.Inputs autoComplete="off" required name='lifespan' id="lifespan" type="text"  placeholder={"Vida útil"}/>
+                          <S.Inputs autoComplete="off" required name='lifespan' id="lifespan" type="text"/>
                         </S.Row2Content>
 
                         <S.Row2Content>
                           <S.Text>medidas</S.Text>
-                          <S.Inputs autoComplete="off" required name='measurements' id="measurements" type="text"  placeholder={"Medidas"}/>
+                          <S.Inputs autoComplete="off" required name='measurements' id="measurements" type="text"/>
                         </S.Row2Content>
                       </S.Row2>
 
                       <S.Text>Descrição</S.Text>
-                      <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text" placeholder="Descrição"/>
+                      <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxlength="130" type="text"/>
                     </S.Form> 
                   </S.Div>
 
