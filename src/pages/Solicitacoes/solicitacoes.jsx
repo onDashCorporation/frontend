@@ -115,7 +115,7 @@ import { useLocation } from 'react-router-dom';
                 <S.TrHeader>
                 <S.ThHeader isFirst >Status</S.ThHeader>
                 <S.ThHeader>id</S.ThHeader>
-                <S.ThHeader>Nome</S.ThHeader>
+                <S.ThHeader>Tipo</S.ThHeader>
                 <S.ThHeader>Data</S.ThHeader>
                 <S.ThHeader >Valor</S.ThHeader>       
                 <S.ThHeader isLast></S.ThHeader>       
@@ -139,7 +139,7 @@ import { useLocation } from 'react-router-dom';
                
               
               <S.StyledTableCell  >
-              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}`)}>
+              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}/${item.status}/0`)}>
               <S.More/>       
                   </S.ButtonContainer> 
               </S.StyledTableCell>
@@ -163,7 +163,7 @@ import { useLocation } from 'react-router-dom';
               <S.TrHeader>
               <S.ThHeader isFirst >Status</S.ThHeader>
                 <S.ThHeader>id</S.ThHeader>
-                <S.ThHeader>Nome</S.ThHeader>
+                <S.ThHeader>Tipo</S.ThHeader>
                 <S.ThHeader>Data</S.ThHeader>
                 <S.ThHeader >Valor</S.ThHeader>       
                 <S.ThHeader isLast></S.ThHeader>       
@@ -187,7 +187,7 @@ import { useLocation } from 'react-router-dom';
                
               
               <S.StyledTableCell  >
-              <S.ButtonContainer onClick={() => nav("/pedidos")}>
+              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}/${item.status}/1`)}>
               <S.More/>       
                   </S.ButtonContainer> 
               </S.StyledTableCell>
