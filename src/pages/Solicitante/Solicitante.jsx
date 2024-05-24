@@ -16,7 +16,7 @@ import api from "../../services/api_login";
   const solicitante = () => {
     const nav = useNavigate();
 
-    const {solicId} = useParams();
+    const {solicId, fk_usuarioId} = useParams();
     const [filterop, setFilterop] = useState("Filtro");
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredData, setFilteredData] = useState([]);
@@ -108,7 +108,7 @@ import api from "../../services/api_login";
                   <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
-                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav("/novopedido")}}/>
+                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav(`/novopedido/${fk_usuarioId}`)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -143,7 +143,7 @@ import api from "../../services/api_login";
                   <S.ButtonContainer>
                   <DropDelete Vizu={true} Mix1={true}
                 onClickOP2={() => setOpenModal(true)}
-                onClickOP3={() => nav("/pedido")}
+                onClickOP3={() => nav(`/pedido/${item.solicId}`)}
                 op="Excluir"
 
              />  
