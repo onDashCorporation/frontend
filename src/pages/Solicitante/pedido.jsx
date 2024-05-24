@@ -1,23 +1,41 @@
 import * as S from "./style";
 import Nav from "../../components/nav/nav";
 import Header from "../../components/header/header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import data from "../Data/DBpedidos.json";
 import Pagination from "../../components/pagination/pagination"
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import HorizontalLinearStepper from "../../components/Steps/stepper.jsx";
-
-
-  const limit = 8;
-  const total =  data.length;
-const Pedido = () => {
-  const nav = useNavigate();
+import api from "../../services/api_login.js";
 
   
-
+const limit = 8;
+const Pedido = () => {
+  const nav = useNavigate();
+  const {solicId} = useParams();
   const [filteredData, setFilteredData] = useState(data);
   const [offset, setOffSet] = useState(0)
+  const total =  filteredData.length;
+
+  const getSolicitacoes = () => {
+    api
+    .get(`/solicitacao/item/${solicId}` )
+    .then((res) => {
+      const dataTable = res.data;
+      setFilteredData(dataTable);
+      // console.log(dataTable)
+    })
+    .catch((error) => {
+      setErro(true)
+      console.error('Erro ao tentar acessar o pedido', error);
+    });
+
+  }
+ 
+  useEffect(() => {
+    getSolicitacoes();
+  }, [solicId]);
 
  
  
@@ -35,25 +53,29 @@ const Pedido = () => {
             <S.StyledTable>
               <S.TableHeader>
                 <S.TrHeader>
-                <S.ThHeader isFirst >Foto</S.ThHeader>
-                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader isFirst>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader>Quantidade</S.ThHeader>
                 <S.ThHeader >Categoria</S.ThHeader>       
+                <S.ThHeader>Quantidade</S.ThHeader>
+                <S.ThHeader isLast>Valor</S.ThHeader>     
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
-              {filteredData.slice(offset,offset + limit).map((item, index) => (
-              <S.TrBody key={index}>
-                {Object.entries(item).map(([key, value], index) => (
-                  <S.StyledTableCell key={index} >
-                    <S.Test  >
-                    {value}
-                    </S.Test>
-                    </S.StyledTableCell>
-                ))}
-              </S.TrBody>
-            ))}
+              {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      
+                      <S.TrBody key={index}>
+                <S.StyledTableCell>{item.cadItemId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+                <S.StyledTableCell>{item.qtdEntrada}</S.StyledTableCell>
+                        <S.StyledTableCell >R$ 
+                        {item.valor_entrada}
+                        </S.StyledTableCell>
+      
+            </S.TrBody>
+          ))}
               </S.TableBody>
             </S.StyledTable>
             <S.PaginationConatiner>
@@ -67,7 +89,7 @@ const Pedido = () => {
             </S.PaginationConatiner>
 
             {/* Passos */}
-            <HorizontalLinearStepper />
+            {/* <HorizontalLinearStepper /> */}
           </S.TableContainer>     
 
 
