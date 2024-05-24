@@ -119,7 +119,7 @@ const Register = () => {
             onFocus={fetchCargos}
           />
           <SelectBox
-            Title={'Selecione um departamento'}
+            Title={'Selecione o departamento'}
             opsMap={departamentos}
             opId="depId"
             opName="nome_depart"

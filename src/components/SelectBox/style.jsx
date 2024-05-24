@@ -10,7 +10,7 @@ export const HiddenSelect = styled.select`
 
 export const SelectSelected = styled.div`
   background-color: transparent;
-  color: #000;
+  color: #818181;
   padding: 8px 16px;
   border: 2px solid rgb(182, 181, 181);
   border-radius: 10px;

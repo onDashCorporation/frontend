@@ -21,6 +21,7 @@ import { useLocation } from 'react-router-dom';
     const [filteredData, setFilteredData] = useState([]);
     const [offset, setOffSet] = useState(0)
     const [offset1, setOffSet1] = useState(0)
+    const [error, setErro] = useState()
     const [opset, setOpset] = useState(true);
     const options = ["Status","Id", "Nome", "Departamento", "Data"]
     const total =  filteredData.length;
@@ -93,7 +94,7 @@ import { useLocation } from 'react-router-dom';
             <S.Header>
               <S.Option>
                 <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{ getSolicitacoes(); setOpset(true)} }>Abertos</S.Op>
-                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false); console.log("falseee")}}>Historico</S.Op>
+                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false);}}>Historico</S.Op>
               </S.Option>
               <S.InsertContainer>
                 <S.SearchContainer>
@@ -114,31 +115,31 @@ import { useLocation } from 'react-router-dom';
                 <S.TrHeader>
                 <S.ThHeader isFirst >Status</S.ThHeader>
                 <S.ThHeader>id</S.ThHeader>
-                <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader>Departamento</S.ThHeader>
-                <S.ThHeader >Data</S.ThHeader>       
+                <S.ThHeader>Tipo</S.ThHeader>
+                <S.ThHeader>Data</S.ThHeader>
+                <S.ThHeader >Valor</S.ThHeader>       
                 <S.ThHeader isLast></S.ThHeader>       
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
               {filteredData
-                    .slice(offset, offset + limit)
+                    .slice(offset1, offset1 + limit)
                     .map((item, index) => (
                       
                       <S.TrBody key={index}>
                         <S.StyledTableCell >
-                        <S.Test mov={item.fk_tipoMoviId === 1}>
-                        {item.fk_tipoMoviId == 1 ? 'entrada' : 'saida' }
+                        <S.Test status={item.status == 'Novo' ? 'novo' : 'lido'} >
+                        {item.status}
                         </S.Test>
                         </S.StyledTableCell>
-                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell  >{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
                 <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
-                <S.StyledTableCell>{item.valor_entrada}</S.StyledTableCell>
+                <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
                
               
               <S.StyledTableCell  >
-              <S.ButtonContainer onClick={() => nav("/pedidos")}>
+              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}/${item.status}/0`)}>
               <S.More/>       
                   </S.ButtonContainer> 
               </S.StyledTableCell>
@@ -160,28 +161,35 @@ import { useLocation } from 'react-router-dom';
           <S.StyledTable>
             <S.TableHeader>
               <S.TrHeader>
-              <S.ThHeader isFirst className={filterop === 'status' ? "Houver" : ""}>Status</S.ThHeader>
-              <S.ThHeader>id</S.ThHeader>
-              <S.ThHeader>Nome</S.ThHeader>
-              <S.ThHeader>Departamento</S.ThHeader>
-              <S.ThHeader >Data</S.ThHeader>       
-              <S.ThHeader isLast></S.ThHeader>       
+              <S.ThHeader isFirst >Status</S.ThHeader>
+                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader>Tipo</S.ThHeader>
+                <S.ThHeader>Data</S.ThHeader>
+                <S.ThHeader >Valor</S.ThHeader>       
+                <S.ThHeader isLast></S.ThHeader>       
               </S.TrHeader>
             </S.TableHeader>
             <S.TableBody>
-            {filteredData.slice(offset,offset + limit).map((item, index) => (
-            <S.TrBody key={index}>
-              {Object.entries(item).map(([key, value], index) => (
-                <S.StyledTableCell key={index} >
-                  <S.Test  status={key === 'status' ? value : undefined}>
-                  {value}
-                  </S.Test>
-                  </S.StyledTableCell>
-              ))}
-              <S.StyledTableCell >
-              <S.ButtonContainer onClick={() => nav("/pedidos")}>
+            {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      
+                      <S.TrBody key={index}>
+                        <S.StyledTableCell >
+                        <S.Test status={item.status == 'Novo' ? 'novo' : 'lido'}>
+                        {item.status}
+                        </S.Test>
+                        </S.StyledTableCell>
+                <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
+                <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
+               
+              
+              <S.StyledTableCell  >
+              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}/${item.status}/1`)}>
               <S.More/>       
-                  </S.ButtonContainer>  
+                  </S.ButtonContainer> 
               </S.StyledTableCell>
             </S.TrBody>
           ))}

@@ -1,22 +1,21 @@
 import * as S from "./novoPedidoStyle";
 import Header from "../../components/header/header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Search from "../../components/search/search";
-import data from "../Data/tabledb.json";
 import Pagination from "../../components/pagination/pagination"
 import CountItem from "../../components/countItem/countItem";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import ModalDelete from "../../components/modalDelete/modalDelete";
-
+import api from "../../services/api_login";
 
   const limit = 7;
-  const total =  data.length;
-
-const NovoPedido = () => {
-
   
+  const NovoPedido = () => {
+
+    const {fk_usuarioId} = useParams();
       const [searchTerm, setSearchTerm] = useState("");
-      const [filteredData, setFilteredData] = useState(data);
+      const [filteredData, setFilteredData] = useState([]);
       const [offset, setOffSet] = useState(0);
       const [offset1, setOffSet1] = useState(0);
       const [opset, setOpset] = useState(true);
@@ -24,6 +23,28 @@ const NovoPedido = () => {
       const [itemValor, setItemValor] = useState();
       const [error, setError] = useState('');
       const [openModal, setOpenModal] = useState(false);
+      const total =  filteredData.length;
+
+
+
+      const getSolicitacoes = () => {
+        api
+        .get('/estoque/', )
+        .then((res) => {
+          const dataTable = res.data;
+          setFilteredData(dataTable);
+        })
+        .catch((error) => {
+          setErro(true)
+          console.error('Erro ao tentar acessar o estoque', error);
+        });
+    
+      }
+     
+      useEffect(() => {
+        getSolicitacoes()
+      }, []);
+  
 
 
   const normalizeString = (str) => {
@@ -36,7 +57,7 @@ const NovoPedido = () => {
 
     
     const normalizedSearch = normalizeString(searchValue);
-        const newFilteredData = data.filter((item) => {
+        const newFilteredData = filteredData.filter((item) => {
             return Object.values(item).some((value) =>
               normalizeString(value.toString()).includes(normalizedSearch)
             );
@@ -46,7 +67,7 @@ const NovoPedido = () => {
       };
 
     const handleAddToEntrada = (item) => {
-      const isItemAlreadySelected = selectedItems.some(selectedItem => selectedItem.id === item.id);
+      const isItemAlreadySelected = selectedItems.some(selectedItem => selectedItem.estoqueId === item.estoqueId);
       // Se o item já estiver na lista, não faz nada
       if (isItemAlreadySelected) {
         setError("Item ja selecionado");
@@ -63,11 +84,27 @@ const NovoPedido = () => {
   setSelectedItems(updatedItems); // Atualiza o estado com o novo array sem o item removido
 };
 
-const handleNovoValor = (novoValor) => {
-  setItemValor(novoValor); // Atualiza o estado com o novo valor
+const handleNovoValor = (novoValor, index) => {
+  // Verifica se o novo valor não ultrapassa a quantidade disponível do item
+  const novoItem = selectedItems[index];
+  if (novoValor > novoItem.qtde) {
+    console.log("Quantidade ultrapassa o estoque disponível");
+    return;
+  }
 
+  // Atualiza a quantidade do item no estado
+  const novosItens = [...selectedItems];
+  novosItens[index].qtde = novoValor;
+  setSelectedItems(novosItens);
 };
- 
+const calcularTotal = () => {
+  if (selectedItems.length > 0) {
+    // Usa reduce() para somar os valores dos itens
+    const total = selectedItems.reduce((acc, item) => acc + parseFloat(item.valorItem), 0);
+      return total.toFixed(2);
+  }
+  return 0; 
+};
 
   return (
     <S.Body>
@@ -100,28 +137,29 @@ const handleNovoValor = (novoValor) => {
             <S.StyledTable>
               <S.TableHeader>
                 <S.TrHeader>
-                <S.ThHeader isFirst >Foto</S.ThHeader>
-                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader isFirst>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader>Categoria</S.ThHeader>
-                <S.ThHeader >Quantidade</S.ThHeader>       
+                <S.ThHeader> Quantidade</S.ThHeader>
+                <S.ThHeader >Categoria</S.ThHeader>       
                 <S.ThHeader >Valor</S.ThHeader>       
                 <S.ThHeader >Adicionar</S.ThHeader>       
                 <S.ThHeader isLast>⠀⠀⠀⠀⠀⠀⠀</S.ThHeader>       
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
-            {selectedItems.slice(offset1,offset1 + limit).map((item, index) => (
-                    <S.TrBody key={index}>
-                      {Object.entries(item).map(([key, value], index) => (
-                        <S.StyledTableCell key={index}>
-                          <S.Test>{value}</S.Test>
-                        </S.StyledTableCell>
-                      ))}
-                      <S.StyledTableCell >
-                        R$10,06
-                 </S.StyledTableCell>
-                      <S.StyledTableCell >
+              {selectedItems
+                    .slice(offset1, offset1 + limit)
+                    .map((item, index) => (
+                      
+                      <S.TrBody key={index}>
+                        <S.StyledTableCell  >{item.estoqueId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_item }</S.StyledTableCell>
+                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+                <S.StyledTableCell >R${item.valorItem}</S.StyledTableCell>
+               
+              
+                <S.StyledTableCell >
                      <CountItem onValorChange={handleNovoValor}  />  
                  </S.StyledTableCell>
                 <S.StyledTableCell >
@@ -131,14 +169,14 @@ const handleNovoValor = (novoValor) => {
                         </S.RadiusButto>
                      </S.ItemContainer> 
                  </S.StyledTableCell>
-                    </S.TrBody>
-                  ))}
+            </S.TrBody>
+          ))}
               </S.TableBody>
             </S.StyledTable>
             <S.PaginationConatinerValor>
                 <S.ContainerValor>
                     <S.Valor>
-                    Valor Total:  R$ 1000
+                    Valor Total: R$ {calcularTotal()}
                     </S.Valor>
                 </S.ContainerValor>
             {selectedItems.length > limit && (
@@ -156,33 +194,34 @@ const handleNovoValor = (novoValor) => {
             <S.StyledTable>
               <S.TableHeader>
                 <S.TrHeader>
-                <S.ThHeader isFirst >Foto</S.ThHeader>
-                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader isFirst>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
                 <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader >Categoria</S.ThHeader>       
-                <S.ThHeader isLast></S.ThHeader>       
+                <S.ThHeader isLast>Valor</S.ThHeader>       
+                <S.ThHeader isLast  ></S.ThHeader>
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
-              {filteredData.slice(offset,offset + limit).map((item, index) => (
-              <S.TrBody key={index}>
-                {Object.entries(item).map(([key, value], index) => (
-                  <S.StyledTableCell key={index} >
-                    <S.Test  >
-                    {value}
-                    </S.Test>
-                    </S.StyledTableCell>
-                ))}
+              {filteredData
+                    .slice(offset, offset + limit)
+                    .map((item, index) => (
+                      
+                      <S.TrBody key={index}>
+                <S.StyledTableCell  >{item.estoqueId}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_item }</S.StyledTableCell>
+                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+                <S.StyledTableCell >R${item.valorItem}</S.StyledTableCell>
+               
               
                 <S.StyledTableCell >
                     <S.ItemContainer onClick={() => {handleAddToEntrada(item)}}>
                      <S.ButtonContainer >Adicionar</S.ButtonContainer>
-                    {/* {error && <S.TextErro>{error}</S.TextErro>}  */}
                     </S.ItemContainer>
                  </S.StyledTableCell>
-              </S.TrBody>
-            ))}
+            </S.TrBody>
+          ))}
               </S.TableBody>
             </S.StyledTable>
             <S.PaginationConatiner>
