@@ -8,14 +8,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import { useLocation } from 'react-router-dom';
 import api from "../../services/api_login";
+import ModalConfirm from "../../components/modalconfirm/modalconfirm";
+
 
   const limit = 8;
   const Pedidos = () => {
     const nav = useNavigate();
-    const {solicId} = useParams();
+    const {solicId, status, id} = useParams();
     const [filteredData, setFilteredData] = useState([]);
     const [offset, setOffSet] = useState(0)
     const [error, setErro] = useState()
+    const [responsta, setResponsta] = useState()
+    const [newstatus, setNewStatus] = useState({"status": "Lido"})
+    const [newstatus1, setNewStatus1] = useState({"status": "Autorizado"})
+    const [openModal, setOpenModal] = useState(false);
+    const [openModal1, setOpenModal1] = useState(false);
+
 
     const location = useLocation();
     const showBackButton = location.pathname !== '/dashboard';
@@ -41,7 +49,30 @@ import api from "../../services/api_login";
       getSolicitacoes();
     }, [solicId]);
   
-
+    const postStatus = () => {
+      api
+      .put(`/solicitacao/status/${solicId}`, newstatus )
+      .then(res => {
+        setResponsta(res);
+        setOpenModal(true)
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  
+    }
+    const postFinalizar = () => {
+      api
+      .put(`/solicitacao/status/${solicId}`, newstatus1 )
+      .then(res => {
+        setResponsta(res);
+        setOpenModal1(true)
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  
+    }
 
   const handlePickUpButtonClick = () => {
     setPickedUp(true);
@@ -61,21 +92,21 @@ import api from "../../services/api_login";
           <S.SectionConatiner>
             <S.Title>Pedidos</S.Title>
             
-            <S.ButtonContainer>
-              <ButtonConfirm onClick={handleFinishButtonClick} Title="Finalizar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
-              <ButtonConfirm onClick={handlePickUpButtonClick} Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>
-               </S.ButtonContainer>
+            {`${id}` == '0' && <S.ButtonContainer>
+              <ButtonConfirm onClick={postFinalizar} Title="Finalizar" backgroundColor="#f22b2b" fontSize="15px"  width="120px"/>
+            { `${status}` == "Novo" && <ButtonConfirm onClick={postStatus} Title="Confirmar" backgroundColor="#38AD68" fontSize="15px" width="120px"/>}
+               </S.ButtonContainer>}
           </S.SectionConatiner>
           
          <S.TableContainer>
             <S.StyledTable>
               <S.TableHeader>
                 <S.TrHeader>
-                <S.ThHeader isFirst >Foto</S.ThHeader>
-                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader isFirst>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
+                <S.ThHeader >Categoria</S.ThHeader>       
                 <S.ThHeader>Quantidade</S.ThHeader>
-                <S.ThHeader isLast>Categoria</S.ThHeader>       
+                <S.ThHeader isLast>Valor</S.ThHeader>
                 </S.TrHeader>
               </S.TableHeader>
               <S.TableBody>
@@ -84,15 +115,13 @@ import api from "../../services/api_login";
                     .map((item, index) => (
                       
                       <S.TrBody key={index}>
-                        <S.StyledTableCell >
-                        <S.Test >
-                        {item.status}
-                        </S.Test>
-                        </S.StyledTableCell>
                 <S.StyledTableCell>{item.cadItemId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
+                <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
                 <S.StyledTableCell>{item.qtdEntrada}</S.StyledTableCell>
-                <S.StyledTableCell>R$:{item.nome_categoria}</S.StyledTableCell>
+                        <S.StyledTableCell >R$ 
+                        {item.valor_entrada}
+                        </S.StyledTableCell>
       
             </S.TrBody>
           ))}
@@ -110,6 +139,9 @@ import api from "../../services/api_login";
           </S.TableContainer>     
         </S.Container>
       </S.Main>
+      <ModalConfirm isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Confrimação Efetuda" Info="a solicitação teve seu status alterado para lido" />
+      <ModalConfirm isOpen={openModal1} setOpenModal={() => {setOpenModal1(!openModal1), nav('/solicitacoes')}} Title="Solicitação Finalizada" Info="a solicitação teve seu status alterado para autorizado" />
+
     </S.Body>
   );
 };
