@@ -11,8 +11,8 @@ const ModalDelete = ({isOpen, setOpenModal, Title,Info}) => {
                 </S.Info>
                 </S.ContainerInfo>
                 <S.ButtonContainer>
-                <ButtonConfirm Title="Sim" width="174px" height="48px" backgroundColor="red" fontSize="20px"/>
-                <ButtonConfirm onClick={setOpenModal} Title="Não" width="174px" height="48px" backgroundColor="green" fontSize="20px"/>
+                <ButtonConfirm Title="Sim" width="174px" height="48px" backgroundColor="green" fontSize="20px"/>
+                <ButtonConfirm onClick={setOpenModal} Title="Não" width="174px" height="48px" backgroundColor="red" fontSize="20px"/>
                 </S.ButtonContainer>
            </S.Container>
             </S.Body>)
