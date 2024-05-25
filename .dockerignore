@@ -1,4 +1,9 @@
 node_modules
-.env
 Dockerfile
 .dockerignore
+public
+.github
+.github
+vercel.json
+LICENCE
+docker-compose.yaml
