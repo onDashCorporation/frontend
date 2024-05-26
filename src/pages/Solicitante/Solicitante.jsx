@@ -11,7 +11,6 @@ import ModalDelete from "../../components/modalDelete/modalDelete";
 import DropDelete from "../../components/dropdelete/dropdelete";
 import api from "../../services/api_login";
 
-
   const limit = 7;
   const solicitante = () => {
     const nav = useNavigate();
@@ -26,6 +25,8 @@ import api from "../../services/api_login";
     const [openModal, setOpenModal] = useState(false);
     const options = [ "Status","Id", "Nome", "Departamento", "Data"]
     const total =  filteredData.length;
+    const [responsta, setResponsta] = useState();
+
 
   const getSolicitacoes = () => {
     api
@@ -45,7 +46,19 @@ import api from "../../services/api_login";
     getSolicitacoes()
   }, []);
 
+  const DeleteSolicitacoes = (solicId) => {
+    api
+    .delete(`/solicitacao/${solicId}` )
+    .then((res) => {
+      setResponsta(res);
+    console.log("foi", solicId)
+    })
+    .catch((error) => {
+      setErro(true)
+      console.error('Erro ao tentar deletar', error);
+    });
 
+  }
 
 
 
@@ -108,7 +121,7 @@ import api from "../../services/api_login";
                   <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
-                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav(`/novopedido/${fk_usuarioId}`)}}/>
+                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav(`/novopedido/${solicId}/${fk_usuarioId}`)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -131,7 +144,7 @@ import api from "../../services/api_login";
                       
                       <S.TrBody key={index}>
                         <S.StyledTableCell >
-                        <S.Test >
+                        <S.Test  status={item.status == 'Novo' ? 'novo' : 'lido'} >
                         {item.status}
                         </S.Test>
                         </S.StyledTableCell>
@@ -212,7 +225,7 @@ import api from "../../services/api_login";
              />
           </S.PaginationConatiner>
         </S.TableContainer>)}
-        <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
+        <ModalDelete onClick1={ () => {setOpenModal(!openModal),DeleteSolicitacoes(filteredData.solicId)}} isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
         </S.Container>
       </S.Main>
     </S.Body>

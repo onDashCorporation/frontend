@@ -11,7 +11,7 @@ const ModalConfirm = ({isOpen, setOpenModal, Title,Info}) => {
                 </S.Info>
                 </S.ContainerInfo>
                 <S.ButtonContainer>
-                <ButtonConfirm onClick={setOpenModal} Title="OK" width="400px" height="48px" backgroundColor="green" fontSize="20px"/>
+                <ButtonConfirm onClick={setOpenModal} Title="OK" width="90%" height="48px" backgroundColor="#277DFF" fontSize="20px"/>
                 </S.ButtonContainer>
            </S.Container>
             </S.Body>)

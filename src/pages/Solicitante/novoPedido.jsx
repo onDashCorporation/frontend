@@ -1,19 +1,21 @@
 import * as S from "./novoPedidoStyle";
 import Header from "../../components/header/header";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Search from "../../components/search/search";
 import Pagination from "../../components/pagination/pagination"
 import CountItem from "../../components/countItem/countItem";
 import ButtonConfirm from "../../components/ButtonConfirm/ButtonConfirm";
 import ModalDelete from "../../components/modalDelete/modalDelete";
 import api from "../../services/api_login";
+import ModalConfirm from "../../components/modalconfirm/modalconfirm";
 
   const limit = 7;
   
   const NovoPedido = () => {
+    const nav = useNavigate();
 
-    const {fk_usuarioId} = useParams();
+    const { fk_usuarioId, solicId} = useParams();
       const [searchTerm, setSearchTerm] = useState("");
       const [filteredData, setFilteredData] = useState([]);
       const [offset, setOffSet] = useState(0);
@@ -21,15 +23,24 @@ import api from "../../services/api_login";
       const [opset, setOpset] = useState(true);
       const [selectedItems, setSelectedItems] = useState([]);
       const [itemValor, setItemValor] = useState();
-      const [error, setError] = useState('');
+      const [error, setError] = useState();
+      const [responsta, setResponsta] = useState();
       const [openModal, setOpenModal] = useState(false);
+      const [openModal1, setOpenModal1] = useState(false);
       const total =  filteredData.length;
+      const [values, setValues] = useState({
+        qtdSaida: '',
+        fk_usuarioId: `${fk_usuarioId}`,
+        fk_qtdItemId: '',
+      });
+      
+      
 
 
 
       const getSolicitacoes = () => {
         api
-        .get('/estoque/', )
+        .get('/qtditem/caditem', )
         .then((res) => {
           const dataTable = res.data;
           setFilteredData(dataTable);
@@ -44,8 +55,9 @@ import api from "../../services/api_login";
       useEffect(() => {
         getSolicitacoes()
       }, []);
-  
 
+      
+      
 
   const normalizeString = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -65,46 +77,63 @@ import api from "../../services/api_login";
         );
         setFilteredData(newFilteredData);
       };
-
-    const handleAddToEntrada = (item) => {
-      const isItemAlreadySelected = selectedItems.some(selectedItem => selectedItem.estoqueId === item.estoqueId);
-      // Se o item já estiver na lista, não faz nada
-      if (isItemAlreadySelected) {
-        setError("Item ja selecionado");
-
-        return;
-      }
-      setSelectedItems([...selectedItems, item]);
-    
-    ;
-  }
+      
+      
+      
   const handleRemoveFromEntrada = (index) => {
   const updatedItems = [...selectedItems];
-  updatedItems.splice(index, 1); // Remove o item com o índice fornecido
-  setSelectedItems(updatedItems); // Atualiza o estado com o novo array sem o item removido
+  updatedItems.splice(index, 1);
+  setSelectedItems(updatedItems);
 };
 
-const handleNovoValor = (novoValor, index) => {
-  // Verifica se o novo valor não ultrapassa a quantidade disponível do item
-  const novoItem = selectedItems[index];
-  if (novoValor > novoItem.qtde) {
-    console.log("Quantidade ultrapassa o estoque disponível");
-    return;
-  }
-
-  // Atualiza a quantidade do item no estado
-  const novosItens = [...selectedItems];
-  novosItens[index].qtde = novoValor;
-  setSelectedItems(novosItens);
-};
 const calcularTotal = () => {
   if (selectedItems.length > 0) {
-    // Usa reduce() para somar os valores dos itens
     const total = selectedItems.reduce((acc, item) => acc + parseFloat(item.valorItem), 0);
-      return total.toFixed(2);
+    return total.toFixed(2);
   }
-  return 0; 
-};
+    return 0; 
+  };
+  
+  
+  const handleQtdSaidaChange = (index, newValue) => {
+    const updatedItems = [...selectedItems];
+    updatedItems[index].qtdSaida = newValue;
+    const id = updatedItems[index].qtdItemId;
+    setSelectedItems(updatedItems);
+    
+    
+    setValues((prevValues) => ({
+      ...prevValues,
+      qtdSaida: newValue,
+      fk_qtdItemId: id,
+    }));
+  };
+  
+  
+  
+  const handleAddToEntrada = (item ) => {
+    setSelectedItems([...selectedItems, item]);
+  console.log("uqe porraa",item.qtdItemId);
+    setValues((prevValues) => ({
+        ...prevValues,
+        fk_qtdItemId: item.qtdItemId, 
+    }));
+  };
+  
+ 
+  const PostSolicitacoes = () => {
+   api.post('solicitacao/' , values)
+   .then(res => {
+     setResponsta(res);
+     console.log("deu certo", values)
+     setOpenModal(true)
+   })
+   .catch(error => {
+     console.log("deu errado kkk",error)
+     console.log("aaaaaaa",values)
+     setOpenModal1(true)
+   });
+  }
 
   return (
     <S.Body>
@@ -121,7 +150,7 @@ const calcularTotal = () => {
               </S.Option>
                {opset ? (
                 <S.ButtonOp>
-               <ButtonConfirm Title="Finalizar pedido"  width="150px" backgroundColor="#38AD68" fontSize="15px"  onClick={() => setOpenModal(true)}/>
+               <ButtonConfirm Title="Finalizar pedido"  width="150px" backgroundColor="#38AD68" fontSize="15px"  onClick={PostSolicitacoes}/>
                </S.ButtonOp>
                )
                :
@@ -137,10 +166,10 @@ const calcularTotal = () => {
             <S.StyledTable>
               <S.TableHeader>
                 <S.TrHeader>
-                <S.ThHeader isFirst>id</S.ThHeader>
+                <S.ThHeader isFirst>Foto</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader >Categoria</S.ThHeader>       
+                <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader >Valor</S.ThHeader>       
                 <S.ThHeader >Adicionar</S.ThHeader>       
                 <S.ThHeader isLast>⠀⠀⠀⠀⠀⠀⠀</S.ThHeader>       
@@ -152,15 +181,17 @@ const calcularTotal = () => {
                     .map((item, index) => (
                       
                       <S.TrBody key={index}>
-                        <S.StyledTableCell  >{item.estoqueId}</S.StyledTableCell>
+                        <S.StyledTableCell  >
+                          <S.ImgTable src={item.foto} />                         
+                          </S.StyledTableCell>
                 <S.StyledTableCell>{item.nome_item }</S.StyledTableCell>
-                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
                 <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
                 <S.StyledTableCell >R${item.valorItem}</S.StyledTableCell>
                
               
                 <S.StyledTableCell >
-                     <CountItem onValorChange={handleNovoValor}  />  
+                <CountItem onValorChange={(text) => handleQtdSaidaChange(index, text)} />
                  </S.StyledTableCell>
                 <S.StyledTableCell >
                       <S.ItemContainer >
@@ -194,10 +225,10 @@ const calcularTotal = () => {
             <S.StyledTable>
               <S.TableHeader>
                 <S.TrHeader>
-                <S.ThHeader isFirst>id</S.ThHeader>
+                <S.ThHeader isFirst>foto</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
-                <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader >Categoria</S.ThHeader>       
+                <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader isLast>Valor</S.ThHeader>       
                 <S.ThHeader isLast  ></S.ThHeader>
                 </S.TrHeader>
@@ -208,10 +239,12 @@ const calcularTotal = () => {
                     .map((item, index) => (
                       
                       <S.TrBody key={index}>
-                <S.StyledTableCell  >{item.estoqueId}</S.StyledTableCell>
+                <S.StyledTableCell  >
+                <S.ImgTable src={item.foto} />                         
+                  </S.StyledTableCell>
                 <S.StyledTableCell>{item.nome_item }</S.StyledTableCell>
-                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
                 <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
+                <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
                 <S.StyledTableCell >R${item.valorItem}</S.StyledTableCell>
                
               
@@ -233,8 +266,9 @@ const calcularTotal = () => {
                />
             </S.PaginationConatiner>
           </S.TableContainer>)}
-          <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Finalizar?" Info="Após confirmar a finalização o pedido sera enviado" />
         </S.Container>
+        <ModalConfirm isOpen={openModal} setOpenModal={() => {setOpenModal(!openModal), nav(`/solicitante/${solicId}/${fk_usuarioId}`)}} Title="A solicitação foi finaliza" Info="a sua solicitação foi finalizada com sucesso "/>
+      <ModalConfirm isOpen={openModal1} setOpenModal={() => setOpenModal1(!openModal1)} Title="Solicitacão Invalida" Info="a solicitação esta incompleta, certifique de preencher todos os campos" />
       </S.Main>
     </S.Body>
   );
