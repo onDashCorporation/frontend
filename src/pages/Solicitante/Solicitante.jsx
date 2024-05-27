@@ -53,7 +53,7 @@ import api from "../../services/api_login";
     api
     .delete(`/solicitacao/${solicId}` )
     .then((res) => {
-      setResponsta(res);
+      setResponsta(res.reverse());
     console.log("foi", solicId)
     getSolicitacoes();
 
