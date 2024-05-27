@@ -134,7 +134,7 @@ import { useLocation } from 'react-router-dom';
                         </S.StyledTableCell>
                 <S.StyledTableCell  >{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
-                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('/')}</S.StyledTableCell>
                 <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
                
               
@@ -182,7 +182,7 @@ import { useLocation } from 'react-router-dom';
                         </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
-                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('/')}</S.StyledTableCell>
                 <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
                
               
