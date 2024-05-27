@@ -30,7 +30,8 @@ export const Op = styled.text`
   height: 40px;
   cursor: pointer;
   transition: 0.2s;
-
+ color: ${(props) => (props.isSelected ? '#277DFF' : 'inherit')};
+  font-weight: ${(props) => (props.isSelected ? '500' : 'inherit')};
   &:hover {
     color: #ffffff;
     font-weight: 500;
@@ -38,4 +39,5 @@ export const Op = styled.text`
     border-radius: 5px;
     background-color: #277DFF;
   }
+  
 `;
