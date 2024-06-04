@@ -15,6 +15,7 @@ export const Body = styled.div`
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     width: 400px;
     height: 200px;
@@ -28,6 +29,7 @@ export const ContainerInfo = styled.div`
     flex-direction: column;
     gap: 20px;
     justify-content: right;
+    width: 90%;
 `;
 export const Title = styled.text`
     font-size: 28px;
@@ -40,4 +42,6 @@ export const Info = styled.text`
 export const ButtonContainer = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center`;
+    justify-content: center;
+    width: 100%;
+`;

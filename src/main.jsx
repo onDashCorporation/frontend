@@ -78,7 +78,7 @@ const router = createBrowserRouter([
         element: <Solicitante />,
       },
       {
-        path: "/novopedido/:fk_usuarioId",
+        path: "/novopedido/:solicId/:fk_usuarioId",
         element: <NovoPedido />,
       },
       {

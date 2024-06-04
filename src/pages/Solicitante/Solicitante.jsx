@@ -11,7 +11,6 @@ import ModalDelete from "../../components/modalDelete/modalDelete";
 import DropDelete from "../../components/dropdelete/dropdelete";
 import api from "../../services/api_login";
 
-
   const limit = 7;
   const solicitante = () => {
     const nav = useNavigate();
@@ -26,6 +25,11 @@ import api from "../../services/api_login";
     const [openModal, setOpenModal] = useState(false);
     const options = [ "Status","Id", "Nome", "Departamento", "Data"]
     const total =  filteredData.length;
+    const [responsta, setResponsta] = useState();
+    const [ error, setErro] = useState()
+    const [selectedSolicId, setSelectedSolicId] = useState(null);
+
+
 
   const getSolicitacoes = () => {
     api
@@ -45,9 +49,28 @@ import api from "../../services/api_login";
     getSolicitacoes()
   }, []);
 
+  const DeleteSolicitacoes = (solicId) => {
+    api
+    .delete(`/solicitacao/${solicId}` )
+    .then((res) => {
+      setResponsta(res.reverse());
+    console.log("foi", solicId)
+    getSolicitacoes();
 
+    })
+    .catch((error) => {
+      setErro(true)
+      console.error('Erro ao tentar deletar', error);
+    });
 
+  }
 
+  const handleOpenModal = (solicId) => {
+    setSelectedSolicId(solicId);
+    setOpenModal(true);
+    getSolicitacoes();
+  };
+  
 
 
   const normalizeString = (str) => {
@@ -94,8 +117,8 @@ import api from "../../services/api_login";
             <S.Title>Solicitações</S.Title>
             <S.Header>
               <S.Option>
-                <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{ console.log("true"); setOpset(true)} }>Status</S.Op>
-                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false); console.log("falseee")}}>Historico</S.Op>
+                <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>setOpset(true) }>Status</S.Op>
+                <S.Op select={opset === false ? 'false' : undefined} onClick={() => setOpset(false)}>Historico</S.Op>
               </S.Option>
               <S.InsertContainer>
                 <S.SearchContainer>
@@ -108,7 +131,7 @@ import api from "../../services/api_login";
                   <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
-                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav(`/novopedido/${fk_usuarioId}`)}}/>
+                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav(`/novopedido/${solicId}/${fk_usuarioId}`)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -131,22 +154,24 @@ import api from "../../services/api_login";
                       
                       <S.TrBody key={index}>
                         <S.StyledTableCell >
-                        <S.Test >
+                        <S.Test  status={item.status == 'Novo' ? 'novo' : 'lido'} >
                         {item.status}
                         </S.Test>
                         </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>R${item.valor_entrada}</S.StyledTableCell>
-                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('/')}</S.StyledTableCell>
               <S.StyledTableCell  >
              
                   <S.ButtonContainer>
-                  <DropDelete Vizu={true} Mix1={true}
-                onClickOP2={() => setOpenModal(true)}
-                onClickOP3={() => nav(`/pedido/${item.solicId}`)}
-                op="Excluir"
-
-             />  
+                  <DropDelete
+                    Vizu={true}
+                    Mix1={true}
+                    onClickOP2={() => handleOpenModal(item.solicId)}
+                    onClickOP3={() => nav(`/pedido/${item.solicId}`)}
+                    op="Excluir"
+                  />
+ 
                  </S.ButtonContainer>           
               </S.StyledTableCell>
             </S.TrBody>
@@ -181,13 +206,13 @@ import api from "../../services/api_login";
                       
                       <S.TrBody key={index}>
                         <S.StyledTableCell >
-                        <S.Test >
+                        <S.Test status={item.status == 'Novo' ? 'novo' : 'lido'} >
                         {item.status}
                         </S.Test>
                         </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>R${item.valor_entrada}</S.StyledTableCell>
-                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('-')}</S.StyledTableCell>               
+                <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('/')}</S.StyledTableCell>               
               <S.StyledTableCell  >
              
                   <S.ButtonContainer>
@@ -212,7 +237,18 @@ import api from "../../services/api_login";
              />
           </S.PaginationConatiner>
         </S.TableContainer>)}
-        <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
+        {/* <ModalDelete onClick1={ () => {setOpenModal(!openModal),DeleteSolicitacoes(filteredData.solicId)}} isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " /> */}
+        <ModalDelete
+  onClick1={() => {
+    setOpenModal(!openModal);
+    DeleteSolicitacoes(selectedSolicId);
+  }}
+  isOpen={openModal}
+  setOpenModal={() => setOpenModal(!openModal)}
+  Title="Deseja Excluir?"
+  Info="Após a exlusão os dados serão perdidos permanentemente "
+/>
+
         </S.Container>
       </S.Main>
     </S.Body>

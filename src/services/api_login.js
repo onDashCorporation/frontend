@@ -1,8 +1,5 @@
 import axios from 'axios'
-import { config } from 'dotenv'
-
-config()
 
 export default axios.create({
-    baseURL: process.env.API_HOST
+    baseURL: `http://acai-alb-api-995734628.us-east-1.elb.amazonaws.com` 
 })
