@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { slide } from "react-burger-menu";
 import { slider } from "@nextui-org/react";
+import { useParams } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -50,10 +51,10 @@ const Login = () => {
       const response = await app.post("/login", values);
       setLoading(false);
       console.log(response.data);
-  
-      // Se o login for bem-sucedido, redirecionamos o usuário para outra página
-      //history.push("/dashboard");
+    
+      
       navigate("/dashboard"); // Correção: redirecionamento deve usar 'navigate' em vez de 'history'
+      
     } catch (error) {
       setLoading(false);
   

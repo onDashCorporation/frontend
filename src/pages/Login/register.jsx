@@ -16,17 +16,17 @@ const Register = () => {
     usuNome: '',
     email: '',
     senha: '',
-    fk_cargoId: '',
+    // fk_cargoId: '',
     fk_depId: ''
   })
 
-  const [cargos, setCargos] = useState([]);
+  // const [cargos, setCargos] = useState([]);
   const [departamentos, setDepartamentos] = useState([]);
 
   useEffect(() => {
-    app.get('/cargo')
-      .then(res => setCargos(res.data))
-      .catch(err => toast.error("Erro ao buscar cargos"));
+    // app.get('/cargo')
+    //   .then(res => setCargos(res.data))
+    //   .catch(err => toast.error("Erro ao buscar cargos"));
 
     app.get('/departamento')
       .then(res => setDepartamentos(res.data))
@@ -95,12 +95,12 @@ const Register = () => {
           <Input placeholder="Nome" type="text" onChange={e => setValues({...values, usuNome: e.target.value})}/>
           <Input placeholder="E-mail" type="text" onChange={e => setValues({...values, email: e.target.value})} />
           <Input placeholder="Senha" type="password" onChange={e => setValues({...values, senha: e.target.value})}/>
-          <select onChange={e => setValues({ ...values, fk_cargoId: e.target.value })}>
+          {/* <select onChange={e => setValues({ ...values, fk_cargoId: e.target.value })}>
               <option value="" style={{ color: 'gray' }}>Selecione um cargo</option>
               {cargos.map(cargo => (
                 <option key={cargo.cargoId} value={cargo.cargoId}>{cargo.cargo_nome}</option>
               ))}
-            </select>
+            </select> */}
             <select onChange={e => setValues({ ...values, fk_depId: e.target.value })}>
               <option value="" style={{ color: 'black' }}>Selecione um departamento</option>
               {departamentos.map(dep => (
