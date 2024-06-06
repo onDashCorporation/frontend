@@ -8,9 +8,6 @@ import app from "../../services/api_login";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { slide } from "react-burger-menu";
-import { slider } from "@nextui-org/react";
-import { useParams } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -19,65 +16,60 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate(); // Correção: useNavigate deve ser atribuído a 'navigate'
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    // Verificação se os campos de email e senha estão em branco
+
     if (!values.email.trim() || !values.senha.trim()) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
-  
-    // Verificação do formato do email
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(values.email)) {
       toast.error("Por favor, insira um email válido.");
       return;
     }
-  
-    // Verificação da senha
+
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(values.senha)) {
-      toast.error("A senha deve ter pelo menos 8 caracteres incluindo: letras maiúsculas, minúsculas, caracteres especiais e números.");
+      toast.error("A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, caracteres especiais e números.");
       return;
     }
-  
+
     setLoading(true);
-  
+
     try {
-      // Se todas as validações passarem, procedemos com o login
       const response = await app.post("/login", values);
       setLoading(false);
       console.log(response.data);
-    
-      
-      navigate("/dashboard"); // Correção: redirecionamento deve usar 'navigate' em vez de 'history'
-      
+
+      if (response.data.fk_cargoId === 3) {
+        navigate("/solicitante");
+      } else {
+        navigate("/dashboard");
+      }
+
     } catch (error) {
       setLoading(false);
-  
+
       if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
         toast.error("Erro ao tentar fazer login");
       }
     }
-};
+  };
 
-  
-
-  //const nav = useNavigate();
-  
   return (
     <S.Main>
-       <ToastContainer
-        autoClose={9000} // Fechar automaticamente após 9 segundos
-        closeOnClick // Fechar ao clicar na notificação
-        newestOnTop // Colocar as notificações mais recentes em cima
-        position="top-right" // Posição das notificações
-        hideProgressBar // Esconder a barra de progresso
+      <ToastContainer
+        autoClose={9000}
+        closeOnClick
+        newestOnTop
+        position="top-right"
+        hideProgressBar
       />
       <S.Login>
         <S.TitleContainer>
@@ -117,15 +109,15 @@ const Login = () => {
             Se{" "}
             <S.Link
               onClick={() => {
-                nav("/register");
+                navigate("/register");
               }}
             >
-              cadastre
+              cadastre-se
             </S.Link>{" "}
             ou{" "}
             <S.Link
               onClick={() => {
-                nav("/forgot");
+                navigate("/forgot");
               }}
             >
               recupere
@@ -135,8 +127,7 @@ const Login = () => {
         </S.ButtonContainer>
         <S.TermsContainer>
           <S.Terms>
-            ao se acessar você concorda <br />
-            com nossos termos de <b>serviço</b> e <b>política privada</b>
+            Ao acessar você concorda com nossos termos de <b>serviço</b> e <b>política de privacidade</b>
           </S.Terms>
         </S.TermsContainer>
       </S.Login>
@@ -144,13 +135,10 @@ const Login = () => {
         <S.ImgTextContainer>
           <TextImg />
         </S.ImgTextContainer>
-        <S.Img src={login} alt="Imagem de um estoque" />
+        <S.Img src={login} alt="Imagem de login" />
       </S.ImgContainer>
     </S.Main>
   );
 };
 
 export default Login;
-
-
-
