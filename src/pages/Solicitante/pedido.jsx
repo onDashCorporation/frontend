@@ -20,9 +20,9 @@ const Pedido = () => {
 
   const getSolicitacoes = () => {
     api
-    .get(`/solicitacao/item/${solicId}` )
+    .get(`/solicitacao/${solicId}` )
     .then((res) => {
-      const dataTable = res.data;
+      const dataTable = res.data.itens;
       setFilteredData(dataTable);
       // console.log(dataTable)
     })
@@ -69,7 +69,7 @@ const Pedido = () => {
                 <S.StyledTableCell>{item.cadItemId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
                 <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
-                <S.StyledTableCell>{item.qtdEntrada}</S.StyledTableCell>
+                <S.StyledTableCell>{item.qtdSaida}</S.StyledTableCell>
                         <S.StyledTableCell >R$ 
                         {item.valor_entrada}
                         </S.StyledTableCell>

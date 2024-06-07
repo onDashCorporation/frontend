@@ -15,7 +15,7 @@ import api from "../../services/api_login";
   const solicitante = () => {
     const nav = useNavigate();
 
-    const {solicId, fk_usuarioId} = useParams();
+    const { fk_usuarioId} = useParams();
     const [filterop, setFilterop] = useState("Filtro");
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredData, setFilteredData] = useState([]);
@@ -23,19 +23,20 @@ import api from "../../services/api_login";
     const [offset1, setOffSet1] = useState(0)
     const [opset, setOpset] = useState(true);
     const [openModal, setOpenModal] = useState(false);
-    const options = [ "Status","Id", "Nome", "Departamento", "Data"]
+    const options = [ "Status","Id", "Valor", "Data"]
     const total =  filteredData.length;
     const [responsta, setResponsta] = useState();
     const [ error, setErro] = useState()
     const [selectedSolicId, setSelectedSolicId] = useState(null);
+    const [isActive, setIsActive] = useState(false);
 
 
 
   const getSolicitacoes = () => {
     api
-    .get(`/solicitacao/user/${solicId}` )
+    .get(`/solicitacao/user/${fk_usuarioId}` )
     .then((res) => {
-      const dataTable = res.data;
+      const dataTable = res.data.reverse();
       setFilteredData(dataTable);
     })
     .catch((error) => {
@@ -53,14 +54,17 @@ import api from "../../services/api_login";
     api
     .delete(`/solicitacao/${solicId}` )
     .then((res) => {
-      setResponsta(res.reverse());
+      setResponsta(res);
     console.log("foi", solicId)
     getSolicitacoes();
+    setIsActive(!isActive)
 
     })
     .catch((error) => {
       setErro(true)
       console.error('Erro ao tentar deletar', error);
+      console.log("não", solicId)
+
     });
 
   }
@@ -68,7 +72,6 @@ import api from "../../services/api_login";
   const handleOpenModal = (solicId) => {
     setSelectedSolicId(solicId);
     setOpenModal(true);
-    getSolicitacoes();
   };
   
 
@@ -84,17 +87,14 @@ import api from "../../services/api_login";
     
     const normalizedSearch = normalizeString(searchValue);
         const newFilteredData = filteredData.filter((item) => {
-          if (filterop === "Departamento") {
-            return normalizeString(item.departamento.toString()).includes(normalizedSearch);
+          if (filterop === "Id") {
+            return normalizeString(item.solicId.toString()).includes(normalizedSearch);
           } 
-           else if (filterop === "Nome") {         
-            return normalizeString(item.nome.toString()).includes(normalizedSearch);
-          }
            else if (filterop === "Status") {          
             return normalizeString(item.status.toString()).includes(normalizedSearch);
           } 
-           else if (filterop === "Id") {         
-            return normalizeString(item.id.toString()).includes(normalizedSearch);
+           else if (filterop === "Valor") {         
+            return normalizeString(item.valor_entrada.toString()).includes(normalizedSearch);
           } 
            else if (filterop === "Data") {
             return normalizeString(item.data.toString()).includes(normalizedSearch);
@@ -131,7 +131,7 @@ import api from "../../services/api_login";
                   <Filter options={options} filterop={filterop} setFilterop={setFilterop} />
                 </S.FilterContainer>
                 <S.ButtonContainer >
-                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav(`/novopedido/${solicId}/${fk_usuarioId}`)}}/>
+                <ButtonConfirm Title="Novo" backgroundColor="#38AD68" fontSize="15px" width="120px" onClick={() => {nav(`/novopedido/${fk_usuarioId}`)}}/>
                </S.ButtonContainer>
               </S.InsertContainer>
             </S.Header>
@@ -216,10 +216,8 @@ import api from "../../services/api_login";
               <S.StyledTableCell  >
              
                   <S.ButtonContainer>
-                  <DropDelete Vizu={true} Mix1={true}
-                onClickOP2={() => setOpenModal(true)}
-                onClickOP3={() => nav("/pedido")}
-                op="Excluir"
+                  <DropDelete Vizu={true}
+                onClickOP3={() => nav(`/pedido/${item.solicId}`)}
 
              />  
                  </S.ButtonContainer>           
@@ -237,11 +235,11 @@ import api from "../../services/api_login";
              />
           </S.PaginationConatiner>
         </S.TableContainer>)}
-        {/* <ModalDelete onClick1={ () => {setOpenModal(!openModal),DeleteSolicitacoes(filteredData.solicId)}} isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " /> */}
         <ModalDelete
   onClick1={() => {
     setOpenModal(!openModal);
     DeleteSolicitacoes(selectedSolicId);
+    
   }}
   isOpen={openModal}
   setOpenModal={() => setOpenModal(!openModal)}

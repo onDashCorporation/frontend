@@ -169,7 +169,7 @@ export default function Modal({isOpen, setOpenModal, title,placeholder, func}) {
               color="white"  
               width="150px" 
               height="40px" 
-              backgroundColor="#38AD68" 
+              backgroundColor="#277DFF" 
               fontSize="15px"/>
             </S.ConatinerButton>
 

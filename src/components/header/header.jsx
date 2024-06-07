@@ -84,7 +84,7 @@ const Header = ({ showBackButton }) => {
       <BackButton text="Voltar" showButton={showBackButton} /> 
       <S.ContainerLogo>
         <S.Logo>
-          StockBox
+          OnDash
         </S.Logo>
       </S.ContainerLogo>
       <S.Areaconta>

@@ -31,7 +31,7 @@ import { useLocation } from 'react-router-dom';
       .get('/solicitacao/', )
       .then((res) => {
         const dataTable = res.data;
-        setFilteredData(dataTable);
+        setFilteredData(dataTable.reverse());
       })
       .catch((error) => {
         setErro(true)
@@ -135,11 +135,13 @@ import { useLocation } from 'react-router-dom';
                 <S.StyledTableCell  >{item.solicId}</S.StyledTableCell>
                 <S.StyledTableCell>{item.fk_usuarioId <= 2 ? 'interno' : 'externo' }</S.StyledTableCell>
                 <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('/')}</S.StyledTableCell>
-                <S.StyledTableCell>R$:{item.valor_entrada}</S.StyledTableCell>
+                <S.StyledTableCell>
+                  R$ {item.valor_entrada != null ? Number(item.valor_entrada).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0,00'}
+                </S.StyledTableCell>
                
               
               <S.StyledTableCell  >
-              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}/${item.status}/0`)}>
+              <S.ButtonContainer onClick={() => nav(`/pedidos/${item.solicId}`)}>
               <S.More/>       
                   </S.ButtonContainer> 
               </S.StyledTableCell>

@@ -31,10 +31,12 @@ export const ContainerM = styled.div`
 `
 
 export const IconClose = styled(I.Xmark)`
- color: #ff0000;
+ color: #666666;
  width: 2rem;
  height: 2rem;
+
 `;
+
 export const Close = styled.button`
   background-color: rgba(0,0,0,0.0);
   cursor: pointer;

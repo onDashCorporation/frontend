@@ -19,15 +19,14 @@ export const Body = styled.div`
 export const Main = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  /* height: 100vh; */
 `;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
   width: 100%;
-  height: 90vh;
+  height: 93vh;
   gap: 30px;
   background-color: #fafafa;
 

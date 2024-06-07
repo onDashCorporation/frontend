@@ -13,12 +13,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   width: 100%;
-  height: 90vh;
   gap: 30px;
   background-color: #fafafa;
-
+    height: 93vh;
 `;
 export const Section = styled.div`
   display: flex;
@@ -100,7 +99,9 @@ export const StyledTable = styled.table`
 `;
 
 export const TableHeader = styled.thead`
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+    background-color: #cccbcb;
+
 `;
 export const Overflow = styled.div``;
 export const ThHeader = styled.th`

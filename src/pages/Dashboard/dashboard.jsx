@@ -101,7 +101,7 @@ const Dashboard = () => {
  const line = {
     series: [
       {
-        name: "Radar 1",
+        name: "Radar ",
         data: ["45", 52, "38", "24", "33", "10"]
       },
       {
@@ -128,15 +128,15 @@ const Dashboard = () => {
  const bar = {
     series: [
       {
-        name: "Radar  1",
+        name: "Eletronicos",
         data: [45, 52, 38, 24, 3, 10]
       },
       {
-        name: "Radar  2",
+        name: "Equipamentos ",
         data: [26, 21, 20, 6, 8, 15]
       },
       {
-        name: "Radar  3",
+        name: "Papelaria",
         data: [16, 11, 10, 16, 8, 25]
       },
     ],

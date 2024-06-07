@@ -15,8 +15,8 @@ export const Container = styled.div`
   align-items: center;
   overflow-y: auto;
   width: 100%;
-  height: 90vh;
-  gap: 30px;
+  background-color: #fafafa;
+    height: 93vh;  gap: 30px;
 `;
 export const Section = styled.div`
   display: flex;
@@ -97,7 +97,10 @@ export const StyledTable = styled.table`
 `;
 
 export const TableHeader = styled.thead`
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2;
+   */
+  background-color: #cccbcb;
+
 `;
 export const Overflow = styled.div``;
 export const ThHeader = styled.th`
@@ -123,12 +126,16 @@ export const ImageCell = styled.img`
 `;
 
 export const TableCell = styled.td``;
-
+export const ImgTable = styled.img`
+/* margin-top: 10%; */
+width: 50px;
+height: 50px;
+`;
 export const StyledTableCell = styled(TableCell)`
   border-bottom: 1px solid #ddd;
-  padding: 20px;
+  padding: 10px;
   width: 80px;
-  height: 30px;
+  height: 60px;
   text-align: center;
 `;
 

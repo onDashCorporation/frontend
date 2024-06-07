@@ -39,7 +39,7 @@ import { Buffer } from 'buffer';
     
   const getEstoque = () => {
     app
-    .get('/estoque/', )
+    .get('/cadItem/', )
     .then((res) => {
       const dataTable = res.data;
       setFilteredData(dataTable);
@@ -165,30 +165,14 @@ import { Buffer } from 'buffer';
                     .map((item, index) => (
                       <S.TrBody key={index}>
                        
-                       {error? (
-                        <S.Container>
-                          oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
-                          {console.log("oioii")}
-                        </S.Container>
-
-                       ):( 
-                       <>
-                       <S.StyledTableCell>
-                        {item.foto && item.foto.data ? (
-                        <img
-                          src={`data:image/jpeg;base64,${convertBufferToBase64(item.foto.data)}`}
-                          alt="Foto"
-                          style={{ width: '80px', height: '80px' }}
-                        />
-                      ) : (
-                        "No Image"
-                      )}
-                    </S.StyledTableCell>
+                       <S.StyledTableCell  >
+                          <S.ImgTable src={item.foto} />                         
+                          </S.StyledTableCell>
                     <S.StyledTableCell>{item.estoqueId}</S.StyledTableCell>
                     <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
                     <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
                     <S.StyledTableCell>{item.nome_categoria}</S.StyledTableCell>
-                       </>)}
+                       
                        
                     
                 <S.StyledTableCell >
@@ -207,8 +191,8 @@ import { Buffer } from 'buffer';
                <Pagination 
                limit={limit}
                total={total} 
-               offset={offset1}
-               setOffset={setOffSet1}
+               offset={offset}
+               setOffset={setOffSet}
                />
             </S.PaginationConatiner>
           </S.TableContainer>) 
@@ -227,7 +211,7 @@ import { Buffer } from 'buffer';
             </S.TableHeader>
             <S.TableBody>
             {filteredData
-                    .slice(offset, offset + limit)
+                    .slice(offset1, offset1 + limit)
                     .map((item, index) => (
                       
                       <S.TrBody key={index}>
@@ -258,12 +242,12 @@ import { Buffer } from 'buffer';
              <Pagination 
              limit={limit}
              total={total} 
-             offset={offset}
-             setOffset={setOffSet}
+             offset={offset1}
+             setOffset={setOffSet1}
              />
           </S.PaginationConatiner>
         </S.TableContainer>)}
-        <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exlusão os dados serão perdidos permanentemente " />
+        <ModalDelete isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} Title="Deseja Excluir?" Info="Após a exclusão os dados serão perdidos permanentemente " />
 
         <ProductModal title='Adicionar Produto' isOpen={openProductM} setOpenModal={setOpenProductM}/>
 

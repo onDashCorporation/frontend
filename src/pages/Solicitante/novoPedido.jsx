@@ -28,6 +28,8 @@ import ModalConfirm from "../../components/modalconfirm/modalconfirm";
       const [openModal, setOpenModal] = useState(false);
       const [openModal1, setOpenModal1] = useState(false);
       const total =  filteredData.length;
+
+
       const [values, setValues] = useState({
         qtdSaida: '',
         fk_usuarioId: `${fk_usuarioId}`,
@@ -35,7 +37,10 @@ import ModalConfirm from "../../components/modalconfirm/modalconfirm";
       });
       
       
-
+  const itemsToSend = selectedItems.map(item => ({
+    qtdSaida: item.qtdSaida,
+    fk_qtdItemId: item.qtdItemId,
+  }));
 
 
       const getSolicitacoes = () => {
@@ -95,46 +100,77 @@ const calcularTotal = () => {
   };
   
   
+  // const handleQtdSaidaChange = (index, newValue) => {
+  //   const updatedItems = [...selectedItems];
+  //   updatedItems[index].qtdSaida = newValue;
+  //   const id = updatedItems[index].qtdItemId;
+  //   setSelectedItems(updatedItems);
+    
+    
+  //   setValues((prevValues) => ({
+  //     ...prevValues,
+  //     qtdSaida: newValue,
+  //     fk_qtdItemId: id,
+  //   }));
+  // };
+  
+  
+  
+  // const handleAddToEntrada = (item ) => {
+  //   setSelectedItems([...selectedItems, item]);
+  // console.log("uqe porraa",item.qtdItemId);
+  //   setValues((prevValues) => ({
+  //       ...prevValues,
+  //       fk_qtdItemId: item.qtdItemId, 
+  //   }));
+  // };
+  // const PostSolicitacoes = () => {
+  //  api.post('solicitacao/' , values)
+  //  .then(res => {
+  //    setResponsta(res);
+  //    console.log("deu certo", values)
+  //    setOpenModal(true)
+  //  })
+  //  .catch(error => {
+  //    console.log("deu errado kkk",error)
+  //    console.log("aaaaaaa",values)
+  //    setOpenModal1(true)
+  //  });
+  // }
   const handleQtdSaidaChange = (index, newValue) => {
     const updatedItems = [...selectedItems];
-    updatedItems[index].qtdSaida = newValue;
-    const id = updatedItems[index].qtdItemId;
+    updatedItems[index].qtde = newValue;
     setSelectedItems(updatedItems);
-    
-    
-    setValues((prevValues) => ({
-      ...prevValues,
-      qtdSaida: newValue,
-      fk_qtdItemId: id,
-    }));
   };
-  
-  
-  
-  const handleAddToEntrada = (item ) => {
-    setSelectedItems([...selectedItems, item]);
-  console.log("uqe porraa",item.qtdItemId);
-    setValues((prevValues) => ({
-        ...prevValues,
-        fk_qtdItemId: item.qtdItemId, 
-    }));
+  const handleAddToEntrada = (item) => {
+    setSelectedItems([...selectedItems, { ...item, qtde: 1 }]);
   };
-  
  
   const PostSolicitacoes = () => {
-   api.post('solicitacao/' , values)
-   .then(res => {
-     setResponsta(res);
-     console.log("deu certo", values)
-     setOpenModal(true)
-   })
-   .catch(error => {
-     console.log("deu errado kkk",error)
-     console.log("aaaaaaa",values)
-     setOpenModal1(true)
-   });
-  }
-
+    const dataToSend = {
+      fk_tipoMoviId: 1,
+      fk_usuarioId: parseInt(fk_usuarioId), // Certifique-se de que fk_usuarioId é um número
+      valor_entrada: calcularTotal().toString(), // Converter para string se necessário
+      itens: selectedItems.map((item) => ({
+        fk_cadItemId: item.fk_cadItemId,
+        qtde: parseInt(item.qtde), // Certifique-se de que qtde é um número
+      })),
+    };
+    console.log('payload',dataToSend);
+  
+    api.post('solicitacao/', dataToSend)
+      .then(res => {
+        setResponsta(res);
+        console.log("deu certo", dataToSend);
+        setOpenModal(true);
+      })
+      .catch(error => {
+        console.log("deu errado kkk", error);
+        console.log("aaaaaaa", dataToSend);
+        setOpenModal1(true);
+      });
+  };
+  
   return (
     <S.Body>
       <Header />
@@ -267,7 +303,7 @@ const calcularTotal = () => {
             </S.PaginationConatiner>
           </S.TableContainer>)}
         </S.Container>
-        <ModalConfirm isOpen={openModal} setOpenModal={() => {setOpenModal(!openModal), nav(`/solicitante/${solicId}/${fk_usuarioId}`)}} Title="A solicitação foi finaliza" Info="a sua solicitação foi finalizada com sucesso "/>
+        <ModalConfirm isOpen={openModal} setOpenModal={() => {setOpenModal(!openModal), nav(`/solicitante/${fk_usuarioId}`)}} Title="A solicitação foi finaliza" Info="a sua solicitação foi finalizada com sucesso "/>
       <ModalConfirm isOpen={openModal1} setOpenModal={() => setOpenModal1(!openModal1)} Title="Solicitacão Invalida" Info="a solicitação esta incompleta, certifique de preencher todos os campos" />
       </S.Main>
     </S.Body>
