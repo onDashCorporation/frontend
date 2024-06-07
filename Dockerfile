@@ -1,17 +1,18 @@
-
 FROM node:21-alpine@sha256:d44678a321331f2f003b51303cc5105f9787637e0524cf94d4323d08050a99c9 AS builder 
+
+WORKDIR /frontend
 
 # executa a aplicação em produção (menor tempo de resposta)
 ENV NODE_ENV=production
 
 # copia os arquivos de configuração
-COPY package*.json .
+COPY package*.json /frontend/
 
 # executa o comando para instalar as dependencias
 RUN npm ci --omit=dev
 
 # copia o projeto
-COPY . .
+COPY . /frontend/
 
 # converte para js simples o projeto
 RUN npm run build
@@ -23,7 +24,7 @@ COPY /nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /dist /usr/share/nginx/html
+COPY --from=builder /frontend/dist /usr/share/nginx/html
 
 EXPOSE 5173
 
