@@ -75,7 +75,8 @@ const Register = () => {
     app.post('/signup', values)
         .then(res => {
             toast.success("Cadastro realizado com sucesso.");
-            nav("/dashboard")
+            console.log(res.data)
+            nav(`/`)
         })
         .catch(error => {
             if (error.response && error.response.data && error.response.data.message) {
