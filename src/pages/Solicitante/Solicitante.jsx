@@ -70,6 +70,7 @@ import api from "../../services/api_login";
   }
 
   const handleOpenModal = (solicId) => {
+    console.log(solicId);
     setSelectedSolicId(solicId);
     setOpenModal(true);
   };
