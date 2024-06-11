@@ -5,7 +5,6 @@ import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import app from "../../services/api_login";
-import { Import } from "iconoir-react";
 import TextImg from "../../components/textimg/textimg";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,18 +49,20 @@ const Register = () => {
   };
 
   const handleSubmit = () => {
+
     // Verificação se os campos de email e senha estão em branco
     if (!values.email.trim() || !values.senha.trim()) {
         toast.error("Por favor, preencha todos os campos.");
         return;
     }
 
+    
     // Verificação do formato do email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(values.email)) {
-        toast.error("Por favor, insira um email válido.");
-        return;
-    }
+      toast.error("Por favor, insira um email válido.");
+      return;
+      }
 
     // Verificação da senha
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -70,14 +71,11 @@ const Register = () => {
         return;
     }
 
-    // Log dos valores que serão enviados
-    console.log("Dados enviados:", values);
-
     // Se todas as validações passarem, procedemos com o cadastro
     app.post('/signup', values)
         .then(res => {
-            console.log(res);
             toast.success("Cadastro realizado com sucesso.");
+            nav("/dashboard")
         })
         .catch(error => {
             if (error.response && error.response.data && error.response.data.message) {
@@ -133,7 +131,8 @@ const Register = () => {
           <Button Title="Criar" onClick={() => {
             console.info('teste')
             handleSubmit()
-            nav('/')
+            
+
             }}/>
           <S.SubText>
             Faça seu{" "}

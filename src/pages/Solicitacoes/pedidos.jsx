@@ -46,7 +46,6 @@ const Pedidos = () => {
         console.error("Erro ao tentar acessar o pedido", error);
       });
   };
-  console.log("asaa", newstatus);
 
   const postStatus = () => {
     api
