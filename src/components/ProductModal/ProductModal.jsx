@@ -20,8 +20,8 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
   const [inputValues, setInputValues] = useState({
     name: '',
     qtde: '',
-    category: '',
-    image: null
+    image: null,
+    fk_categoriaId: ''
   });
 
   // Para exibir o preview da imagem
@@ -58,13 +58,12 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
       toast.warning('Insira a quantidade.')
       return;
     }
-    if (inputValues.category.trim() === '') {
-      fetchCategorias(); // Carregar categorias se ainda não estiverem carregadas
-      toast.warning('Insira a categoria.')
-      return;
-    }
     if (!inputValues.image) {
       toast.warning('Insira uma imagem.')
+      return;
+    }
+    if (!inputValues.fk_categoriaId) {
+      toast.warning('Selecione uma categoria.')
       return;
     }
 
@@ -73,8 +72,8 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
       const formData = new FormData();
       formData.append('nome_item', inputValues.name);
       formData.append('qtdMin', inputValues.qtde);
-      formData.append('fk_categoriaId', inputValues.category);
       formData.append('foto', inputValues.image);
+      formData.append('fk_categoriaId', inputValues.fk_categoriaId);
 
       const response = await app.post('/cadItem', formData, {
         headers: {
@@ -82,9 +81,9 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
         }
       });
       toast.success('Produto adicionado');
-      
+
       // Limpar os campos depois de enviar
-      setInputValues({ name: '', qtde: '', category: '', image: null });
+      setInputValues({ name: '', qtde: '', image: null, fk_categoriaId: '' });
       setImgSrc('');
 
       if (!isSequentialAdd) {
@@ -111,7 +110,7 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
   };
 
   let handleCloseModal = () => {
-    setInputValues({ name: '', qtde: '', category: '', image: null });
+    setInputValues({ name: '', qtde: '', image: null, fk_categoriaId: '' });
     setImgSrc('');
     setOpenModal(false);
   };
@@ -132,12 +131,6 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
   function handleImageError() {
     document.getElementById("DivPreview").style.display = "none";
   }
-
-  const [ values , setValues] = useState({
-    cateId: '',
-    nome_categoria: '',
-    fk_categoriaId: '',
-  })
 
   const [categorias, setCategorias] = useState([]);
   const fetchCategorias = () => {
@@ -187,6 +180,16 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
 
                         <S.Row1Wrap>
                           <S.Row1Content>
+                            <S.Switch>
+                              <S.SwitchText>Adicionar em sequência</S.SwitchText>
+                              <label className="switch">
+                                <input type="checkbox" id="switch" onChange={ToggleSwitch} />
+                                <span className="slider round" />
+                              </label>
+                            </S.Switch>                            
+                          </S.Row1Content>
+                          
+                          <S.Row1Content>
                             <S.Text>Nome</S.Text>
                             <S.NameInput
                               required
@@ -199,44 +202,25 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
                               onChange={handleChange}
                             />
                           </S.Row1Content>
-
-                          <S.Row1Content>
-                            <S.Text>Categoria</S.Text>
-                            {/* <S.CategoryInput
-                              required
-                              autoComplete="off"
-                              name='category'
-                              id="category"
-                              type="number"
-                              placeholder={"Id Categoria"}
-                              value={inputValues.category}
-                              onChange={handleChange}
-                            /> */}
-
-                            <SelectBox
-                              Title={'Selecione uma categoria'}
-                              opsMap={categorias}
-                              opId="cateId"
-                              opName="nome_categoria"
-                              onChange={value => setValues({ ...values, [inputValues.category]: value })}
-                              onFocus={fetchCategorias}
-                            />
-                          </S.Row1Content>
                         </S.Row1Wrap>
                       </S.Row1Div>
 
-                      <S.Switch>
-                        <S.SwitchText>Adicionar em sequência</S.SwitchText>
-                        {/* <S.SwitchCheckbox> */}
-                        <label className="switch">
-                          <input type="checkbox" id="switch" onChange={ToggleSwitch} />
-                          <span className="slider round" />
-                        </label>
-                        {/* </S.SwitchCheckbox> */}
-                      </S.Switch>
+
                     </S.Row1>
 
                     <S.Row2>
+                      <S.Row2Content>
+                        <S.Text>Categoria</S.Text>
+                          <SelectBox
+                            Title={'Selecione uma categoria'}
+                            opsMap={categorias}
+                            opId="cateId"
+                            opName="nome_categoria"
+                            onChange={value => setInputValues({ ...inputValues, fk_categoriaId: value })}
+                            onFocus={fetchCategorias}
+                          />
+                      </S.Row2Content>
+
                       <S.Row2Content>
                         <S.Text>Quantidade mínima</S.Text>
                         <S.Inputs
@@ -250,25 +234,7 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
                           onChange={handleChange}
                         />
                       </S.Row2Content>
-
-                      <S.Row2Content>
-                        <S.Text>preço unitário</S.Text>
-                        <S.Inputs autoComplete="off" required name='price' id="price" type="text" />
-                      </S.Row2Content>
-
-                      <S.Row2Content>
-                        <S.Text>vida útil</S.Text>
-                        <S.Inputs autoComplete="off" required name='lifespan' id="lifespan" type="text" />
-                      </S.Row2Content>
-
-                      <S.Row2Content>
-                        <S.Text>medidas</S.Text>
-                        <S.Inputs autoComplete="off" required name='measurements' id="measurements" type="text" />
-                      </S.Row2Content>
                     </S.Row2>
-
-                    <S.Text>Descrição</S.Text>
-                    <S.Textarea autoComplete="off" name='desc' id="desc" rows="5" maxLength="130" type="text" />
                   </S.Form>
                 </S.Div>
 
