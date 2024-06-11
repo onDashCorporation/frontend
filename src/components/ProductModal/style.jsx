@@ -132,12 +132,18 @@ export const Row1Wrap = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   //gap: 1rem;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+
+  align-items: end;
+  justify-content: start;
 `;
 export const Row1Content = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    /* align-items: end;
+    justify-content: start; */
 `;
 export const NameInput = styled.input`
   font-weight: 400;
@@ -149,19 +155,9 @@ export const NameInput = styled.input`
   margin-bottom: 1rem;
   border-radius: 5px;
 
-  //width: 100%;
-`;
-export const CategoryInput = styled.input`
-  font-weight: 400;
-  font-size: 18px;
-  color: #000000;
-  padding: 0.8rem;
-  background-color: #D9D9D9;
-  outline: none;
-  margin-bottom: 1rem;
-  border-radius: 5px;
+  /* align-items: end; */
 
-  //width: 70%;
+  //width: 100%;
 `;
 
 export const Switch = styled.div`
@@ -213,16 +209,6 @@ export const Inputs = styled.input`
 
   max-width: 80%;
   min-width: 40%;
-`;
-
-export const Textarea = styled.textarea`
-  font-weight: 400;
-  font-size: 18px;
-  color: #000000;
-  border-radius: 5px;
-  padding: 1rem;
-  background-color: #D9D9D9;
-  resize: none;
 `;
 
 export const ContainerButton = styled.div`
