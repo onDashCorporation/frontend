@@ -16,7 +16,7 @@ const Register = () => {
     usuNome: '',
     email: '',
     senha: '',
-    fk_cargoId: '',
+    fk_cargoId: 3,
     fk_depId: ''
   })
 
@@ -108,14 +108,7 @@ const Register = () => {
           <Input placeholder="Nome" type="text" onChange={e => setValues({...values, usuNome: e.target.value})}/>
           <Input placeholder="E-mail" type="text" onChange={e => setValues({...values, email: e.target.value})} />
           <Input placeholder="Senha" type="password" onChange={e => setValues({...values, senha: e.target.value})}/>
-          <SelectBox
-            Title={'Selecione um cargo'}
-            opsMap={cargos}
-            opId="cargoId"
-            opName="cargo_nome"
-            onChange={value => setValues({ ...values, fk_cargoId: value })}
-            onFocus={fetchCargos}
-          />
+
           <SelectBox
             Title={'Selecione o departamento'}
             opsMap={departamentos}
