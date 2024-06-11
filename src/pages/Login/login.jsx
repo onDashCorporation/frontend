@@ -49,7 +49,6 @@ const Login = () => {
       // Se todas as validações passarem, procedemos com o login
       const response = await app.post("/login", values);
       setLoading(false);
-      console.log(response.data);
   
       // Se o login for bem-sucedido, redirecionamos o usuário para outra página
       //history.push("/dashboard");
@@ -116,7 +115,7 @@ const Login = () => {
             Se{" "}
             <S.Link
               onClick={() => {
-                nav("/register");
+                navigate("/register");
               }}
             >
               cadastre
@@ -124,7 +123,7 @@ const Login = () => {
             ou{" "}
             <S.Link
               onClick={() => {
-                nav("/forgot");
+                navigate("/forgot");
               }}
             >
               recupere
