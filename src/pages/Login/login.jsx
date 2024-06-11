@@ -47,12 +47,15 @@ const Login = () => {
   
     try {
       // Se todas as validações passarem, procedemos com o login
-      const response = await app.post("/login", values);
+      const response = (await app.post("/login", values)).data.data[0];
+
       setLoading(false);
   
-      // Se o login for bem-sucedido, redirecionamos o usuário para outra página
-      //history.push("/dashboard");
-      navigate("/dashboard"); // Correção: redirecionamento deve usar 'navigate' em vez de 'history'
+      // defini a pagina de acordo com o cargo
+      const page = response.fk_cargoId === 3 ? `/solicitante/${response.usuId}` : "/dashboard" 
+      
+      navigate(page);
+
     } catch (error) {
       setLoading(false);
   
