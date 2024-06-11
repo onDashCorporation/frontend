@@ -116,7 +116,7 @@ const Login = () => {
             Se{" "}
             <S.Link
               onClick={() => {
-                nav("/register");
+                navigate("/register");
               }}
             >
               cadastre
@@ -124,7 +124,7 @@ const Login = () => {
             ou{" "}
             <S.Link
               onClick={() => {
-                nav("/forgot");
+                navigate("/forgot");
               }}
             >
               recupere
