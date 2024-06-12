@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as S from "./style";
 
-const SelectBox = ({ Title, opsMap, opName, onChange, opId, onFocus }) => {
+const SelectBox = ({ Title, opsMap, opName, onChange, opId, onFocus, widthStyle }) => {
   const [isActive, setIsActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -20,7 +20,7 @@ const SelectBox = ({ Title, opsMap, opName, onChange, opId, onFocus }) => {
   };
 
   return (
-    <S.SelectContainer className="custom-select">
+    <S.SelectContainer className="custom-select" style={widthStyle}>
       <S.HiddenSelect onFocus={handleSelectClick} onChange={e => onChange(e.target.value)}>
         <option value="" style={{ color: 'gray' }}>{Title}</option>
         {opsMap.map(op => (
