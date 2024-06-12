@@ -22,9 +22,9 @@ const Nav = () => {
         {/* <S.Op onClick={() => {nav("/relatorios")}}
         isSelected={location.pathname === "/relatorios"} 
         >Relatorios</S.Op> */}
-        {/* <S.Op onClick={() => {nav("/catalogacao")}}
+        <S.Op onClick={() => {nav("/catalogacao")}}
         isSelected={location.pathname === "/catalogacao"} 
-        >Catalogação</S.Op> */}
+        >Catalogação</S.Op>
       </S.OpConatiner>
     </S.Container>
   );
