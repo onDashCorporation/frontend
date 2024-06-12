@@ -76,23 +76,32 @@ import api from "../../services/api_login";
   };
   
 
-
   const normalizeString = (str) => {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    if (str === null || str === undefined) {
+      return "";
+    }
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
   };
+
+
 
   const handleSearch = (event) => {
     const searchValue = event.target.value;
     setSearchTerm(searchValue);
 
-    
+    if(searchValue === ""){
+      getSolicitacoes()
+    }else{
     const normalizedSearch = normalizeString(searchValue);
         const newFilteredData = filteredData.filter((item) => {
           if (filterop === "Id") {
             return normalizeString(item.solicId.toString()).includes(normalizedSearch);
           } 
            else if (filterop === "Status") {          
-            return normalizeString(item.status.toString()).includes(normalizedSearch);
+            return normalizeString(item.status).includes(normalizedSearch);
           } 
            else if (filterop === "Valor") {         
             return normalizeString(item.valor_entrada.toString()).includes(normalizedSearch);
@@ -107,6 +116,7 @@ import api from "../../services/api_login";
         });
         setFilteredData(newFilteredData);
       };
+    }
  
 
   return (
@@ -160,7 +170,7 @@ import api from "../../services/api_login";
                         </S.Test>
                         </S.StyledTableCell>
                 <S.StyledTableCell>{item.solicId}</S.StyledTableCell>
-                <S.StyledTableCell>R${item.valor_entrada}</S.StyledTableCell>
+                <S.StyledTableCell>R${item.valor_entrada != null ? Number(item.valor_entrada).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0,00'}</S.StyledTableCell>
                 <S.StyledTableCell>{item.data && item.data.slice(0, 10).split('-').reverse().join('/')}</S.StyledTableCell>
               <S.StyledTableCell  >
              
