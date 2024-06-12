@@ -17,14 +17,15 @@ export const Modal = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #EBEBEB;
-  width: 70vw;
+  width: 50vw;
   max-height: 90vh;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 `;
 export const Overflow = styled.div`
-  width: 69.8vw;
+  width: 49.8vw;
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 
@@ -34,14 +35,14 @@ export const ContainerHeader = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 50vw;
 `;
 export const header = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 44vw;
 `;
 export const TitleM = styled.h2`
   font-weight: 700;
@@ -59,8 +60,9 @@ export const IconClose = styled(Xmark)`
 `;
 
 export const ContainerM = styled.div`
-  width: 90%;
-  margin: 1.5% 5% 0% 5%;
+  width: 40vw;
+  /* margin: 1.5% 5% 0% 5%; */
+  margin: 1rem 2.5rem 0 2.5rem;
 `;
 export const Div = styled.div`
     display: flex;
@@ -129,42 +131,49 @@ export const AddImage = styled.input`
 export const Row1Wrap = styled.div`
   display: flex;
   width: 100%;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  //gap: 1rem;
-  /* justify-content: space-around; */
+  height: 100%;
 
-  align-items: end;
-  justify-content: start;
+  /* justify-content: left;
+  align-content: end; */
+
+  justify-content: space-between;
 `;
+
 export const Row1Content = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
-    /* align-items: end;
-    justify-content: start; */
+    
+  /* justify-content: left;
+  align-content: end; */
 `;
 export const NameInput = styled.input`
-  font-weight: 400;
-  font-size: 18px;
-  color: #000000;
-  padding: 0.8rem;
-  background-color: #D9D9D9;
+  font-size: 100%;
+  padding: 0.6em;
   outline: none;
-  margin-bottom: 1rem;
-  border-radius: 5px;
+  color: black;
+  border: 2px solid rgb(182, 181, 181);
+  background-color: transparent;
+  border-radius: 10px;
+  max-width: 100%;
 
-  /* align-items: end; */
+  &:focus{
+    transition: all 0.3s ease;
+    transition: all 0.3s ;
+    border: 2px solid #4e8fd9;;
 
-  //width: 100%;
+  }
 `;
 
 export const Switch = styled.div`
-  margin-left: 1rem;
-  justify-content: right;
+  display: flex;
 
-  width: 211px;
+  width: 215px;
+  min-width: 110px;
+  padding-left: 3.5vw;
 `;
 export const SwitchText = styled.text`
   font-weight: 400;
@@ -183,6 +192,10 @@ export const Row2 = styled.div`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  width: 44.5vw;
+
+  gap: 1rem;
 `;
 export const Row2Content = styled.div`
   display: flex;
@@ -197,18 +210,29 @@ export const Text = styled.h3`
   text-transform: capitalize;
 `;
 export const Inputs = styled.input`
-  font-weight: 400;
-  font-size: 18px;
-  color: #000000;
-  padding: 0.8rem;
-  background-color: #D9D9D9;
+  font-size: 100%;
+  padding: 0.6em;
   outline: none;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  gap: 2rem;
+  color: black;
+  border: 2px solid rgb(182, 181, 181);
+  background-color: transparent;
+  border-radius: 10px;
+
+  &:focus{
+    transition: all 0.3s ease;
+    transition: all 0.3s ;
+    border: 2px solid #4e8fd9;;
+
+  }
 
   max-width: 80%;
   min-width: 40%;
+`;
+
+export const StyledContainer = styled.div`
+  width: 110%;
+  background-color: #F0DE;
+  z-index: 1000;
 `;
 
 export const ContainerButton = styled.div`

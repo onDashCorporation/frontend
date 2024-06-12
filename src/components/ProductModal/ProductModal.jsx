@@ -177,18 +177,15 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
                             {imgSrc ? <S.PreviewImage id="preview" src={imgSrc} onError={handleImageError} /> : null}
                           </S.DivPreview>
                         </S.Image>
-
-                        <S.Row1Wrap>
-                          <S.Row1Content>
-                            <S.Switch>
-                              <S.SwitchText>Adicionar em sequência</S.SwitchText>
+  
+                        <S.Row1Wrap> 
+                          <S.Switch>
+                            <S.SwitchText>Adicionar em sequência</S.SwitchText>
                               <label className="switch">
                                 <input type="checkbox" id="switch" onChange={ToggleSwitch} />
                                 <span className="slider round" />
                               </label>
-                            </S.Switch>                            
-                          </S.Row1Content>
-                          
+                          </S.Switch>                                                 
                           <S.Row1Content>
                             <S.Text>Nome</S.Text>
                             <S.NameInput
@@ -203,22 +200,23 @@ export default function ProductModal({ isOpen, setOpenModal, title }) {
                             />
                           </S.Row1Content>
                         </S.Row1Wrap>
-                      </S.Row1Div>
 
+                      </S.Row1Div>  
 
                     </S.Row1>
 
                     <S.Row2>
                       <S.Row2Content>
                         <S.Text>Categoria</S.Text>
-                          <SelectBox
-                            Title={'Selecione uma categoria'}
-                            opsMap={categorias}
-                            opId="cateId"
-                            opName="nome_categoria"
-                            onChange={value => setInputValues({ ...inputValues, fk_categoriaId: value })}
-                            onFocus={fetchCategorias}
-                          />
+                        <SelectBox
+                          Title={'Selecione uma categoria'}
+                          opsMap={categorias}
+                          opId="cateId"
+                          opName="nome_categoria"
+                          onChange={value => setInputValues({ ...inputValues, fk_categoriaId: value })}
+                          onFocus={fetchCategorias}
+                          widthStyle={{ width: '20vw' }}
+                        />
                       </S.Row2Content>
 
                       <S.Row2Content>
