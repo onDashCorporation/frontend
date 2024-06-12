@@ -128,7 +128,7 @@ const Header = ({ showBackButton }) => {
                 <S.InputImg id="upload-input" type="file" accept="image/*" onChange={handleImageChange} />
               </label>
             </S.UploadInputContainer>
-           
+           <S.Desc>tamanho maximo: 300x300 px</S.Desc>
             <S.Nome>
               <Input label="Nome" value={name} onChange={(e) => setName(e.target.value)} />
             </S.Nome>
