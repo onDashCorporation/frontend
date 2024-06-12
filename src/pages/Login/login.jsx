@@ -1,4 +1,3 @@
-[Ontem 17:01] GABRIELA LIMA DA LUZ
 import * as S from "./styles";
 import Button from "../../components/buttonLogin/button";
 import login from "../../assets/images/login.svg";
