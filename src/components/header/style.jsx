@@ -249,5 +249,7 @@ export const TitlecontaWrapper = styled.div`
 export const InputImg = styled.input`
   display: none;
 `;
-
+export const Desc = styled.text`
+color:#bab9b9;
+`;
 
