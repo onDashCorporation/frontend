@@ -100,43 +100,7 @@ const calcularTotal = () => {
   };
   
   
-  // const handleQtdSaidaChange = (index, newValue) => {
-  //   const updatedItems = [...selectedItems];
-  //   updatedItems[index].qtdSaida = newValue;
-  //   const id = updatedItems[index].qtdItemId;
-  //   setSelectedItems(updatedItems);
-    
-    
-  //   setValues((prevValues) => ({
-  //     ...prevValues,
-  //     qtdSaida: newValue,
-  //     fk_qtdItemId: id,
-  //   }));
-  // };
-  
-  
-  
-  // const handleAddToEntrada = (item ) => {
-  //   setSelectedItems([...selectedItems, item]);
-  // console.log("uqe porraa",item.qtdItemId);
-  //   setValues((prevValues) => ({
-  //       ...prevValues,
-  //       fk_qtdItemId: item.qtdItemId, 
-  //   }));
-  // };
-  // const PostSolicitacoes = () => {
-  //  api.post('solicitacao/' , values)
-  //  .then(res => {
-  //    setResponsta(res);
-  //    console.log("deu certo", values)
-  //    setOpenModal(true)
-  //  })
-  //  .catch(error => {
-  //    console.log("deu errado kkk",error)
-  //    console.log("aaaaaaa",values)
-  //    setOpenModal1(true)
-  //  });
-  // }
+
   const handleQtdSaidaChange = (index, newValue) => {
     const updatedItems = [...selectedItems];
     updatedItems[index].qtde = newValue;
