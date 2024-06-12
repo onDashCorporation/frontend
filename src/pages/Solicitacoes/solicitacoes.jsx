@@ -23,15 +23,15 @@ import { useLocation } from 'react-router-dom';
     const [offset1, setOffSet1] = useState(0)
     const [error, setErro] = useState()
     const [opset, setOpset] = useState(true);
-    const options = ["Status","Id", "Nome", "Departamento", "Data"]
+    const options = ["Status","Id", "Tipo", "Data","Valor" ]
     const total =  filteredData.length;
 
     const getSolicitacoes = () => {
       api
       .get('/solicitacao/', )
       .then((res) => {
-        const dataTable = res.data;
-        setFilteredData(dataTable.reverse());
+        const dataTable = res.data.reverse();
+        setFilteredData(dataTable);
       })
       .catch((error) => {
         setErro(true)
@@ -46,40 +46,41 @@ import { useLocation } from 'react-router-dom';
 
 
 
-
   const normalizeString = (str) => {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    if (str === null || str === undefined) {
+      return "";
+    }
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
   };
 
   const handleSearch = (event) => {
     const searchValue = event.target.value;
     setSearchTerm(searchValue);
-
-    
-    const normalizedSearch = normalizeString(searchValue);
-        const newFilteredData = filteredData.filter((item) => {
-          if (filterop === "Departamento") {
-            return normalizeString(item.departamento.toString()).includes(normalizedSearch);
-          } 
-           else if (filterop === "Nome") {         
-            return normalizeString(item.nome.toString()).includes(normalizedSearch);
-          }
-           else if (filterop === "Status") {          
-            return normalizeString(item.status.toString()).includes(normalizedSearch);
-          } 
-           else if (filterop === "Id") {         
-            return normalizeString(item.id.toString()).includes(normalizedSearch);
-          } 
-           else if (filterop === "Data") {
-            return normalizeString(item.data.toString()).includes(normalizedSearch);
-          }  else {
-            return Object.values(item).some((value) =>
-              normalizeString(value.toString()).includes(normalizedSearch)
-            );
-          }
-        });
-        setFilteredData(newFilteredData);
-      };
+  
+    if (searchValue === "") {
+      getSolicitacoes(); // Recarrega os dados originais
+    } else {
+      const normalizedSearch = normalizeString(searchValue);
+      const newFilteredData = filteredData.filter((item) => {
+        if (filterop === "Valor") {
+          return normalizeString(item.valor_entrada).includes(normalizedSearch);
+        } else if (filterop === "Nome") {
+          return normalizeString(item.nome.toString()).includes(normalizedSearch);
+        } else if (filterop === "Status") {
+          return normalizeString(item.status).includes(normalizedSearch);
+        } else if (filterop === "Id") {
+          return normalizeString(item.solicId.toString()).includes(normalizedSearch);
+        } else if (filterop === "Data") {
+          return normalizeString(item.data.toString()).includes(normalizedSearch);
+        } else{
+          normalizeString(item.toString()).includes(normalizedSearch)
+      }});
+      setFilteredData(newFilteredData);
+    }
+  };
  
     const location = useLocation();
     const showBackButton = location.pathname == '/solicitacoes';
