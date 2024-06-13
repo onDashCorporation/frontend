@@ -244,7 +244,7 @@ const Dashboard = () => {
         <S.Container>
         <S.Section>
           <S.SectionContainer>
-          <S.Title>Solicitações</S.Title>
+          <S.Title>Dachboard</S.Title>
         <S.Option>
                 <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{setOpset(true)} }>Estoque</S.Op>
                 {/* <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false)}}>Movimentações</S.Op>
