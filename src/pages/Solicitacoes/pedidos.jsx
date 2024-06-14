@@ -115,8 +115,7 @@ const Pedidos = () => {
                 <S.TrHeader>
                   <S.ThHeader isFirst>id</S.ThHeader>
                   <S.ThHeader>Nome</S.ThHeader>
-                  <S.ThHeader>Categoria</S.ThHeader>
-                  <S.ThHeader>Quantidade</S.ThHeader>
+               <S.ThHeader>Quantidade</S.ThHeader>
                   <S.ThHeader isLast>Valor</S.ThHeader>
                 </S.TrHeader>
               </S.TableHeader>
@@ -127,7 +126,6 @@ const Pedidos = () => {
                     <S.TrBody key={index}>
                       <S.StyledTableCell>{item.fk_cadItemId}</S.StyledTableCell>
                       <S.StyledTableCell>{item.nome_item}</S.StyledTableCell>
-                      <S.StyledTableCell>{item.qtde}</S.StyledTableCell>
                       <S.StyledTableCell>{item.qtdEntrada}</S.StyledTableCell>
                       <S.StyledTableCell>
                         R$

@@ -117,7 +117,9 @@ const calcularTotal = () => {
       valor_entrada: calcularTotal().toString(), // Converter para string se necessário
       itens: selectedItems.map((item) => ({
         fk_cadItemId: item.fk_cadItemId,
-        qtde: parseInt(item.qtde), // Certifique-se de que qtde é um número
+        qtde: parseInt(item.qtde), 
+        valorItem:  item.valorItem,
+        nome_item:  item.nome_item // Certifique-se de que qtde é um número
       })),
     };
     console.log('payload',dataToSend);
