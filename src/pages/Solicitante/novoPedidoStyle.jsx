@@ -133,7 +133,10 @@ export const TrBody = styled.tr`
     background-color: #fbfbfb;
   }
 `;
-
+export const ImgTable = styled.img`
+width: 50px;
+height: 50px;
+`;
 export const ImageCell = styled(I.NavArrowDown)`
   width: 45px;
   height: 30px;

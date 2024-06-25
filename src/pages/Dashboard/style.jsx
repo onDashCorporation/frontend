@@ -11,7 +11,7 @@ export const test = styled.div`
 export const Container = styled.div`
   overflow-y: auto;
   width: 100%;
-  height: 90vh;
+  height: 93vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -28,8 +28,10 @@ export const LibConatiner = styled.div`
 margin-top: 20px;
 display: flex;
 flex-direction: row;
-justify-content: space-around;
-  width: 100%;
+align-items: center;
+justify-content: center;
+  width: 90%;
+  margin-left: 40px;
 
   
 `;
@@ -120,31 +122,33 @@ export const Option = styled.div`
   flex-direction: row;
  align-items: center;
  justify-content: left;
-  width: 400px;
+  width: 100px;
   background-color: #d9d9d9;
   padding: 5px;
   border-radius: 5px;
   gap: 15px;
 `;
 export const Op = styled.button`
-width: 100%;
+width: 700%;
   font-size: 15px;
   padding: 10px;
   border-radius: 10px;
+  /* background-color: #d9d9d9; */
   background-color: #d9d9d9;
+
   color: black;
   cursor: pointer;
   transition:  all 0.3s ease ;
   background-color: ${(props) =>{
     switch (props.select) {
       case "true":
-        return "#ffffff";
+        // return "#ffffff";
       case "false":
-        return "#ffffff";
+        // return "#ffffff";
       case "mov":
-        return "#ffffff";
+        // return "#ffffff";
       default:
-        return "#d9d9d9";
+        // return "#d9d9d9";
     }
   }}
  `;  

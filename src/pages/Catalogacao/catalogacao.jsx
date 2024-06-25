@@ -102,8 +102,7 @@ const Catalogacao = () => {
             <S.StyledTable>
               <S.TableHeader>
                 <S.TrHeader>
-                <S.ThHeader isFirst >Foto</S.ThHeader>
-                <S.ThHeader>id</S.ThHeader>
+                <S.ThHeader isFirst>id</S.ThHeader>
                 <S.ThHeader>Nome</S.ThHeader>
                 <S.ThHeader> Quantidade</S.ThHeader>
                 <S.ThHeader >Categoria</S.ThHeader>       

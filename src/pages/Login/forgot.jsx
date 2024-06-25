@@ -15,6 +15,8 @@ const Forgot = () => {
     email: '',
   })
   const handleSubmit = () => {
+
+    toast.warn("Aguarde")
     // Verificação se o campo de email está em branco
     if (!values.email.trim()) {
       toast.error("Por favor, insira seu email.");
@@ -30,8 +32,8 @@ const Forgot = () => {
 
     // Se todas as validações passarem, procedemos com a solicitação de reset de senha
     app.post('/forgot-password', values)
-      .then(res => console.log(res))
-      .catch(res => console.log(res));
+      .then(res => toast.success(res.data.message))
+      .catch(res => toast.error(res.data.message || res.data.error));
 };
 
 

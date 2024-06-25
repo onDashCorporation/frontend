@@ -32,6 +32,7 @@ export const ContainerInfo = styled.div`
 export const Title = styled.text`
     font-size: 28px;
     color: black;
+    font-weight: bold;
 `
 export const Info = styled.text`
     font-size: 20px;

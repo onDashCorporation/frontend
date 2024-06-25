@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as S from "./style"
 
-const DropDelete = ({  onClickOP1, onClickOP2, onClickOP3, Vizu, Mix, Mix1, op}) => {
+const DropDelete = ({  onClickOP1, onClickOP2, onClickOP3, Vizu, Mix, Mix1, op, }) => {
 
     const [isActive, setIsActive] = useState(false);
     const nav = useNavigate();

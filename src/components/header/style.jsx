@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 import * as I from "iconoir-react"
 export const HeaderContainer = styled.div`
@@ -10,6 +9,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Logo = styled.div`
+margin-left:-500px;
 padding: 10px;
 font-size: 30px;
 font-weight: bold;
@@ -114,6 +114,7 @@ export const Perfil = styled.li`
 `;
 
 export const Cargo = styled.li`
+  margin-left:10px;
   padding-bottom: 15px;
 `;
 
@@ -249,5 +250,7 @@ export const TitlecontaWrapper = styled.div`
 export const InputImg = styled.input`
   display: none;
 `;
-
+export const Desc = styled.text`
+color:#bab9b9;
+`;
 

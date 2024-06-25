@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element: <Solicitacoes />,
       },
       {
-        path: "/pedidos",
+        path: "/pedidos/:solicId",
         element: <Pedidos />,
       },
       {
@@ -74,15 +74,15 @@ const router = createBrowserRouter([
         element: <Catalogacao />,
       },
       {
-        path: "/solicitante",
+        path: "/solicitante/:fk_usuarioId",
         element: <Solicitante />,
       },
       {
-        path: "/novopedido",
+        path: "/novopedido/:fk_usuarioId",
         element: <NovoPedido />,
       },
       {
-        path: "/pedido",
+        path: "/pedido/:solicId",
         element: <Pedido />,
       },
     ],

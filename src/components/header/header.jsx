@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as S from "./style";
 import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
-import BackButton from '../BackButton/BackButton'
+import BackButton from '../BackButton/BackButton';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { slide as Menu } from 'react-burger-menu';
-import * as I from "iconoir-react";
- 
-const MAX_IMAGE_WIDTH= 300; // Define o limite máximo de tamanho do arquivo em px
+const MAX_IMAGE_WIDTH = 300;
 const MAX_IMAGE_HEIGHT = 300;
 
 const Header = ({ showBackButton }) => {
@@ -16,46 +15,55 @@ const Header = ({ showBackButton }) => {
   const [profileImage, setProfileImage] = useState(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const dropdownRef = useRef(null); // Referência para o elemento dropdown
+  const [tempProfileImage, setTempProfileImage] = useState(null);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  
-  const [menuOpen, setMenuOpen] = useState(false);
 
-  const cargoText = "Adm";
- 
   useEffect(() => {
-    // Adiciona event listener para detectar cliques fora do dropdown
+    const storedProfileImage = localStorage.getItem('profileImage');
+    const storedName = localStorage.getItem('name');
+    const storedEmail = localStorage.getItem('email');
+
+    if (storedProfileImage) {
+      setProfileImage(storedProfileImage);
+    }
+
+    if (storedName) {
+      setName(storedName);
+    }
+
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownVisible(false);
       }
     }
- 
-    // Adiciona o event listener quando o componente monta
+
     document.addEventListener('mousedown', handleClickOutside);
- 
-    // Remove o event listener quando o componente desmonta
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [dropdownRef]);
- 
+
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
- 
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-   
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const image = new Image();
         image.src = reader.result;
         image.onload = () => {
-          // Verifica se as dimensões da imagem não excedem os limites máximos em pixels
           if (image.width <= MAX_IMAGE_WIDTH && image.height <= MAX_IMAGE_HEIGHT) {
-            setProfileImage(reader.result);
+            setTempProfileImage(reader.result);
           } else {
             console.log("A imagem selecionada excede as dimensões máximas permitidas.");
             alert("A imagem selecionada excede as dimensões máximas permitidas.");
@@ -65,26 +73,57 @@ const Header = ({ showBackButton }) => {
       reader.readAsDataURL(file);
     }
   };
- 
+
   const openModal = () => {
+    setTempProfileImage(profileImage);
     setShowModal(true);
-    setDropdownVisible(false); // Fechar o dropdown ao abrir o modal
+    setDropdownVisible(false);
   };
- 
+
   const closeModal = () => {
+    setTempProfileImage(null);
     setShowModal(false);
   };
- 
-  const handleSaveProfile = () => {
-    // Lógica para salvar os dados do perfil
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
   };
- 
+
+  const handleSaveProfile = () => {
+    if (tempProfileImage) {
+      localStorage.setItem('profileImage', tempProfileImage);
+      setProfileImage(tempProfileImage);
+      toast.success('Imagem de perfil atualizada com sucesso!');
+    }
+
+    if (name && name.trim().length >= 3) {
+      localStorage.setItem('name', name);
+    } else if (name) {
+      toast.error('O nome deve ter pelo menos 3 caracteres.');
+      return;
+    }
+
+    if (email) {
+      if (!validateEmail(email)) {
+        toast.error('Por favor, insira um endereço de email válido.');
+        return;
+      }
+
+      localStorage.setItem('email', email);
+    }
+
+    toast.success('Perfil atualizado com sucesso!');
+    closeModal();
+  };
+
   return (
     <S.HeaderContainer>
-      <BackButton text="Voltar" showButton={showBackButton} /> 
+      <ToastContainer />
+      <BackButton text="Voltar" showButton={showBackButton} />
       <S.ContainerLogo>
         <S.Logo>
-          StockBox
+          OnDash
         </S.Logo>
       </S.ContainerLogo>
       <S.Areaconta>
@@ -105,7 +144,7 @@ const Header = ({ showBackButton }) => {
             <S.Perfil>
               <S.Perfiltext onClick={openModal}>Perfil</S.Perfiltext>
             </S.Perfil>
-            <S.Cargo><S.Cargotext>{cargoText}</S.Cargotext></S.Cargo>
+            <S.Cargo>Cargo</S.Cargo>
             <S.Sair><S.Sairtext onClick={() => navigate("/")}>Sair</S.Sairtext></S.Sair>
           </S.Drop>
         )}
@@ -118,9 +157,9 @@ const Header = ({ showBackButton }) => {
             <S.ImgTitle>Selecione Foto de Perfil</S.ImgTitle>
             <S.UploadInputContainer>
               <label htmlFor="upload-input">
-                {profileImage ? (
+                {tempProfileImage ? (
                   <S.UploadIconModal>
-                    <S.UploadIconModalImg src={profileImage} alt="Foto de Perfil" />
+                    <S.UploadIconModalImg src={tempProfileImage} alt="Foto de Perfil" />
                   </S.UploadIconModal>
                 ) : (
                   <S.UploadIconModal />
@@ -128,23 +167,23 @@ const Header = ({ showBackButton }) => {
                 <S.InputImg id="upload-input" type="file" accept="image/*" onChange={handleImageChange} />
               </label>
             </S.UploadInputContainer>
-           
+            <S.Desc>tamanho maximo: 300x300 px</S.Desc>
             <S.Nome>
               <Input label="Nome" value={name} onChange={(e) => setName(e.target.value)} />
             </S.Nome>
             <S.Email>
               <Input label="Endereço de Email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </S.Email> 
-            
+            </S.Email>
+
             <S.SaveButton onClick={handleSaveProfile}>Salvar</S.SaveButton>
-            
+
           </S.ModalContent>
         </S.ModalBackground>
       )}
     </S.HeaderContainer>
   );
 };
- 
+
 export default Header;
 
 

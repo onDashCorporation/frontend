@@ -46,7 +46,6 @@ const Reset = () => {
     app.post('/reset-password', { newPassword: values.newPassword, token })
       .then(res => {
         toast.success("Senha alterada com sucesso");
-        console.log(res);
       })
       .catch(error => {
         toast.error("Erro ao tentar alterar a senha");

@@ -101,7 +101,7 @@ const Dashboard = () => {
  const line = {
     series: [
       {
-        name: "Radar 1",
+        name: "Radar ",
         data: ["45", 52, "38", "24", "33", "10"]
       },
       {
@@ -128,15 +128,15 @@ const Dashboard = () => {
  const bar = {
     series: [
       {
-        name: "Radar  1",
+        name: "Eletronicos",
         data: [45, 52, 38, 24, 3, 10]
       },
       {
-        name: "Radar  2",
+        name: "Equipamentos ",
         data: [26, 21, 20, 6, 8, 15]
       },
       {
-        name: "Radar  3",
+        name: "Papelaria",
         data: [16, 11, 10, 16, 8, 25]
       },
     ],
@@ -179,7 +179,7 @@ const Dashboard = () => {
       height: 100,
       type: 'radialBar',
     },
-    series: [70],
+    series: [86],
     plotOptions: {
       radialBar: {
         
@@ -206,7 +206,7 @@ const Dashboard = () => {
       height: 100,
       type: 'radialBar',
     },
-    series: [86],
+    series: [34],
     plotOptions: {
       radialBar: {
         startAngle: -90,
@@ -244,11 +244,11 @@ const Dashboard = () => {
         <S.Container>
         <S.Section>
           <S.SectionContainer>
-          <S.Title>Solicitações</S.Title>
+          <S.Title>Dachboard</S.Title>
         <S.Option>
                 <S.Op  select={opset === true ? 'true' : undefined} onClick={() =>{setOpset(true)} }>Estoque</S.Op>
-                <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false)}}>Movimentações</S.Op>
-                <S.Op select={opset === 'mov' ? 'mov' : undefined} onClick={() => {setOpset('mov')}}>Controle</S.Op>
+                {/* <S.Op select={opset === false ? 'false' : undefined} onClick={() => {setOpset(false)}}>Movimentações</S.Op>
+                <S.Op select={opset === 'mov' ? 'mov' : undefined} onClick={() => {setOpset('mov')}}>Controle</S.Op> */}
               </S.Option>
           </S.SectionContainer>
         </S.Section>
@@ -261,7 +261,7 @@ const Dashboard = () => {
             </S.Lib>
             </S.ConatinerBottom>
               <S.ConatinerCard>
-             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             <Card Title=" Valor de Estoque" Info="R$ 1230,23" sub={true} SubTitle="valor atualizado hoje"/>
              <S.Radar>
               <S.RadarText>
                 Progresso atual
@@ -274,11 +274,11 @@ const Dashboard = () => {
               </S.RadarText>
              <Chart options={Radialbar1} series={Radialbar1.series} type="radialBar" />
              </S.Radar>
-             <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
+             <Card Title=" Valor de estoque Semestral" Info="R$ 54,2 Mil" sub={true} SubTitle="valor atualizado hoje"/>
              </S.ConatinerCard>
             </S.ContainerGrafic>
             } 
-            {opset === false && 
+            {/* {opset === false && 
           <S.ContainerGrafic>
                  <S.ConatinerBottom>
               <S.Lib>
@@ -327,7 +327,7 @@ const Dashboard = () => {
              <Card Title=" Valor de Estoque" Info="R$ 100,23" sub={true} SubTitle="valor atualizado hoje"/>
              </S.ConatinerCard>
             </S.ContainerGrafic>
-        }
+        } */}
           </S.LibConatiner>
         </S.Container>
       </S.test>

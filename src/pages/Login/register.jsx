@@ -3,12 +3,12 @@ import Button from "../../components/buttonLogin/button";
 import login from "../../assets/images/login.svg";
 import Input from "../../components/inputs/input";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import app from "../../services/api_login";
-import { Import } from "iconoir-react";
 import TextImg from "../../components/textimg/textimg";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SelectBox from "../../components/SelectBox/select";
 
 const Register = () => {
   const nav = useNavigate();
@@ -16,20 +16,53 @@ const Register = () => {
     usuNome: '',
     email: '',
     senha: '',
+    fk_cargoId: 3,
+    fk_depId: ''
   })
+
+  
+  const [departamentos, setDepartamentos] = useState([]);
+
+  const [cargos, setCargos] = useState([]);
+  const fetchCargos = () => {
+    app.get('/cargo')
+      .then(res => setCargos(res.data))
+      .catch(err => {
+        console.error("Erro ao buscar cargos:", {
+          message: err.message,
+          response: err.response
+        });
+        toast.error("Erro ao buscar cargos.");
+      });
+  };
+
+  const fetchDepartamentos = () => {
+    app.get('/departamento')
+    .then(res => setDepartamentos(res.data))
+    .catch(err => {
+      console.error("Erro ao buscar departamentos:", {
+        message: err.message,
+        response: err.response
+      });
+      toast.error("Erro ao buscar departamentos.");
+    });
+  };
+
   const handleSubmit = () => {
+
     // Verificação se os campos de email e senha estão em branco
     if (!values.email.trim() || !values.senha.trim()) {
         toast.error("Por favor, preencha todos os campos.");
         return;
     }
 
+    
     // Verificação do formato do email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(values.email)) {
-        toast.error("Por favor, insira um email válido.");
-        return;
-    }
+      toast.error("Por favor, insira um email válido.");
+      return;
+      }
 
     // Verificação da senha
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -41,8 +74,9 @@ const Register = () => {
     // Se todas as validações passarem, procedemos com o cadastro
     app.post('/signup', values)
         .then(res => {
-            console.log(res);
             toast.success("Cadastro realizado com sucesso.");
+            console.log(res.data)
+            nav(`/`)
         })
         .catch(error => {
             if (error.response && error.response.data && error.response.data.message) {
@@ -51,7 +85,8 @@ const Register = () => {
                 toast.error("Erro ao tentar realizar o cadastro.");
             }
         });
-};
+  };
+
 
   return (
     <S.Main>
@@ -74,6 +109,15 @@ const Register = () => {
           <Input placeholder="Nome" type="text" onChange={e => setValues({...values, usuNome: e.target.value})}/>
           <Input placeholder="E-mail" type="text" onChange={e => setValues({...values, email: e.target.value})} />
           <Input placeholder="Senha" type="password" onChange={e => setValues({...values, senha: e.target.value})}/>
+
+          <SelectBox
+            Title={'Selecione o departamento'}
+            opsMap={departamentos}
+            opId="depId"
+            opName="nome_depart"
+            onChange={value => setValues({ ...values, fk_depId: value })}
+            onFocus={fetchDepartamentos}
+          />
         </S.InputContainer>
         </S.ContainerErro>
 
@@ -81,6 +125,8 @@ const Register = () => {
           <Button Title="Criar" onClick={() => {
             console.info('teste')
             handleSubmit()
+            
+
             }}/>
           <S.SubText>
             Faça seu{" "}

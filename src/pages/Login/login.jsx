@@ -18,6 +18,8 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate(); // Correção: useNavigate deve ser atribuído a 'navigate'
+
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -45,12 +47,15 @@ const Login = () => {
   
     try {
       // Se todas as validações passarem, procedemos com o login
-      const response = await app.post("/login", values);
+      const response = (await app.post("/login", values)).data.data[0];
+
       setLoading(false);
-      console.log(response.data);
   
-      // Se o login for bem-sucedido, redirecionamos o usuário para outra página
-      history.push("/dashboard");
+      // defini a pagina de acordo com o cargo
+      const page = response.fk_cargoId === 3 ? `/solicitante/${response.usuId}` : "/dashboard" 
+      
+      navigate(page);
+
     } catch (error) {
       setLoading(false);
   
@@ -64,7 +69,7 @@ const Login = () => {
 
   
 
-  const nav = useNavigate();
+  //const nav = useNavigate();
   
   return (
     <S.Main>
@@ -113,7 +118,7 @@ const Login = () => {
             Se{" "}
             <S.Link
               onClick={() => {
-                nav("/register");
+                navigate("/register");
               }}
             >
               cadastre
@@ -121,7 +126,7 @@ const Login = () => {
             ou{" "}
             <S.Link
               onClick={() => {
-                nav("/forgot");
+                navigate("/forgot");
               }}
             >
               recupere
